@@ -1,0 +1,6 @@
+@MataAtlantica.API_HostAddress = http://localhost:5239
+
+GET {{MataAtlantica.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
