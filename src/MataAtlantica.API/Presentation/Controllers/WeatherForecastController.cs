@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace MataAtlantica.API.Controllers
+namespace MataAtlantica.API.Presentation.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -28,6 +28,17 @@ namespace MataAtlantica.API.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+    }
+
+    [ApiController]
+    [Route("api/[controller")]
+    public class CategoriasController(CategoriaApplicationService categoriaApplicationService) : ControllerBase
+    {
+        [HttpGet()]
+        public async Task<IActionResult> Listar()
+        {
+
         }
     }
 }
