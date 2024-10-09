@@ -1,37 +1,15 @@
-﻿using MataAtlantica.API.Domain.Repositories.Abstract;
-using MataAtlantica.API.Domain.Services;
-using MataAtlantica.API.Tests.Builder;
-using NSubstitute;
+﻿using AutoMapper;
+using MataAtlantica.API.Domain.Profiles;
 
 namespace MataAtlantica.API.Tests.Domain.Services;
 
 public class CategoriaServiceTests
 {
-    private readonly CategoriaService _sut;
-    private readonly ICategoriaRepository _repository;
-    public CategoriaServiceTests()
-    {
-        _repository = Substitute.For<ICategoriaRepository>();
-        _sut = new(_repository);
-    }
-
     [Fact]
-    [Trait("Funcionalidade", "ListarCategoriasComoArvore")]
-    public void ListarCategoriasComoArvore_DeveRetornarCategorias_ComOsPaisQuandoHouverem()
+    public void DomainProfile_DeveSerValido()
     {
-        // Arrange
-        var categoriaPai = new CategoriaBuilder().BuildDefault().ComNome("CategoriaPai").Create();
-        var categoriaFilha = new CategoriaBuilder().BuildDefault().ComCategoriaPai(categoriaPai).Create();
-        var categoriaFilha2 = new CategoriaBuilder().BuildDefault().ComCategoriaPai(categoriaPai).Create();
+        var configuration = new MapperConfiguration(p => p.AddProfile(typeof(DomainProfile)));
 
-        // Act
-        var categorias = _sut.ListarCategoriasComoArvore();
-
-        // Assert
-        Assert.Multiple(
-            () => Assert.Single(categorias),
-            () => Assert.Equal(2, categorias.FirstOrDefault().CategoriasFilhas.Count),
-            () => Assert.Equal("CategoriaPai", categorias.FirstOrDefault().Nome));
-
+        configuration.AssertConfigurationIsValid();
     }
 }

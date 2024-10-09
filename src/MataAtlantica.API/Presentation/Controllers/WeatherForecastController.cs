@@ -30,15 +30,4 @@ namespace MataAtlantica.API.Presentation.Controllers
             .ToArray();
         }
     }
-
-    [ApiController]
-    [Route("api/[controller")]
-    public class CategoriasController(CategoriaApplicationService categoriaApplicationService) : ControllerBase
-    {
-        [HttpGet()]
-        public async Task<IActionResult> Listar()
-        {
-
-        }
-    }
 }

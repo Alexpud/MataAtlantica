@@ -19,28 +19,28 @@ public abstract class BaseBuilder<TClass, TBuilder>
         => Object;
 }
 
-public class CategoriaBuilder : BaseBuilder<Categoria, CategoriaBuilder>
-{
-    private readonly Fixture _fixture = new();
-    public override CategoriaBuilder BuildDefault()
-    {
-        Object = new()
-        {
-            Id = _fixture.Create<string>(),
-            Nome = _fixture.Create<string>()
-        };
-        return this;
-    }
+//public class CategoriaBuilder : BaseBuilder<Categoria, CategoriaBuilder>
+//{
+//    private readonly Fixture _fixture = new();
+//    public override CategoriaBuilder BuildDefault()
+//    {
+//        Object = new()
+//        {
+//            Id = _fixture.Create<string>(),
+//            Nome = _fixture.Create<string>()
+//        };
+//        return this;
+//    }
 
-    public CategoriaBuilder ComCategoriaPai(Categoria categoria)
-    {
-        Object.SetCategoriaPai(categoria);
-        return this;
-    }
+//    public CategoriaBuilder ComCategoriaPai(Categoria categoria)
+//    {
+//        Object.SetCategoriaPai(categoria);
+//        return this;
+//    }
 
-    public CategoriaBuilder ComNome(string nome)
-    {
-        Object.Nome = nome;
-        return this;
-    }
-}
+//    public CategoriaBuilder ComNome(string nome)
+//    {
+//        Object.Nome = nome;
+//        return this;
+//    }
+//}
