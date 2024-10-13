@@ -1,5 +1,7 @@
-﻿using MataAtlantica.API.Domain.Services;
+﻿using MataAtlantica.API.Domain.Models;
+using MataAtlantica.API.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace MataAtlantica.API.Presentation.Controllers;
 
@@ -9,11 +11,42 @@ public class CategoriasController(CategoriaService categoriaService) : Controlle
 {
     private readonly CategoriaService _categoriaService = categoriaService;
 
+    /// <summary>
+    /// Adiciona uma nova categoria
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
     [HttpPost]
+    [ProducesResponseType(typeof(CategoriaDto), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> Criar(AdicionarCategoriaViewModel model)
     {
         var dto = new Domain.Models.AdicionarCategoriaArgs(model.Nome);
         return Ok(await _categoriaService.Adicionar(dto));
+    }
+
+    /// <summary>
+    /// Adiciona uma subcategoria a uma categoria existente
+    /// </summary>
+    /// <param name="id">Id da categoria</param>
+    /// <param name="model"></param>
+    /// <returns></returns>
+    [HttpPost("{id}")]
+    [ProducesResponseType(typeof(CategoriaDto), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> AdicionarSubCategoria(string id, AdicionarCategoriaViewModel model)
+    {
+        var dto = new Domain.Models.AdicionarCategoriaArgs(model.Nome);
+        return Ok(await _categoriaService.AdicionarSubCategoria(id, model.Nome));
+    }
+
+    /// <summary>
+    /// Lista as categorias com suas subCategorias
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    [ProducesResponseType(typeof(List<CategoriaDto>), (int)HttpStatusCode.OK)]
+    public IActionResult Listar()
+    {
+        return Ok(_categoriaService.ListarCategoriasComoArvore());
     }
 }
 

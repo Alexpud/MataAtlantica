@@ -1,3 +1,3 @@
 ﻿namespace MataAtlantica.API.Domain.Models;
 
-public record CategoriaDto(string Nome, CategoriaDto CategoriaPai, List<CategoriaDto> SubCategorias);
+public record CategoriaDto(string Id, string Nome, List<CategoriaDto> SubCategorias);

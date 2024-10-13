@@ -25,4 +25,20 @@ public class CategoriaService(ICategoriaRepository categoriaRepository, IMapper 
         await _categoriaRepository.Commit();
         return _mapper.Map<CategoriaDto>(categoria);
     }
+
+    public async Task<CategoriaDto> AdicionarSubCategoria(string id, string nome)
+    {
+        var categoria = await _categoriaRepository.ObterPorId(id);
+        if (categoria.EhSubCategoria())
+            throw new Exception("Não se pode adicioanr subcategoria a uma subcategoria");
+
+        var subCategoria = new Categoria(nome);
+        subCategoria.SetCategoriaPai(categoria);
+        _categoriaRepository.Adicionar(subCategoria);
+
+        await _categoriaRepository.Commit();
+
+        categoria = await _categoriaRepository.ObterPorId(id, categoria => categoria.SubCategorias);
+        return _mapper.Map<CategoriaDto>(categoria);
+    }
 }

@@ -8,6 +8,6 @@ public class DomainProfile : Profile
 {
     public DomainProfile()
     {
-        CreateMap<Categoria, CategoriaDto>();
+        CreateMap<Categoria, CategoriaDto>().PreserveReferences();
     }
 }

@@ -16,6 +16,11 @@ public abstract class BaseRepository<TEntity>(MataAtlanticaDbContext dbContext) 
         _dbSet.Add(entidade);
     }
 
+    public void Atualizar(TEntity entidade)
+    {
+        _dbSet.Update(entidade);
+    }
+
     public IQueryable<TEntity> AsQueryable()
         => _dbSet.AsQueryable();
 
@@ -30,5 +35,17 @@ public abstract class BaseRepository<TEntity>(MataAtlanticaDbContext dbContext) 
         if (include != null)
             query = query.Include(include);
         return query;
+    }
+
+    public async Task<TEntity> ObterPorId(string id)
+    {
+        return await _dbSet.FirstOrDefaultAsync(entity => entity.Id == id); 
+    }
+
+    public async Task<TEntity> ObterPorId<TProperty>(string id, Expression<Func<TEntity, TProperty>> include)
+    {
+        if (include == null)
+            return await ObterPorId(id);
+        return await _dbSet.Include(include).FirstOrDefaultAsync(entity => entity.Id == id);
     }
 }
