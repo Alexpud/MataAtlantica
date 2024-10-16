@@ -13,10 +13,27 @@ public class CategoriaService(ICategoriaRepository categoriaRepository, IMapper 
 
     public List<CategoriaDto> ListarCategoriasComoArvore()
     {
-        var categorias = _categoriaRepository.FilterBy(new CategoriasRaizSpecification().Expression, p => p.SubCategorias);
+        var categorias = _categoriaRepository.AsQueryable().ToList();
+        var categoriaDto = _mapper.Map<List<CategoriaDto>>(categorias);
+        var result = new List<CategoriaDto>();
+        foreach(var categoria in categoriaDto)
+        {
+            if (EhSubCategoria(categoria))
+            {
+                var categoriaPai = categoriaDto.FirstOrDefault(p => p.Id == categoria.CategoriaPaiId);
+                categoriaPai.SubCategorias.Add(categoria);
+            }
+            else
+            {
+                result.Add(categoria);
+            }
+        }
 
-        return _mapper.Map<List<CategoriaDto>>(categorias);
+        return result;
     }
+
+    private static bool EhSubCategoria(CategoriaDto categoria) 
+        => categoria.CategoriaPaiId != null;
 
     public async Task<CategoriaDto> Adicionar(AdicionarCategoriaArgs dto)
     {
@@ -29,9 +46,6 @@ public class CategoriaService(ICategoriaRepository categoriaRepository, IMapper 
     public async Task<CategoriaDto> AdicionarSubCategoria(string id, string nome)
     {
         var categoria = await _categoriaRepository.ObterPorId(id);
-        if (categoria.EhSubCategoria())
-            throw new Exception("Não se pode adicioanr subcategoria a uma subcategoria");
-
         var subCategoria = new Categoria(nome);
         subCategoria.SetCategoriaPai(categoria);
         _categoriaRepository.Adicionar(subCategoria);

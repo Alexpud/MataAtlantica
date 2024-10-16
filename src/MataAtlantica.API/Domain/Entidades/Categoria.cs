@@ -15,7 +15,7 @@ public class Categoria : EntidadeBase
     }
 
     public bool EhSubCategoria()
-        => string.IsNullOrWhiteSpace(CategoriaPaiId);
+        => !string.IsNullOrWhiteSpace(CategoriaPaiId);
 
     public void AdicionarSubCategoria(Categoria categoria)
         => SubCategorias.Add(categoria);
