@@ -2,7 +2,6 @@
 using MataAtlantica.API.Domain.Entidades;
 using MataAtlantica.API.Domain.Models;
 using MataAtlantica.API.Domain.Repositories.Abstract;
-using MataAtlantica.API.Domain.Specifications;
 
 namespace MataAtlantica.API.Domain.Services;
 
