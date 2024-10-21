@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4200B91E-4E41-433B-B4AA-041579BCA94E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MataAtlantica.API.Tests", "tests\MataAtlantica.API.Tests\MataAtlantica.API.Tests.csproj", "{E1BF0A2F-E5D8-4B4E-8A5C-6785A7E9ED09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,11 +26,19 @@ Global
 		{95BA4626-0DD0-4B67-A3F5-3634E4AC8B27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95BA4626-0DD0-4B67-A3F5-3634E4AC8B27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95BA4626-0DD0-4B67-A3F5-3634E4AC8B27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1BF0A2F-E5D8-4B4E-8A5C-6785A7E9ED09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1BF0A2F-E5D8-4B4E-8A5C-6785A7E9ED09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1BF0A2F-E5D8-4B4E-8A5C-6785A7E9ED09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1BF0A2F-E5D8-4B4E-8A5C-6785A7E9ED09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{95BA4626-0DD0-4B67-A3F5-3634E4AC8B27} = {23CC4171-A465-4DDD-BC98-616793B4F585}
+		{E1BF0A2F-E5D8-4B4E-8A5C-6785A7E9ED09} = {4200B91E-4E41-433B-B4AA-041579BCA94E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AE2CF0E5-AC9F-4F0F-B2C9-489D9A377688}
 	EndGlobalSection
 EndGlobal
