@@ -1,4 +1,6 @@
-﻿namespace MataAtlantica.API.Domain.Entidades;
+﻿using FluentValidation.Results;
+
+namespace MataAtlantica.API.Domain.Entidades;
 
 public class Categoria : EntidadeBase
 {
@@ -9,7 +11,7 @@ public class Categoria : EntidadeBase
 
     public Categoria() { }
 
-    public Categoria(string nome) : base()
+    public Categoria(string nome)
     {
         Nome = nome;
     }
@@ -19,4 +21,7 @@ public class Categoria : EntidadeBase
 
     public void SetCategoriaPai(Categoria categoriaPai) 
         => CategoriaPaiId = categoriaPai.Id;
+
+    public override ValidationResult Validar()
+        => new ValidationResult();
 }

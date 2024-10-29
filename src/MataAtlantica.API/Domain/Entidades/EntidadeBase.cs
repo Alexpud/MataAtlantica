@@ -1,4 +1,6 @@
-﻿namespace MataAtlantica.API.Domain.Entidades;
+﻿using FluentValidation.Results;
+
+namespace MataAtlantica.API.Domain.Entidades;
 
 public abstract class EntidadeBase
 {
@@ -8,4 +10,6 @@ public abstract class EntidadeBase
     {
         Id = Guid.NewGuid().ToString("D");
     }
+
+    public abstract ValidationResult Validar();
 }
