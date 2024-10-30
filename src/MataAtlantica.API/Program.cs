@@ -30,7 +30,11 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddAutoMapper(typeof(DomainProfile).Assembly);
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+builder.Services.AddScoped<IFornecedorRepository, FornecedorRepository>();
+
 builder.Services.AddScoped<CategoriaService>();
+builder.Services.AddScoped<FornecedorService>();
+
 builder.Services.AddDbContext<MataAtlanticaDbContext>(p => 
     p.UseSqlServer(builder.Configuration.GetConnectionString("Default"))
     .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));

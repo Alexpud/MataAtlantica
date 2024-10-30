@@ -13,12 +13,9 @@ public class FornecedorService(
     private readonly IFornecedorRepository _fornecedorRepository = fornecedorRepository;
     private readonly IMapper _mapper = mapper;
     
-    public async Task<Result<FornecedorDto>> ObterPorId(string id)
+    public async Task<FornecedorDto> ObterPorId(string id)
     {
         var fornecedor = await _fornecedorRepository.ObterPorId(id);
-        if (fornecedor == null)
-            return Result.Fail(BusinessErrors.FornecedorNaoEncontrado);
-        
-        return _mapper.Map<FornecedorDto>(fornecedor);
+        return fornecedor == null ? null : _mapper.Map<FornecedorDto>(fornecedor);
     }
 }

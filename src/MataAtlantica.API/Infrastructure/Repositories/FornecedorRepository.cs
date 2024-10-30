@@ -4,9 +4,9 @@ using MataAtlantica.API.Infrastructure.Data;
 
 namespace MataAtlantica.API.Infrastructure.Repositories;
 
-public class CategoriaRepository : BaseRepository<Categoria>, ICategoriaRepository
+public class FornecedorRepository : BaseRepository<Fornecedor>, IFornecedorRepository
 {
-    public CategoriaRepository(MataAtlanticaDbContext dbContext) : base(dbContext)
+    public FornecedorRepository(MataAtlanticaDbContext dbContext) : base(dbContext)
     {
     }
 }

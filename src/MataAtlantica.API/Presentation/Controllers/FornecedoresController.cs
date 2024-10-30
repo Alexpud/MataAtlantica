@@ -4,9 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MataAtlantica.API.Presentation.Controllers;
 
-[ApiController]
 [Route("api/[controller]")]
-public class FornecedoresController(FornecedorService service) : ControllerBase
+public class FornecedoresController(FornecedorService service) : BaseController
 {
     private readonly FornecedorService _service = service;
     
@@ -19,9 +18,7 @@ public class FornecedoresController(FornecedorService service) : ControllerBase
     public async Task<IActionResult> ObterPorId(string id)
     {
         var fornecedor = await _service.ObterPorId(id);
-        if (fornecedor.IsFailed)
-            return BadRequest();
-        return Ok(fornecedor);
+        return fornecedor == null ? NoContent() : Ok(fornecedor);
     }
 
     /// <summary>
@@ -47,3 +44,4 @@ public class FornecedoresController(FornecedorService service) : ControllerBase
         return Ok();
     }
 }
+
