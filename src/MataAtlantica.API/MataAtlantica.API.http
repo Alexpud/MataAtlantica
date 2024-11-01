@@ -1,6 +1,10 @@
-@MataAtlantica.API_HostAddress = http://localhost:5239
+@MataAtlantica.API_HostAddress = https://localhost:7188
 
 GET {{MataAtlantica.API_HostAddress}}/weatherforecast/
 Accept: application/json
+
+###
+
+GET {{MataAtlantica.API_HostAddress}}/api/fornecedores/string
 
 ###

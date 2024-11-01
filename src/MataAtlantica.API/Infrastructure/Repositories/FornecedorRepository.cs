@@ -9,4 +9,9 @@ public class FornecedorRepository : BaseRepository<Fornecedor>, IFornecedorRepos
     public FornecedorRepository(MataAtlanticaDbContext dbContext) : base(dbContext)
     {
     }
+
+    public Task<Fornecedor> ObterPorCpfCnpj(string cpfCnpj)
+    {
+        throw new NotImplementedException();
+    }
 }

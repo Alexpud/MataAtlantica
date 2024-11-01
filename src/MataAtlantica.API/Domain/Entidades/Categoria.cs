@@ -21,7 +21,4 @@ public class Categoria : EntidadeBase
 
     public void SetCategoriaPai(Categoria categoriaPai) 
         => CategoriaPaiId = categoriaPai.Id;
-
-    public override ValidationResult Validar()
-        => new ValidationResult();
 }

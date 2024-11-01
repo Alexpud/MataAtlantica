@@ -5,6 +5,7 @@ using MataAtlantica.API.Infrastructure.Data;
 using MataAtlantica.API.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using System;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,6 +41,12 @@ builder.Services.AddDbContext<MataAtlanticaDbContext>(p =>
     .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
 var app = builder.Build();
+
+using (var Scope = app.Services.CreateScope())
+{
+    var context = Scope.ServiceProvider.GetRequiredService<MataAtlanticaDbContext>();
+    context.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

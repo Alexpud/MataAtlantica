@@ -10,9 +10,8 @@ public class Avaliacao : EntidadeBase
     public float NotaProduto { get; set; }
     public string ProdutoId { get; set; }
     public Produto Produto { get; set; }
+    public DateTime? UltimaAtualizacao { get; private set; }
 
-    public override ValidationResult Validar()
-        => new AvaliacaoValidator().Validate(this);
 }
 
 public class AvaliacaoValidator : AbstractValidator<Avaliacao>

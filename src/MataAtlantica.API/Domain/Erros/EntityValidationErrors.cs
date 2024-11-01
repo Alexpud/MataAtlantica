@@ -31,4 +31,5 @@ public static class EntityValidationErrors
 public static class BusinessErrors
 {
     public static IError FornecedorNaoEncontrado = new Error("Fornecedor nao encontrado");
+    public static IError FornecedorComCpfCnpjJaExiste = new Error("Fornecedor com o cpf/cnpj informado ja existe");
 }

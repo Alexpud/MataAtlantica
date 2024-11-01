@@ -4,5 +4,5 @@ namespace MataAtlantica.API.Domain.Repositories.Abstract;
 
 public interface IFornecedorRepository : IBaseRepository<Fornecedor>
 {
-    
+    Task<Fornecedor> ObterPorCpfCnpj(string cpfCnpj);
 }

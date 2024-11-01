@@ -10,6 +10,4 @@ public abstract class EntidadeBase
     {
         Id = Guid.NewGuid().ToString("D");
     }
-
-    public abstract ValidationResult Validar();
 }

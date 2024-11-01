@@ -15,15 +15,13 @@ public class Produto : EntidadeBase
     public string CategoriaId { get; set; }
     public Fornecedor Fornecedor { get; set; }
     public string FornecedorId { get; set; }
+    public DateTime? UltimaAtualizacao { get; private set; }
 
     public void AdicionarImagemThumbnail(string nome, int ordem)
         => ConfiguracaoImagens.Thumbnails.Add(new Imagem(nome, ordem));
 
     public void AdicionarImagemIlustrativa(string nome, int ordem)
         =>ConfiguracaoImagens.ImagensIlustrativas.Add(new Imagem(nome, ordem));
-
-    public override ValidationResult Validar()
-        => new ProdutoValidator().Validate(this);
 }
 
 public class ConfiguracaoImagens
