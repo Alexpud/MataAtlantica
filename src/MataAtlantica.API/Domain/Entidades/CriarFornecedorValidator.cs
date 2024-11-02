@@ -24,7 +24,8 @@ public class CriarFornecedorValidator : AbstractValidator<CriarFornecedor>
             .WithErrorCode(nameof(EntityValidationErrors.CpfCnpjObrigatorioParaFornecedor))
             .WithMessage(EntityValidationErrors.CpfCnpjObrigatorioParaFornecedor.Message)
             .MustAsync(async (cpfCnpj, token) => await fornecedorRepository.ObterPorCpfCnpj(cpfCnpj) == null)
-            .WithMessage(BusinessErrors.FornecedorComCpfCnpjJaExiste.Message);
+            .WithMessage(BusinessErrors.FornecedorComCpfCnpjJaExiste.Message)
+            .WithErrorCode(nameof(BusinessErrors.FornecedorComCpfCnpjJaExiste));
 
 
         RuleFor(p => p.Telefone)
@@ -64,7 +65,10 @@ public class EnderecoFornecedorValidator : AbstractValidator<EnderecoFornecedor>
         RuleFor(p => p.UF)
             .NotEmpty()
             .WithErrorCode(nameof(EntityValidationErrors.EstadoObrigatorioParaEndereco))
-            .WithMessage(EntityValidationErrors.EstadoObrigatorioParaEndereco.Message);
+            .WithMessage(EntityValidationErrors.EstadoObrigatorioParaEndereco.Message)
+            .MaximumLength(2)
+            .WithErrorCode(nameof(EntityValidationErrors.UFDeveTerNoMaximo2CaracteresParaEndereco))
+            .WithMessage(EntityValidationErrors.UFDeveTerNoMaximo2CaracteresParaEndereco.Message);
 
         RuleFor(p => p.CEP)
             .NotEmpty()

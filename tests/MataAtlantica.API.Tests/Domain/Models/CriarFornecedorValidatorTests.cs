@@ -1,5 +1,6 @@
 ﻿using FluentValidation.TestHelper;
 using MataAtlantica.API.Domain.Entidades;
+using MataAtlantica.API.Domain.Erros;
 using MataAtlantica.API.Domain.Models;
 using MataAtlantica.API.Domain.Repositories.Abstract;
 using NSubstitute;
@@ -29,7 +30,7 @@ public class CriarFornecedorValidatorTests
         var criarFornecedor = new CriarFornecedor(
             Nome: string.Empty,
             Descricao: string.Empty,
-            CpfCnpj: string.Empty,
+            CpfCnpj: "asadasd",
             Telefone: string.Empty,
             Localizacao: new EnderecoFornecedor(
                 Rua: string.Empty,
@@ -45,6 +46,8 @@ public class CriarFornecedorValidatorTests
 
         // Assert
         result.ShouldHaveValidationErrorFor(p => p.CpfCnpj);
+        var error = result.Errors.First(p => p.PropertyName == nameof(criarFornecedor.CpfCnpj));
+        Assert.Equal(nameof(BusinessErrors.FornecedorComCpfCnpjJaExiste), error.ErrorCode);
     }
 
     [Trait("Feature", "Criar Fornecedor")]

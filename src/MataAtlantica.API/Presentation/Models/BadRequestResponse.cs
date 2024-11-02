@@ -13,8 +13,6 @@ public class BadRequestResponse
     {
         if (error.HasMetadataKey("ErrorCode"))
             Errors.Add(new Error((string)error.Metadata["ErrorCode"], error.Message));
-
-        throw new NotImplementedException("Esse cenario ainda não foi pensado");
     }
 }
 

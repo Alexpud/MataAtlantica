@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using FluentValidation.Results;
+using MataAtlantica.API.Domain.Entidades;
 using MataAtlantica.API.Domain.Erros;
 using MataAtlantica.API.Domain.Models;
 using MataAtlantica.API.Domain.Repositories.Abstract;
@@ -56,6 +57,41 @@ public class FornecedorServiceTests
 
         // Assert
         Assert.True(result.IsFailed);
+    }
+
+    [Fact(DisplayName = "Criacao de fornecedor deve criar um novo fornecedor quando bem sucedido")]
+    [Trait("Feature", "Criar Fornecedor")]
+    public async Task CriarFornecedor_DeveInserirNovoFornecedor_QuandoBemSucedido()
+    {
+        // Arrange
+        _criarFornecedorValidator
+            .ValidateAsync(Arg.Any<CriarFornecedor>())
+            .Returns(new ValidationResult());
+
+        var criarFornecedor = new CriarFornecedor(
+            Nome: string.Empty,
+            Descricao: string.Empty,
+            CpfCnpj: string.Empty,
+            Telefone: string.Empty,
+            Localizacao: new EnderecoFornecedor(
+                Rua: string.Empty,
+                Bairro: string.Empty,
+                Numero: string.Empty,
+                Cidade: string.Empty,
+                UF: string.Empty,
+                CEP: string.Empty
+            ));
+
+        _mapper.Map<FornecedorDto>(Arg.Any<Fornecedor>())
+            .Returns(new FornecedorDto());
+
+        // Act
+        var result = await _sut.CriarFornecedor(criarFornecedor);
+
+        // Assert
+        Assert.Multiple(
+            () => Assert.True(result.IsSuccess),
+            () => _fornecedorRepository.Received(1).Commit());
     }
 }
 

@@ -10,7 +10,8 @@ public static class EntityValidationErrors
     public static IError CidadeObrigatorioParaEndereco = new Error("Cidade e obrigatorio");
     public static IError EstadoObrigatorioParaEndereco = new Error("Estado e obrigatorio");
     public static IError CepObrigatorioParaEndereco = new Error("Cep e obrigatorio");
-    
+    public static IError UFDeveTerNoMaximo2CaracteresParaEndereco = new Error("UF deve ter no maximo 2 caracteres");
+
     public static IError TelefoneObrigatorioParaFornecedor = new Error("Telefone e obrigatorio");
     public static IError NomeObrigatorioParaFornecedor = new Error("Nome e obrigatorio");
     public static IError CpfCnpjObrigatorioParaFornecedor = new Error("Cpf e obrigatorio");

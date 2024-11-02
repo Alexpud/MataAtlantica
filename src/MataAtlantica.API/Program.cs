@@ -1,3 +1,6 @@
+using FluentValidation;
+using MataAtlantica.API.Domain.Entidades;
+using MataAtlantica.API.Domain.Models;
 using MataAtlantica.API.Domain.Profiles;
 using MataAtlantica.API.Domain.Repositories.Abstract;
 using MataAtlantica.API.Domain.Services;
@@ -35,6 +38,8 @@ builder.Services.AddScoped<IFornecedorRepository, FornecedorRepository>();
 
 builder.Services.AddScoped<CategoriaService>();
 builder.Services.AddScoped<FornecedorService>();
+
+builder.Services.AddScoped<IValidator<CriarFornecedor>, CriarFornecedorValidator>();
 
 builder.Services.AddDbContext<MataAtlanticaDbContext>(p => 
     p.UseSqlServer(builder.Configuration.GetConnectionString("Default"))

@@ -1,9 +1,10 @@
 using AutoMapper;
 using FluentResults;
 using FluentValidation;
-using FluentValidation.Results;
+using MataAtlantica.API.Domain.Entidades;
 using MataAtlantica.API.Domain.Models;
 using MataAtlantica.API.Domain.Repositories.Abstract;
+using MataAtlantica.API.Helpers;
 
 namespace MataAtlantica.API.Domain.Services;
 
@@ -20,14 +21,14 @@ public class FornecedorService(
     {
         var validationResult = await _criarFornecedorValidator.ValidateAsync(criarFornecedorDto);
         if (!validationResult.IsValid)
-            return Result.Fail(GetErrors(validationResult));
-        throw new NotImplementedException();
-    }
+            return Result.Fail(validationResult.GetErrors());
 
-    private IEnumerable<IError> GetErrors(ValidationResult validationResult)
-    {
-        foreach(var error in validationResult.Errors)
-            yield return new Error(error.ErrorMessage).WithMetadata("ErrorCode", error.ErrorCode);
+        var fornecedor = new Fornecedor(criarFornecedorDto);
+        _fornecedorRepository.Adicionar(fornecedor);
+        await _fornecedorRepository.Commit();
+
+        var dto = _mapper.Map<FornecedorDto>(fornecedor);
+        return Result.Ok(dto);
     }
 
     public async Task<FornecedorDto> ObterPorId(string id)
