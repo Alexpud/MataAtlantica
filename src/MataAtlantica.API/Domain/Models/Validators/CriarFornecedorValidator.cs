@@ -1,9 +1,8 @@
 ﻿using FluentValidation;
 using MataAtlantica.API.Domain.Erros;
-using MataAtlantica.API.Domain.Models;
 using MataAtlantica.API.Domain.Repositories.Abstract;
 
-namespace MataAtlantica.API.Domain.Entidades;
+namespace MataAtlantica.API.Domain.Models.Validators;
 
 public class CriarFornecedorValidator : AbstractValidator<CriarFornecedor>
 {

@@ -48,8 +48,6 @@ public class FornecedoresController(FornecedorService service) : BaseController
     ///      }
     /// 
     /// </remarks>
-    /// <response code="201">Returns the newly created item</response>
-    /// <response code="400">If the item is null</response>
     [HttpPost]
     [ProducesResponseType(typeof(FornecedorDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(BadRequestResponse), (int)HttpStatusCode.BadRequest)]
@@ -76,10 +74,54 @@ public class FornecedoresController(FornecedorService service) : BaseController
 
     }
 
-    [HttpPut]
-    public IActionResult Alterar(AlterarFornecedor model)
+    /// <summary>
+    /// Altera um fornecedor
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
+    /// <remarks>
+    /// Exemplo de requisicao:
+    /// 
+    ///     PUT /Fornecedores/{id}
+    ///     {
+    ///         "Nome": "Nivea",
+    ///         "Descricao": "Grande vendedora de cosméticos",
+    ///         "CpfCnpj": "XXX.XXX.XXX/0001-XX",
+    ///         "Telefone": "(17) 99999-9999",
+    ///         "Localizacao": {
+    ///             "Rua": "Rua das marias",
+    ///             "Bairro": "Bairro das pedras",
+    ///             "Numero": "1231",
+    ///             "UF": "SP",
+    ///             "CEP": "400000000",
+    ///             "Cidade": "Florianopolis"
+    ///         }
+    ///      }
+    /// 
+    /// </remarks>
+    [HttpPut("{id}")]
+    [ProducesResponseType(typeof(FornecedorDto), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(BadRequestResponse), (int)HttpStatusCode.BadRequest)]
+    public async Task<IActionResult> Alterar(string id, Models.AlterarFornecedor model)
     {
-        return Ok();
+        var alterarFornecedor = new Domain.Models.AlterarFornecedor(
+            Id: id,
+            Nome: model.Nome,
+            Descricao: model.Descricao,
+            CpfCnpj: model.CpfCnpj,
+            Telefone: model.Telefone,
+            Localizacao: new Domain.Models.EnderecoFornecedor(
+                Rua: model.Localizacao.Rua,
+                Bairro: model.Localizacao.Bairro,
+                Numero: model.Localizacao.Numero,
+                Cidade: model.Localizacao.Cidade,
+                UF: model.Localizacao.UF,
+                CEP: model.Localizacao.CEP
+            ));
+        var result = await _service.AlterarFornecedor(alterarFornecedor);
+        if (result.IsFailed)
+            return HandleFailedResult(result);
+        return Ok(result.Value);
     }
 
     [HttpGet]

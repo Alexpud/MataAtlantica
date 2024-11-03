@@ -1,6 +1,6 @@
 using FluentValidation;
-using MataAtlantica.API.Domain.Entidades;
 using MataAtlantica.API.Domain.Models;
+using MataAtlantica.API.Domain.Models.Validators;
 using MataAtlantica.API.Domain.Profiles;
 using MataAtlantica.API.Domain.Repositories.Abstract;
 using MataAtlantica.API.Domain.Services;
@@ -27,6 +27,9 @@ builder.Services.AddSwaggerGen(options =>
         Description = "API em dotnet core da loja Mata Atlantica",
     });
 
+    //use fully qualified object names
+    options.CustomSchemaIds(x => x.FullName);
+
     // using System.Reflection;
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
@@ -40,10 +43,12 @@ builder.Services.AddScoped<CategoriaService>();
 builder.Services.AddScoped<FornecedorService>();
 
 builder.Services.AddScoped<IValidator<CriarFornecedor>, CriarFornecedorValidator>();
+builder.Services.AddScoped<IValidator<AlterarFornecedor>, AlterarFornecedorValidator>();
 
-builder.Services.AddDbContext<MataAtlanticaDbContext>(p => 
-    p.UseSqlServer(builder.Configuration.GetConnectionString("Default"))
-    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+builder.Services.AddDbContext<MataAtlanticaDbContext>(p =>
+    p.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+
+// Desativar query tracking para contextos de leitura em um CQRS seria interessante
 
 var app = builder.Build();
 

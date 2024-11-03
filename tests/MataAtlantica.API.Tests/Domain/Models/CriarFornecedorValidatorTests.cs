@@ -1,8 +1,9 @@
 ﻿using FluentValidation.TestHelper;
 using MataAtlantica.API.Domain.Entidades;
 using MataAtlantica.API.Domain.Erros;
-using MataAtlantica.API.Domain.Models;
+using MataAtlantica.API.Domain.Models.Validators;
 using MataAtlantica.API.Domain.Repositories.Abstract;
+using MataAtlantica.API.Tests.Builder;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 
@@ -27,27 +28,17 @@ public class CriarFornecedorValidatorTests
             .Returns(new Fornecedor());
 
 
-        var criarFornecedor = new CriarFornecedor(
-            Nome: string.Empty,
-            Descricao: string.Empty,
-            CpfCnpj: "asadasd",
-            Telefone: string.Empty,
-            Localizacao: new EnderecoFornecedor(
-                Rua: string.Empty,
-                Bairro: string.Empty,
-                Numero: string.Empty,
-                Cidade: string.Empty,
-                UF: string.Empty,
-                CEP: string.Empty
-            ));
+        var criarFornecedor = new CriarFornecedorBuilder().BuildDefault().ComCpfCnpj("ALGO").Create();
 
         // Act
         var result = await _sut.TestValidateAsync(criarFornecedor);
 
         // Assert
-        result.ShouldHaveValidationErrorFor(p => p.CpfCnpj);
         var error = result.Errors.First(p => p.PropertyName == nameof(criarFornecedor.CpfCnpj));
-        Assert.Equal(nameof(BusinessErrors.FornecedorComCpfCnpjJaExiste), error.ErrorCode);
+        Assert.Multiple(
+            () => result.ShouldHaveValidationErrorFor(p => p.CpfCnpj),
+            () => Assert.Equal(nameof(BusinessErrors.FornecedorComCpfCnpjJaExiste), error?.ErrorCode),
+            () => Assert.Equal(BusinessErrors.FornecedorComCpfCnpjJaExiste.Message, error?.ErrorMessage));
     }
 
     [Trait("Feature", "Criar Fornecedor")]
@@ -59,19 +50,7 @@ public class CriarFornecedorValidatorTests
             .ReturnsNull();
 
 
-        var criarFornecedor = new CriarFornecedor(
-            Nome: string.Empty,
-            Descricao: string.Empty,
-            CpfCnpj: "algum cpf/cnpj",
-            Telefone: string.Empty,
-            Localizacao: new EnderecoFornecedor(
-                Rua: string.Empty,
-                Bairro: string.Empty,
-                Numero: string.Empty,
-                Cidade: string.Empty,
-                UF: string.Empty,
-                CEP: string.Empty
-            ));
+        var criarFornecedor = new CriarFornecedorBuilder().BuildDefault().ComCpfCnpj("lol").Create();
 
         // Act
         var result = await _sut.TestValidateAsync(criarFornecedor);

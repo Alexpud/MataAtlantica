@@ -3,10 +3,7 @@ using System.ComponentModel.DataAnnotations;
 namespace MataAtlantica.API.Presentation.Models;
 
 public class AlterarFornecedor
-{
-    [Required]
-    public string Id { get; set; }
-    
+{    
     [Required]
     public string Nome { get; set; }
 
@@ -22,5 +19,5 @@ public class AlterarFornecedor
     [Required]
     public string Telefone { get; set; }
 
-    public EnderecoFornecedor Endereco { get; set; }
+    public EnderecoFornecedor Localizacao { get; set; }
 }

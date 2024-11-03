@@ -9,6 +9,7 @@ public class DomainProfile : Profile
     public DomainProfile()
     {
         CreateMap<Categoria, CategoriaDto>().PreserveReferences();
+        CreateMap<Endereco, EnderecoFornecedor>();
         CreateMap<Fornecedor, FornecedorDto>();
     }
 }
