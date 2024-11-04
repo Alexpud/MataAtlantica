@@ -124,10 +124,15 @@ public class FornecedoresController(FornecedorService service) : BaseController
         return Ok(result.Value);
     }
 
+    /// <summary>
+    /// Lista os fornecedores
+    /// </summary>
+    /// <returns></returns>
     [HttpGet]
+    [ProducesResponseType(typeof(List<FornecedorDto>), (int)HttpStatusCode.OK)]
     public IActionResult Listar()
     {
-        return Ok();
+        return Ok(_service.Listar());
     }
 }
 
