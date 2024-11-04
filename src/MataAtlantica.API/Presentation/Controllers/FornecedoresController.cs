@@ -7,6 +7,7 @@ using System.Net;
 namespace MataAtlantica.API.Presentation.Controllers;
 
 [Route("api/[controller]")]
+[Produces("application/json")]
 public class FornecedoresController(FornecedorService service) : BaseController
 {
     private readonly FornecedorService _service = service;

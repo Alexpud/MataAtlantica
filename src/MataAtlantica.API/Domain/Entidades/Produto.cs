@@ -1,11 +1,20 @@
-using FluentValidation;
-using FluentValidation.Results;
-using MataAtlantica.API.Domain.Erros;
+using MataAtlantica.API.Domain.Models;
 
 namespace MataAtlantica.API.Domain.Entidades;
 
 public class Produto : EntidadeBase
 {
+    private Produto() { }
+    public Produto(CriarProduto model)
+    {
+        Nome = model.Nome;
+        Descricao = model.Descricao;
+        Marca = model.Marca;
+        Preco = model.Preco;
+        CategoriaId = model.CategoriaId;
+        FornecedorId = model.FornecedorId;
+    }
+
     public string Nome { get; set; }
     public string Descricao { get; set; }
     public string Marca { get; set; }
@@ -34,40 +43,4 @@ public class Imagem(string Nome, int Ordem)
 {
     public string Nome { get; set; } = Nome;
     public int Ordem { get; set; } = Ordem;
-}
-
-public class ProdutoValidator : AbstractValidator<Produto>
-{
-    public ProdutoValidator()
-    {
-        RuleFor(produto => produto.Nome)
-            .NotEmpty()
-            .WithErrorCode(nameof(EntityValidationErrors.NomeObrigatorioParaProduto))
-            .WithMessage(EntityValidationErrors.NomeObrigatorioParaProduto.Message);
-
-        RuleFor(produto => produto.Descricao)
-            .NotEmpty()
-            .WithErrorCode(nameof(EntityValidationErrors.DescricaoObrigatorioParaProduto))
-            .WithMessage(EntityValidationErrors.DescricaoObrigatorioParaProduto.Message);
-
-        RuleFor(produto => produto.Marca)
-            .NotEmpty()
-            .WithErrorCode(nameof(EntityValidationErrors.MarcaObrigatoriaParaProduto))
-            .WithMessage(EntityValidationErrors.MarcaObrigatoriaParaProduto.Message);
-
-        RuleFor(produto => produto.Preco)
-            .GreaterThan(0)
-            .WithErrorCode(nameof(EntityValidationErrors.PrecoObrigatorioParaProduto))
-            .WithMessage(EntityValidationErrors.PrecoObrigatorioParaProduto.Message);
-
-        RuleFor(produto => produto.CategoriaId)
-            .NotEmpty()
-            .WithErrorCode(nameof(EntityValidationErrors.CategoriaObrigatorioParaProduto))
-            .WithMessage(EntityValidationErrors.CategoriaObrigatorioParaProduto.Message);
-
-        RuleFor(produto => produto.FornecedorId)
-            .NotEmpty()
-            .WithErrorCode(nameof(EntityValidationErrors.FornecedorObrigatorioParaProduto))
-            .WithMessage(EntityValidationErrors.FornecedorObrigatorioParaProduto.Message);
-    }
 }

@@ -38,11 +38,14 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddAutoMapper(typeof(DomainProfile).Assembly);
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<IFornecedorRepository, FornecedorRepository>();
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 
 builder.Services.AddScoped<CategoriaService>();
 builder.Services.AddScoped<FornecedorService>();
+builder.Services.AddScoped<ProdutoService>();
 
 builder.Services.AddScoped<IValidator<CriarFornecedor>, CriarFornecedorValidator>();
+builder.Services.AddScoped<IValidator<CriarProduto>, CriarProdutoValidator>();
 builder.Services.AddScoped<IValidator<AlterarFornecedor>, AlterarFornecedorValidator>();
 
 builder.Services.AddDbContext<MataAtlanticaDbContext>(p =>

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MataAtlantica.API.Presentation.Controllers;
 
 [ApiController]
+[Produces("application/json")]
 public abstract class BaseController : ControllerBase
 {
     public IActionResult HandleFailedResult<T>(Result<T> result)

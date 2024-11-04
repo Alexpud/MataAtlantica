@@ -7,6 +7,7 @@ namespace MataAtlantica.API.Presentation.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Produces("application/json")]
 public class CategoriasController(CategoriaService categoriaService) : ControllerBase
 {
     private readonly CategoriaService _categoriaService = categoriaService;
