@@ -39,6 +39,7 @@ public abstract class BaseRepository<TEntity>(MataAtlanticaDbContext dbContext) 
         return query;
     }
 
+    // Essa implementacao ficou redundante com specification
     public IQueryable<TEntity> FilterBy<TProperty>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TProperty>> include)
     {
         var query = _dbSet.Where(predicate);
@@ -53,6 +54,7 @@ public abstract class BaseRepository<TEntity>(MataAtlanticaDbContext dbContext) 
         return await _dbSet.FirstOrDefaultAsync(entity => entity.Id == id); 
     }
 
+    // Essa implementacao ficou redundante com specification
     public async Task<TEntity> ObterPorId<TProperty>(string id, Expression<Func<TEntity, TProperty>> include)
     {
         if (include == null)
