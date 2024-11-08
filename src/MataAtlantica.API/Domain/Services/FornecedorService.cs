@@ -9,17 +9,17 @@ using MataAtlantica.API.Helpers;
 namespace MataAtlantica.API.Domain.Services;
 
 public class FornecedorService(
-    IValidator<CriarFornecedor> criarFornecedorValidator,
-    IValidator<AlterarFornecedor> alterarFornecedorValidator,
+    IValidator<AdicionarFornecedorDto> criarFornecedorValidator,
+    IValidator<AlterarFornecedorDto> alterarFornecedorValidator,
     IFornecedorRepository fornecedorRepository,
     IMapper mapper)
 {
-    private readonly IValidator<CriarFornecedor> _criarFornecedorValidator = criarFornecedorValidator;
-    private readonly IValidator<AlterarFornecedor> _alterarFornecedorValidator = alterarFornecedorValidator;
+    private readonly IValidator<AdicionarFornecedorDto> _criarFornecedorValidator = criarFornecedorValidator;
+    private readonly IValidator<AlterarFornecedorDto> _alterarFornecedorValidator = alterarFornecedorValidator;
     private readonly IFornecedorRepository _fornecedorRepository = fornecedorRepository;
     private readonly IMapper _mapper = mapper;
 
-    public async Task<Result<FornecedorDto>> AlterarFornecedor(AlterarFornecedor alterarFornecedor)
+    public async Task<Result<FornecedorDto>> Alterar(AlterarFornecedorDto alterarFornecedor)
     {
         var validationResult = await _alterarFornecedorValidator.ValidateAsync(alterarFornecedor);
         if (!validationResult.IsValid)
@@ -33,7 +33,7 @@ public class FornecedorService(
         return Result.Ok(_mapper.Map<FornecedorDto>(fornecedor));
     }
 
-    public async Task<Result<FornecedorDto>> CriarFornecedor(CriarFornecedor criarFornecedorDto)
+    public async Task<Result<FornecedorDto>> Adicionar(AdicionarFornecedorDto criarFornecedorDto)
     {
         var validationResult = await _criarFornecedorValidator.ValidateAsync(criarFornecedorDto);
         if (!validationResult.IsValid)

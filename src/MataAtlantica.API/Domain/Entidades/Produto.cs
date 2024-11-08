@@ -4,8 +4,8 @@ namespace MataAtlantica.API.Domain.Entidades;
 
 public class Produto : EntidadeBase
 {
-    private Produto() { }
-    public Produto(CriarProduto model)
+    public Produto() { }
+    public Produto(AdicionarProdutoDto model)
     {
         Nome = model.Nome;
         Descricao = model.Descricao;

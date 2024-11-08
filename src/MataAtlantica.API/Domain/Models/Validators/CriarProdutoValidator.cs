@@ -4,7 +4,7 @@ using MataAtlantica.API.Domain.Repositories.Abstract;
 
 namespace MataAtlantica.API.Domain.Models.Validators;
 
-public class CriarProdutoValidator : AbstractValidator<CriarProduto>
+public class CriarProdutoValidator : AbstractValidator<AdicionarProdutoDto>
 {
     public CriarProdutoValidator(ICategoriaRepository categoriaRepository, IFornecedorRepository fornecedorRepository)
     {

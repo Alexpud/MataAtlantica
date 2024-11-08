@@ -1,4 +1,5 @@
 ﻿using MataAtlantica.API.Domain.Entidades;
+using MataAtlantica.API.Domain.Specifications;
 using System.Linq.Expressions;
 
 namespace MataAtlantica.API.Domain.Repositories.Abstract;
@@ -17,4 +18,5 @@ public interface IBaseRepository<TEntity> where TEntity : EntidadeBase
     void Adicionar(TEntity categoria);
     Task Commit();
     void Atualizar(TEntity entidade);
+    IQueryable<TEntity> BuscarPorSpec(BaseSpecification<TEntity> specification);
 }

@@ -4,7 +4,7 @@ using MataAtlantica.API.Domain.Repositories.Abstract;
 
 namespace MataAtlantica.API.Domain.Models.Validators;
 
-public class AlterarFornecedorValidator : AbstractValidator<AlterarFornecedor>
+public class AlterarFornecedorValidator : AbstractValidator<AlterarFornecedorDto>
 {
     public AlterarFornecedorValidator(IFornecedorRepository fornecedorRepository)
     {

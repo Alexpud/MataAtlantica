@@ -9,11 +9,11 @@ using MataAtlantica.API.Helpers;
 namespace MataAtlantica.API.Domain.Services;
 
 public class ProdutoService(
-    IValidator<CriarProduto> criarProdutoValidator,
+    IValidator<AdicionarProdutoDto> criarProdutoValidator,
     IProdutoRepository produtoRepository, 
     IMapper mapper)
 {
-    private readonly IValidator<CriarProduto> _criarProdutoValidator = criarProdutoValidator;
+    private readonly IValidator<AdicionarProdutoDto> _criarProdutoValidator = criarProdutoValidator;
     private readonly IProdutoRepository _produtoRepository = produtoRepository;
     private readonly IMapper _mapper = mapper;
 
@@ -23,7 +23,7 @@ public class ProdutoService(
         return produto == null ? null : _mapper.Map<ProdutoDto>(produto);
     }
 
-    public async Task<Result<ProdutoDto>> CriarProduto(CriarProduto model)
+    public async Task<Result<ProdutoDto>> Adicionar(AdicionarProdutoDto model)
     {
         var validation = await _criarProdutoValidator.ValidateAsync(model);
         if (!validation.IsValid)
@@ -34,5 +34,11 @@ public class ProdutoService(
         await _produtoRepository.Commit();
 
         return Result.Ok(_mapper.Map<ProdutoDto>(produto));
+    }
+
+    public List<ProdutoDto> BuscarProdutos(BuscarProdutosArgs args)
+    {
+        var produtos = _produtoRepository.Buscar(args);
+        return produtos.ToList();
     }
 }

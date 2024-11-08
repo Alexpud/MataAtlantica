@@ -1,5 +1,4 @@
 using MataAtlantica.API.Domain.Models;
-using MataAtlantica.API.Domain.Models.Validators;
 using MataAtlantica.API.Domain.Services;
 using MataAtlantica.API.Presentation.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -46,16 +45,16 @@ public class ProdutosController(ProdutoService service) : BaseController
     [HttpPost]
     [ProducesResponseType(typeof(ProdutoDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(BadRequestResponse), (int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> CriarProduto(Models.CriarProduto model)
+    public async Task<IActionResult> AdicionarProduto(AdicionarProdutoRequest model)
     {
-        var dto = new Domain.Models.CriarProduto(
+        var dto = new AdicionarProdutoDto(
             model.Nome,
             model.CategoriaId,
             model.Preco,
             model.Descricao,
             model.FornecedorId,
             model.Marca);
-        var result = await _service.CriarProduto(dto);
+        var result = await _service.Adicionar(dto);
         return result.IsFailed ? HandleFailedResult(result) : Ok(result.Value);
     }
 
@@ -65,8 +64,15 @@ public class ProdutosController(ProdutoService service) : BaseController
     /// <param name="model"></param>
     /// <returns></returns>
     [HttpGet]
-    public IActionResult BuscarProdutos(BuscarProdutosArgs model)
+    [ProducesResponseType(typeof(ProdutoDto), (int)HttpStatusCode.OK)]
+    public IActionResult BuscarProdutos([FromQuery] BuscarProdutosRequest model)
     {
-        return Ok();
+        var dto= new BuscarProdutosArgs()
+        {
+            Categoria = model.Categoria,
+            Fornecedor = model.Fornecedor,
+            Nome = model.Nome,
+        };
+        return Ok(_service.BuscarProdutos(dto));
     }
 }

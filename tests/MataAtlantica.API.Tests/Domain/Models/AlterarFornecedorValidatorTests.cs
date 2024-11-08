@@ -35,7 +35,7 @@ public class AlterarFornecedorValidatorTests
         var result = await _sut.TestValidateAsync(alterarFornecedor);
 
         // Assert
-        var error = result.Errors.FirstOrDefault(p => p.PropertyName ==  nameof(AlterarFornecedor.Id));
+        var error = result.Errors.FirstOrDefault(p => p.PropertyName ==  nameof(AlterarFornecedorDto.Id));
         Assert.Multiple(
             () => result.ShouldHaveValidationErrorFor(p => p.Id),
             () => Assert.Equal(BusinessErrors.FornecedorNaoEncontrado.Message, error?.ErrorMessage),
@@ -74,7 +74,7 @@ public class AlterarFornecedorValidatorTests
         var result = await _sut.TestValidateAsync(criarFornecedor);
 
         // Assert
-        var error = result.Errors.FirstOrDefault(p => p.PropertyName == nameof(AlterarFornecedor.CpfCnpj));
+        var error = result.Errors.FirstOrDefault(p => p.PropertyName == nameof(AlterarFornecedorDto.CpfCnpj));
         Assert.Multiple(
             () => result.ShouldHaveValidationErrorFor(p => p.CpfCnpj),
             () => Assert.Equal(BusinessErrors.FornecedorComCpfCnpjJaExiste.Message, error?.ErrorMessage),

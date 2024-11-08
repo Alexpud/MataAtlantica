@@ -1,17 +1,17 @@
 namespace MataAtlantica.API.Presentation.Models;
 
-public class BuscarProdutosArgs
+public class BuscarProdutosRequest
 {
     /// <summary>
     /// Nome do produto a ser utilizado no filtro
     /// </summary>
     public string Nome { get; set; }
     /// <summary>
-    /// Id da categoria a ser utilizado no filtro
+    /// Nome da categoria
     /// </summary>
-    public string CategoriaId { get; set; }
+    public string Categoria { get; set; }
     /// <summary>
-    /// Id do vendedor a ser utilizado no filtro
+    /// Nome do fornecedor 
     /// </summary>
-    public string VendedorId { get; set; }
+    public string Fornecedor { get; set; }
 }

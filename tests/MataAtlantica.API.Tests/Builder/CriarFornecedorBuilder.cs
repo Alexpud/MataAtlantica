@@ -3,13 +3,13 @@ using MataAtlantica.API.Domain.Models;
 
 namespace MataAtlantica.API.Tests.Builder;
 
-public class CriarFornecedorBuilder : BaseBuilder<CriarFornecedor, CriarFornecedorBuilder>
+public class CriarFornecedorBuilder : BaseBuilder<AdicionarFornecedorDto, CriarFornecedorBuilder>
 {
     private string _cpfCnpj = string.Empty;
 
-    public override CriarFornecedor Create()
+    public override AdicionarFornecedorDto Create()
     {
-        Object = new CriarFornecedor(
+        Object = new AdicionarFornecedorDto(
             Nome: string.Empty,
             Descricao: string.Empty,
             CpfCnpj: _cpfCnpj,
@@ -32,14 +32,14 @@ public class CriarFornecedorBuilder : BaseBuilder<CriarFornecedor, CriarForneced
     }
 }
 
-public class AlterarFornecedorBuilder : BaseBuilder<AlterarFornecedor, AlterarFornecedorBuilder>
+public class AlterarFornecedorBuilder : BaseBuilder<AlterarFornecedorDto, AlterarFornecedorBuilder>
 {
     private readonly Fixture _fixture = new Fixture();
     private string _cpfCnpj = string.Empty;
 
-    public override AlterarFornecedor Create()
+    public override AlterarFornecedorDto Create()
     {
-        Object = new AlterarFornecedor(
+        Object = new AlterarFornecedorDto(
             Id: _fixture.Create<string>(),
             Nome: _fixture.Create<string>(),
             Descricao: _fixture.Create<string>(),

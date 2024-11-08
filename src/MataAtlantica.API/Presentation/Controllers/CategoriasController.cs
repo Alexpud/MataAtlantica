@@ -19,9 +19,9 @@ public class CategoriasController(CategoriaService categoriaService) : Controlle
     /// <returns></returns>
     [HttpPost]
     [ProducesResponseType(typeof(CategoriaDto), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Criar(AdicionarCategoria model)
+    public async Task<IActionResult> Criar(AdicionarCategoriaRequest model)
     {
-        var dto = new Domain.Models.AdicionarCategoria(model.Nome);
+        var dto = new AdicionarCategoriaDto(model.Nome);
         return Ok(await _categoriaService.Adicionar(dto));
     }
 
@@ -33,9 +33,9 @@ public class CategoriasController(CategoriaService categoriaService) : Controlle
     /// <returns></returns>
     [HttpPost("{id}")]
     [ProducesResponseType(typeof(CategoriaDto), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> AdicionarSubCategoria(string id, AdicionarCategoria model)
+    public async Task<IActionResult> AdicionarSubCategoria(string id, AdicionarCategoriaRequest model)
     {
-        var dto = new Domain.Models.AdicionarCategoria(model.Nome);
+        var dto = new AdicionarCategoriaDto(model.Nome);
         return Ok(await _categoriaService.AdicionarSubCategoria(id, model.Nome));
     }
 
@@ -51,4 +51,4 @@ public class CategoriasController(CategoriaService categoriaService) : Controlle
     }
 }
 
-public record struct AdicionarCategoria(string Nome);
+public record struct AdicionarCategoriaRequest(string Nome);

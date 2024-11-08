@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MataAtlantica.API.Presentation.Models;
 
-public class AlterarFornecedor
+public class AlterarFornecedorRequest
 {    
     [Required]
     public string Nome { get; set; }

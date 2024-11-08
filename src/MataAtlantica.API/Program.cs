@@ -44,9 +44,9 @@ builder.Services.AddScoped<CategoriaService>();
 builder.Services.AddScoped<FornecedorService>();
 builder.Services.AddScoped<ProdutoService>();
 
-builder.Services.AddScoped<IValidator<CriarFornecedor>, CriarFornecedorValidator>();
-builder.Services.AddScoped<IValidator<CriarProduto>, CriarProdutoValidator>();
-builder.Services.AddScoped<IValidator<AlterarFornecedor>, AlterarFornecedorValidator>();
+builder.Services.AddScoped<IValidator<AdicionarFornecedorDto>, CriarFornecedorValidator>();
+builder.Services.AddScoped<IValidator<AdicionarProdutoDto>, CriarProdutoValidator>();
+builder.Services.AddScoped<IValidator<AlterarFornecedorDto>, AlterarFornecedorValidator>();
 
 builder.Services.AddDbContext<MataAtlanticaDbContext>(p =>
     p.UseSqlServer(builder.Configuration.GetConnectionString("Default")));

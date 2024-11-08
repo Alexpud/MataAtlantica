@@ -1,5 +1,6 @@
 ﻿using MataAtlantica.API.Domain.Entidades;
 using MataAtlantica.API.Domain.Repositories.Abstract;
+using MataAtlantica.API.Domain.Specifications;
 using MataAtlantica.API.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -29,11 +30,21 @@ public abstract class BaseRepository<TEntity>(MataAtlanticaDbContext dbContext) 
         await _dbContext.SaveChangesAsync();
     }
 
+    public IQueryable<TEntity> BuscarPorSpec(BaseSpecification<TEntity> specification)
+    {
+        var query = _dbSet.Where(specification.ToExpression());
+        if (specification.IncludeExpression != null)
+            query = specification.IncludeExpression(query);
+
+        return query;
+    }
+
     public IQueryable<TEntity> FilterBy<TProperty>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TProperty>> include)
     {
         var query = _dbSet.Where(predicate);
         if (include != null)
             query = query.Include(include);
+
         return query;
     }
 

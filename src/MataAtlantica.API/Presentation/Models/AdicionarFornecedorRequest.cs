@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MataAtlantica.API.Presentation.Models;
 
-public class CriarFornecedor
+public class AdicionarFornecedorRequest
 {
     [Required]
     public string Nome { get; set; }

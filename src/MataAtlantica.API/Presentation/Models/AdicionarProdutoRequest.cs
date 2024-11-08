@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MataAtlantica.API.Presentation.Models;
 
-public class CriarProduto
+public class AdicionarProdutoRequest
 {
     /// <summary>
     /// Nome do produto

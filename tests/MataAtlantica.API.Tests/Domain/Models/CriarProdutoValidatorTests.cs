@@ -26,7 +26,7 @@ public class CriarProdutoValidatorTests
     public async Task TestValidate_DeveFalharComErroEmCategoriaId_QuandoCategoriaNaoFoiEncontrada()
     {
         // Arrange
-        var criarProduto = new CriarProduto(
+        var criarProduto = new AdicionarProdutoDto(
             Nome: string.Empty,
             CategoriaId: string.Empty,
             Preco: 0,
@@ -55,7 +55,7 @@ public class CriarProdutoValidatorTests
     public async Task TestValidate_NaoDeveTerErroEmCategoriaId_QuandoCategoriaForValida()
     {
         // Arrange
-        var criarProduto = new CriarProduto(
+        var criarProduto = new AdicionarProdutoDto(
             Nome: string.Empty,
             CategoriaId: "alguma categoria",
             Preco: 0,
@@ -78,7 +78,7 @@ public class CriarProdutoValidatorTests
     public async Task TestValidate_DeveFalharComErroEmFornecedorId_QuandoFornecedorNaoForEncontrado()
     {
         // Arrange
-        var criarProduto = new CriarProduto(
+        var criarProduto = new AdicionarProdutoDto(
             Nome: string.Empty,
             CategoriaId: string.Empty,
             Preco: 0,
@@ -107,7 +107,7 @@ public class CriarProdutoValidatorTests
     public async Task TestValidate_NaoDeveTerErroEmFornecedorId_QuandoFornecedorForValido()
     {
         // Arrange
-        var criarProduto = new CriarProduto(
+        var criarProduto = new AdicionarProdutoDto(
             Nome: string.Empty,
             CategoriaId: string.Empty,
             Preco: 0,

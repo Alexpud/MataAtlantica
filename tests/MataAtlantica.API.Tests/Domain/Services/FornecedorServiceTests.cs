@@ -14,16 +14,16 @@ namespace MataAtlantica.API.Tests.Domain.Services;
 public class FornecedorServiceTests
 {
     private readonly FornecedorService _sut;
-    private readonly IValidator<CriarFornecedor> _criarFornecedorValidator;
-    private readonly IValidator<AlterarFornecedor> _alterarFornecedorValidator;
+    private readonly IValidator<AdicionarFornecedorDto> _criarFornecedorValidator;
+    private readonly IValidator<AlterarFornecedorDto> _alterarFornecedorValidator;
     private readonly IFornecedorRepository _fornecedorRepository;
     private readonly IMapper _mapper;
     public FornecedorServiceTests()
     {
         _fornecedorRepository = Substitute.For<IFornecedorRepository>();
         _mapper = Substitute.For<IMapper>();
-        _criarFornecedorValidator = Substitute.For<IValidator<CriarFornecedor>>();
-        _alterarFornecedorValidator = Substitute.For<IValidator<AlterarFornecedor>>();
+        _criarFornecedorValidator = Substitute.For<IValidator<AdicionarFornecedorDto>>();
+        _alterarFornecedorValidator = Substitute.For<IValidator<AlterarFornecedorDto>>();
         _sut = new FornecedorService(_criarFornecedorValidator, _alterarFornecedorValidator, _fornecedorRepository, _mapper);
     }
 
@@ -32,7 +32,7 @@ public class FornecedorServiceTests
     public async Task CriarFornecedor_DeveFalhar_QuandoDadosSãoInvalidos()
     {
         // Arrange
-        _criarFornecedorValidator.ValidateAsync(Arg.Any<CriarFornecedor>())
+        _criarFornecedorValidator.ValidateAsync(Arg.Any<AdicionarFornecedorDto>())
             .Returns(new ValidationResult()
             {
                 Errors = new List<ValidationFailure>()
@@ -44,7 +44,7 @@ public class FornecedorServiceTests
         var criarFornecedor = new CriarFornecedorBuilder().BuildDefault().Create();
 
         // Act
-        var result = await _sut.CriarFornecedor(criarFornecedor);
+        var result = await _sut.Adicionar(criarFornecedor);
 
         // Assert
         Assert.True(result.IsFailed);
@@ -56,7 +56,7 @@ public class FornecedorServiceTests
     {
         // Arrange
         _criarFornecedorValidator
-            .ValidateAsync(Arg.Any<CriarFornecedor>())
+            .ValidateAsync(Arg.Any<AdicionarFornecedorDto>())
             .Returns(new ValidationResult());
 
         var criarFornecedor = new CriarFornecedorBuilder().BuildDefault().Create();
@@ -65,7 +65,7 @@ public class FornecedorServiceTests
             .Returns(new FornecedorDto());
 
         // Act
-        var result = await _sut.CriarFornecedor(criarFornecedor);
+        var result = await _sut.Adicionar(criarFornecedor);
 
         // Assert
         Assert.Multiple(
@@ -87,7 +87,7 @@ public class FornecedorServiceTests
     public async Task AlterarFornecedor_DeveFalhar_QuandoValidacaoFalha()
     {
         // Arrange
-        _alterarFornecedorValidator.ValidateAsync(Arg.Any<AlterarFornecedor>())
+        _alterarFornecedorValidator.ValidateAsync(Arg.Any<AlterarFornecedorDto>())
             .Returns(new ValidationResult()
             {
                 Errors = new List<ValidationFailure>()
@@ -99,7 +99,7 @@ public class FornecedorServiceTests
         var alterarFornecedor = new AlterarFornecedorBuilder().BuildDefault().Create();
 
         // Act
-        var result = await _sut.AlterarFornecedor(alterarFornecedor);
+        var result = await _sut.Alterar(alterarFornecedor);
 
         // Assert
         Assert.True(result.IsFailed);
@@ -111,7 +111,7 @@ public class FornecedorServiceTests
     public async Task AlterarFornecedor_DeveAlterarFornecedor_QuandoBemSucedido()
     {
         // Arrange
-        _alterarFornecedorValidator.ValidateAsync(Arg.Any<AlterarFornecedor>())
+        _alterarFornecedorValidator.ValidateAsync(Arg.Any<AlterarFornecedorDto>())
             .Returns(new ValidationResult());
 
         var fornecedorAAtualizar = new Fornecedor();
@@ -124,7 +124,7 @@ public class FornecedorServiceTests
             .Returns(new FornecedorDto());
 
         // Act
-        var result = await _sut.AlterarFornecedor(alterarFornecedor);
+        var result = await _sut.Alterar(alterarFornecedor);
 
         // Assert
         Assert.Multiple(

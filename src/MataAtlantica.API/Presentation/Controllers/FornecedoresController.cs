@@ -52,9 +52,9 @@ public class FornecedoresController(FornecedorService service) : BaseController
     [HttpPost]
     [ProducesResponseType(typeof(FornecedorDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(BadRequestResponse), (int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Criar(Models.CriarFornecedor model)
+    public async Task<IActionResult> Criar(AdicionarFornecedorRequest model)
     {
-        var criarFornecedor = new Domain.Models.CriarFornecedor(
+        var criarFornecedor = new AdicionarFornecedorDto(
             Nome:   model.Nome,
             Descricao: model.Descricao,
             CpfCnpj: model.CpfCnpj,
@@ -68,7 +68,7 @@ public class FornecedoresController(FornecedorService service) : BaseController
                 CEP: model.Localizacao.CEP
             ));
 
-        var result = await _service.CriarFornecedor(criarFornecedor);
+        var result = await _service.Adicionar(criarFornecedor);
         if (result.IsFailed)
             return HandleFailedResult(result);
         return Ok(result.Value);
@@ -103,9 +103,9 @@ public class FornecedoresController(FornecedorService service) : BaseController
     [HttpPut("{id}")]
     [ProducesResponseType(typeof(FornecedorDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(BadRequestResponse), (int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Alterar(string id, Models.AlterarFornecedor model)
+    public async Task<IActionResult> Alterar(string id, AlterarFornecedorRequest model)
     {
-        var alterarFornecedor = new Domain.Models.AlterarFornecedor(
+        var alterarFornecedor = new AlterarFornecedorDto(
             Id: id,
             Nome: model.Nome,
             Descricao: model.Descricao,
@@ -119,7 +119,7 @@ public class FornecedoresController(FornecedorService service) : BaseController
                 UF: model.Localizacao.UF,
                 CEP: model.Localizacao.CEP
             ));
-        var result = await _service.AlterarFornecedor(alterarFornecedor);
+        var result = await _service.Alterar(alterarFornecedor);
         if (result.IsFailed)
             return HandleFailedResult(result);
         return Ok(result.Value);

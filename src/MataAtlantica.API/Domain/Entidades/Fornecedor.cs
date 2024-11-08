@@ -8,7 +8,7 @@ public class Fornecedor : EntidadeBase
     {
     }
 
-    public Fornecedor(CriarFornecedor model)
+    public Fornecedor(AdicionarFornecedorDto model)
     {
         Nome = model.Nome;
         Descricao = model.Descricao;
@@ -31,7 +31,7 @@ public class Fornecedor : EntidadeBase
     public List<Produto> Produtos { get; set; }
     public List<Avaliacao> Avaliacoes { get; set; }
 
-    public void AtualizarAPartirDe(AlterarFornecedor alterarFornecedor)
+    public void AtualizarAPartirDe(AlterarFornecedorDto alterarFornecedor)
     {
         UltimaAtualizacao = DateTime.UtcNow;
         Nome = alterarFornecedor.Nome;
