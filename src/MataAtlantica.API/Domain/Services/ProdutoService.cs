@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using FluentResults;
 using FluentValidation;
+using MataAtlantica.API.Domain.Abstract.Repositories;
 using MataAtlantica.API.Domain.Entidades;
 using MataAtlantica.API.Domain.Models;
-using MataAtlantica.API.Domain.Repositories.Abstract;
 using MataAtlantica.API.Helpers;
 
 namespace MataAtlantica.API.Domain.Services;
@@ -40,5 +40,17 @@ public class ProdutoService(
     {
         var produtos = _produtoRepository.Buscar(args);
         return produtos.ToList();
+    }
+
+    /// <summary>
+    /// Adiciona thumbnail a produto, se houver thumbnail com a mesma ordem, nao adiciona.
+    /// </summary>
+    /// <param name="dto"></param>
+    /// <returns></returns>
+    public async Task AdicionarThumbnail(AdicionarThumbnailProdutoDto dto)
+    {
+        var produto = await _produtoRepository.ObterPorId(dto.ProdutoId);
+        produto.AdicionarImagemThumbnail(dto.Ordem);
+        await _produtoRepository.Commit();
     }
 }

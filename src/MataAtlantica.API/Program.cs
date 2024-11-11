@@ -1,11 +1,16 @@
 using FluentValidation;
+using MataAtlantica.API.Application.Models;
+using MataAtlantica.API.Application.Services;
+using MataAtlantica.API.Domain.Abstract.Repositories;
+using MataAtlantica.API.Domain.Abstract.Services;
 using MataAtlantica.API.Domain.Models;
 using MataAtlantica.API.Domain.Models.Validators;
 using MataAtlantica.API.Domain.Profiles;
-using MataAtlantica.API.Domain.Repositories.Abstract;
 using MataAtlantica.API.Domain.Services;
 using MataAtlantica.API.Infrastructure.Data;
 using MataAtlantica.API.Infrastructure.Repositories;
+using MataAtlantica.API.Infrastructure.Services;
+using MataAtlantica.API.Presentation.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System;
@@ -43,10 +48,17 @@ builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<CategoriaService>();
 builder.Services.AddScoped<FornecedorService>();
 builder.Services.AddScoped<ProdutoService>();
+builder.Services.AddScoped<IFileStorageService, FileStorageService>();
+builder.Services.AddScoped<ImagensProdutoService>();
+builder.Services.AddScoped<FileStorageClientFactory>();
 
 builder.Services.AddScoped<IValidator<AdicionarFornecedorDto>, CriarFornecedorValidator>();
 builder.Services.AddScoped<IValidator<AdicionarProdutoDto>, CriarProdutoValidator>();
 builder.Services.AddScoped<IValidator<AlterarFornecedorDto>, AlterarFornecedorValidator>();
+builder.Services.AddScoped<IValidator<MataAtlantica.API.Application.Models.AdicionarThumbnailProdutoDto>, AdicionarThumbnailValidator>();
+
+builder.Services.Configure<FilesOptions>(
+    builder.Configuration.GetSection(FilesOptions.Posicao));
 
 builder.Services.AddDbContext<MataAtlanticaDbContext>(p =>
     p.UseSqlServer(builder.Configuration.GetConnectionString("Default")));

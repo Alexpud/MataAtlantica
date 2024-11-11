@@ -1,9 +1,9 @@
 using AutoMapper;
 using FluentResults;
 using FluentValidation;
+using MataAtlantica.API.Domain.Abstract.Repositories;
 using MataAtlantica.API.Domain.Entidades;
 using MataAtlantica.API.Domain.Models;
-using MataAtlantica.API.Domain.Repositories.Abstract;
 using MataAtlantica.API.Helpers;
 
 namespace MataAtlantica.API.Domain.Services;

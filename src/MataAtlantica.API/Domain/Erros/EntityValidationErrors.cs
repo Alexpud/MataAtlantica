@@ -34,4 +34,9 @@ public static class BusinessErrors
     public static IError FornecedorNaoEncontrado = new Error("Fornecedor nao encontrado");
     public static IError FornecedorComCpfCnpjJaExiste = new Error("Fornecedor com o cpf/cnpj informado ja existe");
     public static IError CategoriaNaoEncontrada = new Error("Categoria nao encontrada");
+    public static IError NenhumImagemPassada = new Error("Nenhuma imagem foi passada");
+    public static IError QuantidadeDeArquivosSuperiorAoLimite = new Error("Quantidade de arquivos superior ao limite");
+    public static IError ArquivoComFormatoInvalido = new Error("Arquivo com formato invalido");
+    public static IError ImagemMuitoGrande = new Error("Imagem ultrapassa o tamanho máximo de 1Mb");
+    public static IError ProdutoNaoEncontrado = new Error("Produto nao encontrado");
 }

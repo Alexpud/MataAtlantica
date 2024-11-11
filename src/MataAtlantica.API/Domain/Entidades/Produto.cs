@@ -26,11 +26,21 @@ public class Produto : EntidadeBase
     public string FornecedorId { get; set; }
     public DateTime? UltimaAtualizacao { get; private set; }
 
-    public void AdicionarImagemThumbnail(string nome, int ordem)
-        => ConfiguracaoImagens.Thumbnails.Add(new Imagem(nome, ordem));
+    public void AdicionarImagemThumbnail(int ordem)
+    {
+        ConfiguracaoImagens ??= new ConfiguracaoImagens()
+            {
+                Thumbnails = new List<Imagem>()
+            };
+        var thumbnailExistente = ConfiguracaoImagens.Thumbnails.FirstOrDefault(p => p.Ordem == ordem);
+        if (thumbnailExistente != null)
+            thumbnailExistente = new Imagem(ordem);
+        else
+            ConfiguracaoImagens.Thumbnails.Add(new Imagem(ordem));
+    }
 
-    public void AdicionarImagemIlustrativa(string nome, int ordem)
-        =>ConfiguracaoImagens.ImagensIlustrativas.Add(new Imagem(nome, ordem));
+    public void AdicionarImagemIlustrativa(int ordem)
+        =>ConfiguracaoImagens.ImagensIlustrativas.Add(new Imagem(ordem));
 }
 
 public class ConfiguracaoImagens
@@ -39,8 +49,7 @@ public class ConfiguracaoImagens
     public List<Imagem> ImagensIlustrativas { get; set; }
 }
 
-public class Imagem(string Nome, int Ordem)
+public class Imagem(int Ordem)
 {
-    public string Nome { get; set; } = Nome;
     public int Ordem { get; set; } = Ordem;
 }

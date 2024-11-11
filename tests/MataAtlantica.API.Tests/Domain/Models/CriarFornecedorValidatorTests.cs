@@ -1,8 +1,8 @@
 ﻿using FluentValidation.TestHelper;
+using MataAtlantica.API.Domain.Abstract.Repositories;
 using MataAtlantica.API.Domain.Entidades;
 using MataAtlantica.API.Domain.Erros;
 using MataAtlantica.API.Domain.Models.Validators;
-using MataAtlantica.API.Domain.Repositories.Abstract;
 using MataAtlantica.API.Tests.Builder;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;

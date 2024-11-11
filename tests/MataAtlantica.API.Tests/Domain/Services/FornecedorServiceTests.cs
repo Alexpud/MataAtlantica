@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using FluentValidation.Results;
+using MataAtlantica.API.Domain.Abstract.Repositories;
 using MataAtlantica.API.Domain.Entidades;
 using MataAtlantica.API.Domain.Erros;
 using MataAtlantica.API.Domain.Models;
-using MataAtlantica.API.Domain.Repositories.Abstract;
 using MataAtlantica.API.Domain.Services;
 using MataAtlantica.API.Tests.Builder;
 using NSubstitute;
@@ -29,7 +29,7 @@ public class FornecedorServiceTests
 
     [Trait("Feature", "Criar Fornecedor")]
     [Fact(DisplayName = "Criacao de fornecedor deve falhar quando validacao dos dados falha")]
-    public async Task CriarFornecedor_DeveFalhar_QuandoDadosSãoInvalidos()
+    public async Task Adicionar_DeveFalhar_QuandoDadosSãoInvalidos()
     {
         // Arrange
         _criarFornecedorValidator.ValidateAsync(Arg.Any<AdicionarFornecedorDto>())
@@ -52,7 +52,7 @@ public class FornecedorServiceTests
 
     [Fact(DisplayName = "Criacao de fornecedor deve criar um novo fornecedor quando bem sucedido")]
     [Trait("Feature", "Criar Fornecedor")]
-    public async Task CriarFornecedor_DeveInserirNovoFornecedor_QuandoBemSucedido()
+    public async Task Adicionar_DeveInserirNovoFornecedor_QuandoBemSucedido()
     {
         // Arrange
         _criarFornecedorValidator
@@ -84,7 +84,7 @@ public class FornecedorServiceTests
 
     [Trait("Feature", "Alterar Fornecedor")]
     [Fact(DisplayName = "Alterar fornecedor deve falhar quando validacao dos dados falha")]
-    public async Task AlterarFornecedor_DeveFalhar_QuandoValidacaoFalha()
+    public async Task Alterar_DeveFalhar_QuandoValidacaoFalha()
     {
         // Arrange
         _alterarFornecedorValidator.ValidateAsync(Arg.Any<AlterarFornecedorDto>())
@@ -108,7 +108,7 @@ public class FornecedorServiceTests
 
     [Trait("Feature", "Alterar Fornecedor")]
     [Fact(DisplayName = "Alterar fornecedor deve alterar fornecedor quando bem sucedido")]
-    public async Task AlterarFornecedor_DeveAlterarFornecedor_QuandoBemSucedido()
+    public async Task Alterar_DeveAlterar_QuandoBemSucedido()
     {
         // Arrange
         _alterarFornecedorValidator.ValidateAsync(Arg.Any<AlterarFornecedorDto>())

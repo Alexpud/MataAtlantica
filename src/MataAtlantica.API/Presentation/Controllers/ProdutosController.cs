@@ -1,6 +1,7 @@
 using MataAtlantica.API.Domain.Models;
 using MataAtlantica.API.Domain.Services;
 using MataAtlantica.API.Presentation.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
