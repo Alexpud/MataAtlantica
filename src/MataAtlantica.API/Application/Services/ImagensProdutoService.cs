@@ -4,37 +4,52 @@ using MataAtlantica.API.Domain.Abstract.Services;
 using MataAtlantica.API.Domain.Models;
 using MataAtlantica.API.Domain.Services;
 using MataAtlantica.API.Helpers;
+using AdicionarImagemProdutoDto = MataAtlantica.API.Application.Models.AdicionarImagemProdutoDto;
 
 namespace MataAtlantica.API.Application.Services;
 
-public class ImagensProdutoService(
-    IValidator<Models.AdicionarThumbnailProdutoDto> validator,
+public partial class ImagensProdutoService(
+    IValidator<AdicionarImagemProdutoDto> validator,
     IFileStorageService fileStorageService,
     ProdutoService produtoService)
 {
-    private readonly IValidator<Models.AdicionarThumbnailProdutoDto> _adicionarThumbnailsValidator = validator;
+    private readonly IValidator<AdicionarImagemProdutoDto> _adicionarThumbnailsValidator = validator;
     private readonly ProdutoService _produtoService = produtoService;
 
-    public async Task<Result> AdicionarThumbnails(Models.AdicionarThumbnailProdutoDto model)
+    public async Task<Result> AdicionarThumbnail(AdicionarImagemProdutoDto model)
     {
         var result = await _adicionarThumbnailsValidator.ValidateAsync(model);
         if (!result.IsValid)
             return Result.Fail(result.GetErrors());
 
-        var dto = new Domain.Models.AdicionarThumbnailProdutoDto(model.ProdutoId, model.Ordem);
+        var dto = new Domain.Models.AdicionarImagemProdutoDto(model.ProdutoId, model.Ordem);
         await _produtoService.AdicionarThumbnail(dto);
 
-        var fileUploadDto = CreateFileUploadDto(model);
+        var fileUploadDto = CreateFileUploadDto(model, TipoImagem.Thumbnail);
         await fileStorageService.UploadFile(fileUploadDto);
         return Result.Ok();
     }
 
-    private FileUploadDto CreateFileUploadDto(Models.AdicionarThumbnailProdutoDto model)
+    public async Task<Result> AdicionarImagemIlustrativa(AdicionarImagemProdutoDto model)
     {
-        var filePath = Path.Combine("imagens", model.ProdutoId, "thumbnails");
-        var fileName = $"{model.Ordem}.{GetFileExtension(model.Thumbnail)}";
+        var result = await _adicionarThumbnailsValidator.ValidateAsync(model);
+        if (!result.IsValid)
+            return Result.Fail(result.GetErrors());
+
+        var dto = new Domain.Models.AdicionarImagemProdutoDto(model.ProdutoId, model.Ordem);
+        await _produtoService.AdicionarImagemIlustrativa(dto);
+
+        var fileUploadDto = CreateFileUploadDto(model, TipoImagem.Ilustrativa);
+        await fileStorageService.UploadFile(fileUploadDto);
+        return Result.Ok();
+    }
+
+    private FileUploadDto CreateFileUploadDto(AdicionarImagemProdutoDto model, TipoImagem tipoImagem)
+    {
+        var filePath = Path.Combine("imagens", model.ProdutoId, tipoImagem.ToString());
+        var fileName = $"{model.Ordem}.{GetFileExtension(model.ArquivoImagem)}";
         var memoryStream = new MemoryStream();
-        model.Thumbnail.CopyTo(memoryStream);
+        model.ArquivoImagem.CopyTo(memoryStream);
         return new FileUploadDto(filePath, fileName, memoryStream);
     }
 

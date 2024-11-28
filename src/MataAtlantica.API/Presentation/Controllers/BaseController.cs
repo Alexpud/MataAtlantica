@@ -17,4 +17,14 @@ public abstract class BaseController : ControllerBase
         badRequestResponse.Message = "Alguns erros foram encontrados";
         return BadRequest(badRequestResponse);
     }
+
+    public IActionResult HandleFailedResult(Result result)
+    {
+        var badRequestResponse = new BadRequestResponse();
+        foreach (var error in result.Errors)
+            badRequestResponse.AddError(error);
+
+        badRequestResponse.Message = "Alguns erros foram encontrados";
+        return BadRequest(badRequestResponse);
+    }
 }

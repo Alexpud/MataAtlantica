@@ -55,7 +55,7 @@ builder.Services.AddScoped<FileStorageClientFactory>();
 builder.Services.AddScoped<IValidator<AdicionarFornecedorDto>, CriarFornecedorValidator>();
 builder.Services.AddScoped<IValidator<AdicionarProdutoDto>, CriarProdutoValidator>();
 builder.Services.AddScoped<IValidator<AlterarFornecedorDto>, AlterarFornecedorValidator>();
-builder.Services.AddScoped<IValidator<MataAtlantica.API.Application.Models.AdicionarThumbnailProdutoDto>, AdicionarThumbnailValidator>();
+builder.Services.AddScoped<IValidator<MataAtlantica.API.Application.Models.AdicionarImagemProdutoDto>, AdicionarImagemProdutoValidator>();
 
 builder.Services.Configure<FilesOptions>(
     builder.Configuration.GetSection(FilesOptions.Posicao));

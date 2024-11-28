@@ -11,7 +11,7 @@ using System.Text;
 namespace MataAtlantica.API.Tests.Application.Services;
 public class AdicionarThumbnailValidatorTests
 {
-    private readonly AdicionarThumbnailValidator _sut;
+    private readonly AdicionarImagemProdutoValidator _sut;
     private readonly IProdutoRepository _produtoRepository;
     public AdicionarThumbnailValidatorTests()
     {
@@ -26,19 +26,19 @@ public class AdicionarThumbnailValidatorTests
         // Arrange
         var bytes = Encoding.UTF8.GetBytes("This is a dummy file");
         IFormFile file = new FormFile(new MemoryStream(bytes), 0, bytes.Length, "Data", "dummy.pdf");
-        var model = new AdicionarThumbnailProdutoDto()
+        var model = new AdicionarImagemProdutoDto()
         {
-            Thumbnail = file,
+            ArquivoImagem = file,
         };
 
         // Act
         var result = await _sut.TestValidateAsync(model);
 
         // Assert
-        result.ShouldHaveValidationErrorFor(p => p.Thumbnail);
-        var errors = result.Errors.Where(p => p.PropertyName == nameof(AdicionarThumbnailProdutoDto.Thumbnail));
+        result.ShouldHaveValidationErrorFor(p => p.ArquivoImagem);
+        var errors = result.Errors.Where(p => p.PropertyName == nameof(AdicionarImagemProdutoDto.ArquivoImagem));
         Assert.NotEmpty(result.Errors
-            .Where(p => p.PropertyName == nameof(AdicionarThumbnailProdutoDto.ProdutoId)
+            .Where(p => p.PropertyName == nameof(AdicionarImagemProdutoDto.ProdutoId)
                 && p.ErrorCode == nameof(BusinessErrors.ProdutoNaoEncontrado)));
     }
 
@@ -49,10 +49,10 @@ public class AdicionarThumbnailValidatorTests
         // Arrange
         var bytes = Encoding.UTF8.GetBytes("This is a dummy file");
         IFormFile file = new FormFile(new MemoryStream(bytes), 0, bytes.Length, "Data", "dummy.pdf");
-        var model = new AdicionarThumbnailProdutoDto()
+        var model = new AdicionarImagemProdutoDto()
         {
             ProdutoId = "PRODUTOiD",
-            Thumbnail = file
+            ArquivoImagem = file
         };
 
         _produtoRepository.ObterPorId(Arg.Any<string>())
@@ -70,16 +70,16 @@ public class AdicionarThumbnailValidatorTests
     public async Task TestValidate_DeveTerErroDeValidacaoParaThumbnails_QuandoNenhumArquivoForPassado()
     {
         // Arrange
-        var model = new AdicionarThumbnailProdutoDto();
+        var model = new AdicionarImagemProdutoDto();
 
         // Act
         var result = await _sut.TestValidateAsync(model);
 
         // Assert
-        result.ShouldHaveValidationErrorFor(p => p.Thumbnail);
-        var errors = result.Errors.Where(p => p.PropertyName == nameof(AdicionarThumbnailProdutoDto.Thumbnail));
+        result.ShouldHaveValidationErrorFor(p => p.ArquivoImagem);
+        var errors = result.Errors.Where(p => p.PropertyName == nameof(AdicionarImagemProdutoDto.ArquivoImagem));
         Assert.NotEmpty(result.Errors
-            .Where(p => p.PropertyName == nameof(AdicionarThumbnailProdutoDto.Thumbnail)
+            .Where(p => p.PropertyName == nameof(AdicionarImagemProdutoDto.ArquivoImagem)
                 && p.ErrorCode == nameof(BusinessErrors.NenhumImagemPassada)));
     }
 
@@ -90,19 +90,19 @@ public class AdicionarThumbnailValidatorTests
         // Arrange
         var bytes = Encoding.UTF8.GetBytes("This is a dummy file");
         IFormFile file = new FormFile(new MemoryStream(bytes), 0, bytes.Length, "Data", "dummy.pdf");
-        var model = new AdicionarThumbnailProdutoDto
+        var model = new AdicionarImagemProdutoDto
         {
-            Thumbnail = file
+            ArquivoImagem = file
         };
 
         // Act
         var result = await _sut.TestValidateAsync(model);
 
         // Assert
-        result.ShouldHaveValidationErrorFor(p => p.Thumbnail);
-        var errors = result.Errors.Where(p => p.PropertyName == nameof(AdicionarThumbnailProdutoDto.Thumbnail));
+        result.ShouldHaveValidationErrorFor(p => p.ArquivoImagem);
+        var errors = result.Errors.Where(p => p.PropertyName == nameof(AdicionarImagemProdutoDto.ArquivoImagem));
         Assert.NotEmpty(result.Errors
-            .Where(p => p.PropertyName == nameof(AdicionarThumbnailProdutoDto.Thumbnail)
+            .Where(p => p.PropertyName == nameof(AdicionarImagemProdutoDto.ArquivoImagem)
                 && p.ErrorCode == nameof(BusinessErrors.ArquivoComFormatoInvalido)));
     }
 }

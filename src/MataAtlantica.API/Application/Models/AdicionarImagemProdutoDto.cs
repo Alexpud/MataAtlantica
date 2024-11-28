@@ -1,8 +1,8 @@
 ﻿namespace MataAtlantica.API.Application.Models;
 
-public class AdicionarThumbnailProdutoDto
+public class AdicionarImagemProdutoDto
 {
     public string ProdutoId { get; set; }
-    public IFormFile Thumbnail { get; set; }
+    public IFormFile ArquivoImagem { get; set; }
     public int Ordem { get; set; }
 }

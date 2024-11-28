@@ -5,6 +5,7 @@ using MataAtlantica.API.Domain.Abstract.Repositories;
 using MataAtlantica.API.Domain.Entidades;
 using MataAtlantica.API.Domain.Models;
 using MataAtlantica.API.Helpers;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 
 namespace MataAtlantica.API.Domain.Services;
 
@@ -47,10 +48,17 @@ public class ProdutoService(
     /// </summary>
     /// <param name="dto"></param>
     /// <returns></returns>
-    public async Task AdicionarThumbnail(AdicionarThumbnailProdutoDto dto)
+    public async Task AdicionarThumbnail(AdicionarImagemProdutoDto dto)
     {
         var produto = await _produtoRepository.ObterPorId(dto.ProdutoId);
         produto.AdicionarImagemThumbnail(dto.Ordem);
+        await _produtoRepository.Commit();
+    }
+
+    public async Task AdicionarImagemIlustrativa(AdicionarImagemProdutoDto dto)
+    {
+        var produto = await _produtoRepository.ObterPorId(dto.ProdutoId);
+        produto.AdicionarImagemIlustrativa(dto.Ordem);
         await _produtoRepository.Commit();
     }
 }

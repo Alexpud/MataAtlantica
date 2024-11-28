@@ -33,14 +33,20 @@ public class Produto : EntidadeBase
                 Thumbnails = new List<Imagem>()
             };
         var thumbnailExistente = ConfiguracaoImagens.Thumbnails.FirstOrDefault(p => p.Ordem == ordem);
-        if (thumbnailExistente != null)
-            thumbnailExistente = new Imagem(ordem);
-        else
-            ConfiguracaoImagens.Thumbnails.Add(new Imagem(ordem));
+        if (thumbnailExistente == null)
+            ConfiguracaoImagens.Thumbnails.Add(new Imagem(ordem));            
     }
 
     public void AdicionarImagemIlustrativa(int ordem)
-        =>ConfiguracaoImagens.ImagensIlustrativas.Add(new Imagem(ordem));
+    {
+        ConfiguracaoImagens ??= new ConfiguracaoImagens()
+        {
+            ImagensIlustrativas = new List<Imagem>()
+        };
+        var imagem = ConfiguracaoImagens.ImagensIlustrativas.FirstOrDefault(p => p.Ordem == ordem);
+        if (imagem != null)
+            ConfiguracaoImagens.ImagensIlustrativas.Add(new Imagem(ordem));
+    }
 }
 
 public class ConfiguracaoImagens

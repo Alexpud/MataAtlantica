@@ -1,8 +1,8 @@
 ﻿namespace MataAtlantica.API.Domain.Models;
 
-public class AdicionarThumbnailProdutoDto
+public class AdicionarImagemProdutoDto
 {
-    public AdicionarThumbnailProdutoDto(string produtoId, int ordem)
+    public AdicionarImagemProdutoDto(string produtoId, int ordem)
     {
         ProdutoId = produtoId;
         Ordem = ordem;

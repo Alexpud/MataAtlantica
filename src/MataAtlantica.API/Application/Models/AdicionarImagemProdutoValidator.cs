@@ -4,19 +4,19 @@ using MataAtlantica.API.Domain.Erros;
 
 namespace MataAtlantica.API.Application.Models;
 
-public class AdicionarThumbnailValidator : AbstractValidator<AdicionarThumbnailProdutoDto>
+public class AdicionarImagemProdutoValidator : AbstractValidator<AdicionarImagemProdutoDto>
 {
     public static string[] FormatosPermitidos = { ".jpeg", ".png" };
     public const int TamanhoMaximoImagem = 1_000_000;
 
-    public AdicionarThumbnailValidator(IProdutoRepository produtoRepository)
+    public AdicionarImagemProdutoValidator(IProdutoRepository produtoRepository)
     {
         RuleFor(p => p.ProdutoId)
             .MustAsync(async (produtoId, cancellationToken) => await produtoRepository.ObterPorId(produtoId) != null)
             .WithErrorCode(nameof(BusinessErrors.ProdutoNaoEncontrado))
             .WithMessage(nameof(BusinessErrors.ProdutoNaoEncontrado));
 
-        RuleFor(p => p.Thumbnail)
+        RuleFor(p => p.ArquivoImagem)
             .NotNull()
             .WithErrorCode(nameof(BusinessErrors.NenhumImagemPassada))
             .WithMessage(BusinessErrors.NenhumImagemPassada.Message)
