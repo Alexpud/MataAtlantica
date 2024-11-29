@@ -9,3 +9,16 @@ GET {{MataAtlantica.API_HostAddress}}/api/fornecedores/string
 GET {{MataAtlantica.API_HostAddress}}/api/produtos
 
 ###
+
+GET {{MataAtlantica.API_HostAddress}}/api/produtos
+
+###
+
+@id=0fe3eb77-32b8-4c20-945a-02db4f0c498e
+PUT {{MataAtlantica.API_HostAddress}}/api/produtos/{{id}}
+Content-Type: application/json
+{
+  "Nome": "asdasd"
+}
+
+###

@@ -47,6 +47,12 @@ public class Produto : EntidadeBase
         if (imagem != null)
             ConfiguracaoImagens.ImagensIlustrativas.Add(new Imagem(ordem));
     }
+
+    public void AtualizarDe(AlterarProdutoDto model)
+    {
+        Nome = model.Nome;
+        UltimaAtualizacao = DateTime.Now;
+    }
 }
 
 public class ConfiguracaoImagens

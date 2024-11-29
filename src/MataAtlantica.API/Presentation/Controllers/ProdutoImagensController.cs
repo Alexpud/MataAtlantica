@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MataAtlantica.API.Presentation.Controllers;
 
+[Route("api/produtos")]
 public partial class ProdutoImagensController(ImagensProdutoService imagemProdutoService) : BaseController
 {
     private readonly ImagensProdutoService _imagemProdutoService = imagemProdutoService;
@@ -14,7 +15,7 @@ public partial class ProdutoImagensController(ImagensProdutoService imagemProdut
     /// <param name="produtoId"></param>
     /// <returns></returns>
     [Consumes("multipart/form-data")]
-    [HttpPost("api/produtos/{produtoId}/thumbnail")]
+    [HttpPost("{produtoId}/thumbnail")]
     public async Task<IActionResult> AdicionarThumbnail([FromForm] AdicionarImagemRequest request, string produtoId)
     {
         var model = new Application.Models.AdicionarImagemProdutoDto
@@ -30,7 +31,7 @@ public partial class ProdutoImagensController(ImagensProdutoService imagemProdut
     }
 
     [Consumes("multipart/form-data")]
-    [HttpPost("api/produtos/{produtoId}/imagem-ilustrativa")]
+    [HttpPost("{produtoId}/imagem-ilustrativa")]
     public async Task<IActionResult> AdicionarImagemIlustrativa([FromForm] AdicionarImagemRequest request, string produtoId)
     {
         var model = new Application.Models.AdicionarImagemProdutoDto

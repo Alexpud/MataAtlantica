@@ -11,10 +11,12 @@ namespace MataAtlantica.API.Domain.Services;
 
 public class ProdutoService(
     IValidator<AdicionarProdutoDto> criarProdutoValidator,
+    IValidator<AlterarProdutoDto> atualizarProdutoValidator,
     IProdutoRepository produtoRepository, 
     IMapper mapper)
 {
     private readonly IValidator<AdicionarProdutoDto> _criarProdutoValidator = criarProdutoValidator;
+    private readonly IValidator<AlterarProdutoDto> _atualizarProdutoValidator = atualizarProdutoValidator;
     private readonly IProdutoRepository _produtoRepository = produtoRepository;
     private readonly IMapper _mapper = mapper;
 
@@ -32,6 +34,19 @@ public class ProdutoService(
 
         var produto = new Produto(model);
         _produtoRepository.Adicionar(produto);
+        await _produtoRepository.Commit();
+
+        return Result.Ok(_mapper.Map<ProdutoDto>(produto));
+    }
+
+    public async Task<Result<ProdutoDto>> Alterar(AlterarProdutoDto model)
+    {
+        var validation = await _atualizarProdutoValidator.ValidateAsync(model);
+        if (!validation.IsValid)
+            return Result.Fail(validation.GetErrors());
+
+        var produto = await _produtoRepository.ObterPorId(model.ProdutoId);
+        produto.AtualizarDe(model);
         await _produtoRepository.Commit();
 
         return Result.Ok(_mapper.Map<ProdutoDto>(produto));

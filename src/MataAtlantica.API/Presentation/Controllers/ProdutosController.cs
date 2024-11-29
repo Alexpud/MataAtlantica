@@ -60,6 +60,24 @@ public class ProdutosController(ProdutoService service) : BaseController
     }
 
     /// <summary>
+    /// Altera um produto existente
+    /// </summary>
+    /// <param name="id">ID do produto existente</param>
+    /// <param name="model"></param>
+    /// <returns></returns>
+    [HttpPut("{id}")]
+    [ProducesResponseType(typeof(ProdutoDto), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(BadRequestResponse), (int)HttpStatusCode.BadRequest)]
+    public async Task<IActionResult> AlterarProduto(string id, AlterarProdutoRequest model)
+    {
+        var dto = new AlterarProdutoDto(
+            id,
+            model.Nome);
+        var result = await _service.Alterar(dto);
+        return result.IsFailed ? HandleFailedResult(result) : Ok(result.Value);
+    }
+
+    /// <summary>
     /// Busca os produtos filtrados pelos parametros passados
     /// </summary>
     /// <param name="model"></param>
