@@ -10,9 +10,9 @@ public class DomainProfileTests
     [Fact]
     public void DomainProfile_DeveSerValido()
     {
-        var configuration = new MapperConfiguration(p => p.AddProfile(typeof(DomainProfile)));
-
-        configuration.AssertConfigurationIsValid();
+        // Arrange & Act & Assert
+        new MapperConfiguration(p => p.AddProfile(typeof(DomainProfile)))
+            .AssertConfigurationIsValid();
     }
 
     [Fact]
@@ -31,6 +31,6 @@ public class DomainProfileTests
         Assert.Multiple(
             () => Assert.NotNull(dto),
             () => Assert.Equal(categoriaPai.Nome, dto.Nome),
-            () => Assert.Equal(1, dto.SubCategorias.Count));
+            () => Assert.Single(dto.SubCategorias));
     }
 }

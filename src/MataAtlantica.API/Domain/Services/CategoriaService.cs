@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using MataAtlantica.API.Domain.Abstract.Repositories;
 using MataAtlantica.API.Domain.Entidades;
 using MataAtlantica.API.Domain.Models;
-using MataAtlantica.API.Domain.Repositories.Abstract;
 
 namespace MataAtlantica.API.Domain.Services;
 
@@ -34,7 +34,7 @@ public class CategoriaService(ICategoriaRepository categoriaRepository, IMapper 
     private static bool EhSubCategoria(CategoriaDto categoria) 
         => categoria.CategoriaPaiId != null;
 
-    public async Task<CategoriaDto> Adicionar(AdicionarCategoriaArgs dto)
+    public async Task<CategoriaDto> Adicionar(AdicionarCategoriaDto dto)
     {
         var categoria = new Categoria(dto.Nome);
         _categoriaRepository.Adicionar(categoria);
