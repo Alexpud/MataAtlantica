@@ -1,6 +1,6 @@
-﻿using MataAtlantica.API.Domain.Abstract.Repositories;
-using MataAtlantica.API.Domain.Entidades;
-using MataAtlantica.API.Infrastructure.Data;
+﻿using MataAtlantica.API.Infrastructure.Data;
+using MataAtlantica.Domain.Abstract.Repositories;
+using MataAtlantica.Domain.Entidades;
 using Microsoft.EntityFrameworkCore;
 
 namespace MataAtlantica.API.Infrastructure.Repositories;

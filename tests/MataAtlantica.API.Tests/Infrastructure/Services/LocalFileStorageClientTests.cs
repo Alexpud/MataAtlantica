@@ -1,5 +1,5 @@
-﻿using MataAtlantica.API.Domain.Models;
-using MataAtlantica.API.Infrastructure.Services;
+﻿using MataAtlantica.API.Infrastructure.Services;
+using MataAtlantica.Domain.Models;
 using System.Text;
 
 namespace MataAtlantica.API.Tests.Infrastructure.Services;

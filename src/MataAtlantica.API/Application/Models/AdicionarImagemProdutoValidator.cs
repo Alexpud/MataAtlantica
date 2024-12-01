@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
-using MataAtlantica.API.Domain.Abstract.Repositories;
-using MataAtlantica.API.Domain.Erros;
+using MataAtlantica.Domain.Abstract.Repositories;
+using MataAtlantica.Domain.Erros;
 
 namespace MataAtlantica.API.Application.Models;
 

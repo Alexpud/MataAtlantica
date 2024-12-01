@@ -1,6 +1,6 @@
-﻿using MataAtlantica.API.Domain.Abstract.Services;
-using MataAtlantica.API.Domain.Models;
-using MataAtlantica.API.Presentation.Options;
+﻿using MataAtlantica.API.Presentation.Options;
+using MataAtlantica.Domain.Abstract.Services;
+using MataAtlantica.Domain.Models;
 using Microsoft.Extensions.Options;
 
 namespace MataAtlantica.API.Infrastructure.Services;

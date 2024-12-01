@@ -1,4 +1,4 @@
-﻿using MataAtlantica.API.Domain.Entidades;
+﻿using MataAtlantica.Domain.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

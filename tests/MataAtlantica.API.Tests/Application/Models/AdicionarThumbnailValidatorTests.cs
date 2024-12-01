@@ -1,14 +1,13 @@
-﻿using FluentResults;
-using FluentValidation.TestHelper;
+﻿using FluentValidation.TestHelper;
 using MataAtlantica.API.Application.Models;
-using MataAtlantica.API.Domain.Abstract.Repositories;
-using MataAtlantica.API.Domain.Entidades;
-using MataAtlantica.API.Domain.Erros;
+using MataAtlantica.Domain.Abstract.Repositories;
+using MataAtlantica.Domain.Entidades;
+using MataAtlantica.Domain.Erros;
 using Microsoft.AspNetCore.Http;
 using NSubstitute;
 using System.Text;
 
-namespace MataAtlantica.API.Tests.Application.Services;
+namespace MataAtlantica.API.Tests.Application.Models;
 public class AdicionarThumbnailValidatorTests
 {
     private readonly AdicionarImagemProdutoValidator _sut;

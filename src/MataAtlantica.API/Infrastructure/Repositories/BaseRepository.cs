@@ -1,7 +1,7 @@
-﻿using MataAtlantica.API.Domain.Abstract.Repositories;
-using MataAtlantica.API.Domain.Entidades;
-using MataAtlantica.API.Domain.Specifications;
-using MataAtlantica.API.Infrastructure.Data;
+﻿using MataAtlantica.API.Infrastructure.Data;
+using MataAtlantica.Domain.Abstract.Repositories;
+using MataAtlantica.Domain.Entidades;
+using MataAtlantica.Domain.Specifications;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 

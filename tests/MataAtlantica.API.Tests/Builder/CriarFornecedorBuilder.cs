@@ -1,5 +1,5 @@
 ﻿using AutoFixture;
-using MataAtlantica.API.Domain.Models;
+using MataAtlantica.Domain.Models;
 
 namespace MataAtlantica.API.Tests.Builder;
 

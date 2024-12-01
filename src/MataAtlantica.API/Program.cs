@@ -1,19 +1,18 @@
 using FluentValidation;
 using MataAtlantica.API.Application.Models;
 using MataAtlantica.API.Application.Services;
-using MataAtlantica.API.Domain.Abstract.Repositories;
-using MataAtlantica.API.Domain.Abstract.Services;
-using MataAtlantica.API.Domain.Models;
-using MataAtlantica.API.Domain.Models.Validators;
-using MataAtlantica.API.Domain.Profiles;
-using MataAtlantica.API.Domain.Services;
 using MataAtlantica.API.Infrastructure.Data;
 using MataAtlantica.API.Infrastructure.Repositories;
 using MataAtlantica.API.Infrastructure.Services;
 using MataAtlantica.API.Presentation.Options;
+using MataAtlantica.Domain.Abstract.Repositories;
+using MataAtlantica.Domain.Abstract.Services;
+using MataAtlantica.Domain.Models;
+using MataAtlantica.Domain.Models.Validators;
+using MataAtlantica.Domain.Profiles;
+using MataAtlantica.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using System;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);

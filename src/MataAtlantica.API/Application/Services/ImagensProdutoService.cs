@@ -1,9 +1,9 @@
 ﻿using FluentResults;
 using FluentValidation;
-using MataAtlantica.API.Domain.Abstract.Services;
-using MataAtlantica.API.Domain.Models;
-using MataAtlantica.API.Domain.Services;
 using MataAtlantica.API.Helpers;
+using MataAtlantica.Domain.Abstract.Services;
+using MataAtlantica.Domain.Models;
+using MataAtlantica.Domain.Services;
 using AdicionarImagemProdutoDto = MataAtlantica.API.Application.Models.AdicionarImagemProdutoDto;
 
 namespace MataAtlantica.API.Application.Services;
