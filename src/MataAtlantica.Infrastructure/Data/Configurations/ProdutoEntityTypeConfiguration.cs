@@ -2,7 +2,7 @@ using MataAtlantica.Domain.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace MataAtlantica.API.Infrastructure.Data.Configurations;
+namespace MataAtlantica.Infrastructure.Data.Configurations;
 
 public class ProdutoEntityTypeConfiguration : IEntityTypeConfiguration<Produto>
 {

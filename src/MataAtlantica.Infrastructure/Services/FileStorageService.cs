@@ -3,7 +3,7 @@ using MataAtlantica.Domain.Abstract.Services;
 using MataAtlantica.Domain.Models;
 using Microsoft.Extensions.Options;
 
-namespace MataAtlantica.API.Infrastructure.Services;
+namespace MataAtlantica.Infrastructure.Services;
 
 public class FileStorageService(FileStorageClientFactory factory) : IFileStorageService
 {

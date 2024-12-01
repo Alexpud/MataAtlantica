@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace MataAtlantica.API.Infrastructure.Data;
+namespace MataAtlantica.Infrastructure.Data;
 
 public class MataAtlanticaDbContext : DbContext
 {

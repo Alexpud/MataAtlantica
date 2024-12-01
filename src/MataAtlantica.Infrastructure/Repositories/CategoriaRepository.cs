@@ -1,8 +1,8 @@
-﻿using MataAtlantica.API.Infrastructure.Data;
-using MataAtlantica.Domain.Abstract.Repositories;
+﻿using MataAtlantica.Domain.Abstract.Repositories;
 using MataAtlantica.Domain.Entidades;
+using MataAtlantica.Infrastructure.Data;
 
-namespace MataAtlantica.API.Infrastructure.Repositories;
+namespace MataAtlantica.Infrastructure.Repositories;
 
 public class CategoriaRepository : BaseRepository<Categoria>, ICategoriaRepository
 {

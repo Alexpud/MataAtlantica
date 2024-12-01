@@ -1,6 +1,6 @@
 ﻿using MataAtlantica.Domain.Models;
 
-namespace MataAtlantica.API.Infrastructure.Services;
+namespace MataAtlantica.Infrastructure.Services;
 
 public interface IFileStorageClient
 {
@@ -13,7 +13,7 @@ public class LocalFileStorageClient : IFileStorageClient
     {
         var tempPath = Path.GetTempPath();
         var diretorioArquivo = Path.Combine(tempPath, dto.CaminhoArquivo);
-        
+
         if (!Directory.Exists(diretorioArquivo))
             Directory.CreateDirectory(diretorioArquivo);
 

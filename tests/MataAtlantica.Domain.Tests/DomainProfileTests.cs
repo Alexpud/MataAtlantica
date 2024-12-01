@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using MataAtlantica.API.Domain.Models;
-using MataAtlantica.API.Domain.Profiles;
-using MataAtlantica.API.Tests.Builder;
+using MataAtlantica.Domain.Models;
+using MataAtlantica.Domain.Profiles;
+using MataAtlantica.Domain.Tests.Builder;
 
 namespace MataAtlantica.Domain.Tests;
 

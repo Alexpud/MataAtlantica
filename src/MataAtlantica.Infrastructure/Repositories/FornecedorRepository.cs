@@ -1,9 +1,9 @@
-﻿using MataAtlantica.API.Infrastructure.Data;
-using MataAtlantica.Domain.Abstract.Repositories;
+﻿using MataAtlantica.Domain.Abstract.Repositories;
 using MataAtlantica.Domain.Entidades;
+using MataAtlantica.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace MataAtlantica.API.Infrastructure.Repositories;
+namespace MataAtlantica.Infrastructure.Repositories;
 
 public class FornecedorRepository : BaseRepository<Fornecedor>, IFornecedorRepository
 {
@@ -11,6 +11,6 @@ public class FornecedorRepository : BaseRepository<Fornecedor>, IFornecedorRepos
     {
     }
 
-    public async Task<Fornecedor> ObterPorCpfCnpj(string cpfCnpj) 
+    public async Task<Fornecedor> ObterPorCpfCnpj(string cpfCnpj)
         => await _dbSet.FirstOrDefaultAsync(fornecedor => fornecedor.CpfCnpj == cpfCnpj);
 }

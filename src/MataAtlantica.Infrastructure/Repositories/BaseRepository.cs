@@ -1,11 +1,11 @@
-﻿using MataAtlantica.API.Infrastructure.Data;
-using MataAtlantica.Domain.Abstract.Repositories;
+﻿using MataAtlantica.Domain.Abstract.Repositories;
 using MataAtlantica.Domain.Entidades;
 using MataAtlantica.Domain.Specifications;
+using MataAtlantica.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace MataAtlantica.API.Infrastructure.Repositories;
+namespace MataAtlantica.Infrastructure.Repositories;
 
 public abstract class BaseRepository<TEntity>(MataAtlanticaDbContext dbContext) : IBaseRepository<TEntity> where TEntity : EntidadeBase
 {
@@ -41,7 +41,7 @@ public abstract class BaseRepository<TEntity>(MataAtlanticaDbContext dbContext) 
 
     public async Task<TEntity> ObterPorId(string id)
     {
-        return await _dbSet.FirstOrDefaultAsync(entity => entity.Id == id); 
+        return await _dbSet.FirstOrDefaultAsync(entity => entity.Id == id);
     }
 
     // Essa implementacao ficou redundante com specification
