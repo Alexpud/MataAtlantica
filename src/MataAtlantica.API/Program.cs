@@ -61,7 +61,7 @@ builder.Services.AddScoped<IValidator<AlterarFornecedorDto>, AlterarFornecedorVa
 builder.Services.AddScoped<IValidator<AdicionarProdutoThumbnailCommand>, AdicionarProdutoThumbnailCommandValidator>();
 builder.Services.AddScoped<IValidator<AdicionarImagemProdutoDto>, AdicionarImagemProdutoValidator>();
 
-builder.Services.AddTransient<ExceptionMiddleware>();
+builder.Services.AddTransient<ValidationExceptionHandler>();
 // builder.Services.AddScoped<IValidator<MataAtlantica.API.Application.Models.AdicionarImagemProdutoDto>, AdicionarImagemProdutoValidator>();
 
 builder.Services.AddMediatR(cfg =>
@@ -80,12 +80,16 @@ builder.Services.Configure<FilesOptions>(
 builder.Services.AddDbContext<MataAtlanticaDbContext>(p =>
     p.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
+
+builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
 // Desativar query tracking para contextos de leitura em um CQRS seria interessante
 
+builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
-app.UseMiddleware(typeof(ExceptionMiddleware));
+app.UseExceptionHandler();
+
 
 using (var Scope = app.Services.CreateScope())
 {
@@ -99,6 +103,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseHttpsRedirection();
 
