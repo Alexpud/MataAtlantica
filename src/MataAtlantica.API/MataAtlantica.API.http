@@ -22,3 +22,7 @@ Content-Type: application/json
 }
 
 ###
+
+GET {{MataAtlantica.API_HostAddress}}/api/mediatr
+
+###

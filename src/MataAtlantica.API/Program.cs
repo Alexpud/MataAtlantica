@@ -1,7 +1,9 @@
+using FluentResults;
 using FluentValidation;
 using MataAtlantica.API.Application.Models;
 using MataAtlantica.API.Application.Services;
 using MataAtlantica.API.Presentation.Options;
+using MataAtlantica.Application.Produtos.CadastrarThumbnail;
 using MataAtlantica.Domain.Abstract.Repositories;
 using MataAtlantica.Domain.Abstract.Services;
 using MataAtlantica.Domain.Models;
@@ -11,9 +13,13 @@ using MataAtlantica.Domain.Services;
 using MataAtlantica.Infrastructure.Data;
 using MataAtlantica.Infrastructure.Repositories;
 using MataAtlantica.Infrastructure.Services;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using System.Net.NetworkInformation;
 using System.Reflection;
+using MataAtlantica.API.Middleware;
+using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,7 +61,15 @@ builder.Services.AddScoped<IValidator<AdicionarFornecedorDto>, CriarFornecedorVa
 builder.Services.AddScoped<IValidator<AdicionarProdutoDto>, CriarProdutoValidator>();
 builder.Services.AddScoped<IValidator<AlterarProdutoDto>, AlterarProdutoValidator>();
 builder.Services.AddScoped<IValidator<AlterarFornecedorDto>, AlterarFornecedorValidator>();
-builder.Services.AddScoped<IValidator<MataAtlantica.API.Application.Models.AdicionarImagemProdutoDto>, AdicionarImagemProdutoValidator>();
+builder.Services.AddScoped<IValidator<AdicionarProdutoThumbnailCommand>, AdicionarProdutoThumbnailCommandValidator>();
+// builder.Services.AddScoped<IValidator<MataAtlantica.API.Application.Models.AdicionarImagemProdutoDto>, AdicionarImagemProdutoValidator>();
+
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssemblies(typeof(CadastrarThumbnailHandler).Assembly);
+});
+
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
 builder.Services.Configure<FilesOptions>(
     builder.Configuration.GetSection(FilesOptions.Posicao));
@@ -65,7 +79,9 @@ builder.Services.AddDbContext<MataAtlanticaDbContext>(p =>
 
 // Desativar query tracking para contextos de leitura em um CQRS seria interessante
 
+
 var app = builder.Build();
+
 
 using (var Scope = app.Services.CreateScope())
 {
@@ -85,5 +101,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.Run();

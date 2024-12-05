@@ -23,7 +23,7 @@ public partial class ImagensProdutoService(
             return Result.Fail(result.GetErrors());
 
         var dto = new Domain.Models.AdicionarImagemProdutoDto(model.ProdutoId, model.Ordem);
-        await _produtoService.AdicionarThumbnail(dto);
+        await _produtoService.AdicionarThumbnail(dto.ProdutoId, dto.Ordem);
 
         var fileUploadDto = CreateFileUploadDto(model, TipoImagem.Thumbnail);
         await fileStorageService.UploadFile(fileUploadDto);

@@ -4,6 +4,7 @@ using FluentValidation;
 using MataAtlantica.API.Helpers;
 using MataAtlantica.Domain.Abstract.Repositories;
 using MataAtlantica.Domain.Entidades;
+using MataAtlantica.Domain.Erros;
 using MataAtlantica.Domain.Models;
 
 namespace MataAtlantica.Domain.Services;
@@ -60,13 +61,17 @@ public class ProdutoService(
     /// <summary>
     /// Adiciona thumbnail a produto, se houver thumbnail com a mesma ordem, nao adiciona.
     /// </summary>
-    /// <param name="dto"></param>
+    /// <param name="produtoId">Id do produto associado</param>
+    /// <param name="ordem">Ordem de exibicao da imagem</param>
     /// <returns></returns>
-    public async Task AdicionarThumbnail(AdicionarImagemProdutoDto dto)
+    public async Task<Result> AdicionarThumbnail(string produtoId, int ordem)
     {
-        var produto = await _produtoRepository.ObterPorId(dto.ProdutoId);
-        produto.AdicionarImagemThumbnail(dto.Ordem);
+        var produto = await _produtoRepository.ObterPorId(produtoId);
+        if (produto == null)
+            return Result.Fail(BusinessErrors.ProdutoNaoEncontrado);
+        produto.AdicionarImagemThumbnail(ordem);
         await _produtoRepository.Commit();
+        return Result.Ok();
     }
 
     public async Task AdicionarImagemIlustrativa(AdicionarImagemProdutoDto dto)
