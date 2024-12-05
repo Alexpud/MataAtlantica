@@ -20,11 +20,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MataAtlantica.Domain", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MataAtlantica.Domain.Tests", "tests\MataAtlantica.Domain.Tests\MataAtlantica.Domain.Tests.csproj", "{792A3B09-16E6-4FD9-BD52-AD46A65C7872}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MataAtlantica.Infrastructure", "src\MataAtlantica.Infrastructure\MataAtlantica.Infrastructure.csproj", "{7B541EBF-1CD6-464D-9FE0-8D0913B18C9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MataAtlantica.Infrastructure", "src\MataAtlantica.Infrastructure\MataAtlantica.Infrastructure.csproj", "{7B541EBF-1CD6-464D-9FE0-8D0913B18C9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MataAtlantica.Infrastructure.Tests", "tests\MataAtlantica.Infrastructure.Tests\MataAtlantica.Infrastructure.Tests.csproj", "{F939017C-B77A-4FDF-B834-A47B14DDDED2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MataAtlantica.Infrastructure.Tests", "tests\MataAtlantica.Infrastructure.Tests\MataAtlantica.Infrastructure.Tests.csproj", "{F939017C-B77A-4FDF-B834-A47B14DDDED2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MataAtlantica.Application", "src\MataAtlantica.Application\MataAtlantica.Application.csproj", "{0CD688CC-33FE-4F56-A3B3-AB8309E8B9ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MataAtlantica.Application", "src\MataAtlantica.Application\MataAtlantica.Application.csproj", "{0CD688CC-33FE-4F56-A3B3-AB8309E8B9ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MataAtlantica.Application.Tests", "tests\MataAtlantica.Application.Tests\MataAtlantica.Application.Tests.csproj", "{C9FBDB9F-107C-47A5-9D4B-31B119F15538}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,6 +62,10 @@ Global
 		{0CD688CC-33FE-4F56-A3B3-AB8309E8B9ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CD688CC-33FE-4F56-A3B3-AB8309E8B9ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CD688CC-33FE-4F56-A3B3-AB8309E8B9ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9FBDB9F-107C-47A5-9D4B-31B119F15538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9FBDB9F-107C-47A5-9D4B-31B119F15538}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9FBDB9F-107C-47A5-9D4B-31B119F15538}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9FBDB9F-107C-47A5-9D4B-31B119F15538}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +78,7 @@ Global
 		{7B541EBF-1CD6-464D-9FE0-8D0913B18C9D} = {23CC4171-A465-4DDD-BC98-616793B4F585}
 		{F939017C-B77A-4FDF-B834-A47B14DDDED2} = {4200B91E-4E41-433B-B4AA-041579BCA94E}
 		{0CD688CC-33FE-4F56-A3B3-AB8309E8B9ED} = {23CC4171-A465-4DDD-BC98-616793B4F585}
+		{C9FBDB9F-107C-47A5-9D4B-31B119F15538} = {4200B91E-4E41-433B-B4AA-041579BCA94E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE2CF0E5-AC9F-4F0F-B2C9-489D9A377688}

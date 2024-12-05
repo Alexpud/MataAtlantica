@@ -2,7 +2,7 @@
 using MataAtlantica.Infrastructure.Services;
 using System.Text;
 
-namespace MataAtlantica.API.Tests.Infrastructure.Services;
+namespace MataAtlantica.Infrastructure.Tests.Services;
 
 public class LocalFileStorageClientTests
 {

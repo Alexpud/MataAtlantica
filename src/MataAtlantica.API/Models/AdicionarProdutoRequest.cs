@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MataAtlantica.API.Presentation.Models;
+namespace MataAtlantica.API.Models;
 
 public class AdicionarProdutoRequest
 {
@@ -28,7 +28,7 @@ public class AdicionarProdutoRequest
     /// </summary>
     [Required]
     public string Descricao { get; set; }
-    
+
     /// <summary>
     /// Id do fornecedor do produto
     /// </summary>

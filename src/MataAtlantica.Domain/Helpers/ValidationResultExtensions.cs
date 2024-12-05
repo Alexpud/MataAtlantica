@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using FluentValidation.Results;
 
-namespace MataAtlantica.API.Helpers;
+namespace MataAtlantica.Domain.Helpers;
 
 public static class ValidationResultExtensions
 {

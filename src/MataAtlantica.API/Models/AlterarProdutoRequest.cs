@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MataAtlantica.API.Presentation.Models;
+namespace MataAtlantica.API.Models;
 
 public class AlterarProdutoRequest
 {

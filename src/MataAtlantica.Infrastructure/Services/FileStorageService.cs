@@ -1,5 +1,4 @@
-﻿using MataAtlantica.API.Presentation.Options;
-using MataAtlantica.Domain.Abstract.Services;
+﻿using MataAtlantica.Domain.Abstract.Services;
 using MataAtlantica.Domain.Models;
 using Microsoft.Extensions.Options;
 

@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using FluentResults;
 using FluentValidation;
-using MataAtlantica.API.Helpers;
 using MataAtlantica.Domain.Abstract.Repositories;
 using MataAtlantica.Domain.Entidades;
 using MataAtlantica.Domain.Erros;
+using MataAtlantica.Domain.Helpers;
 using MataAtlantica.Domain.Models;
 
 namespace MataAtlantica.Domain.Services;
@@ -12,11 +12,13 @@ namespace MataAtlantica.Domain.Services;
 public class ProdutoService(
     IValidator<AdicionarProdutoDto> criarProdutoValidator,
     IValidator<AlterarProdutoDto> atualizarProdutoValidator,
+    IValidator<AdicionarImagemProdutoDto> adicionarImagemProdutoValidator,
     IProdutoRepository produtoRepository,
     IMapper mapper)
 {
     private readonly IValidator<AdicionarProdutoDto> _criarProdutoValidator = criarProdutoValidator;
     private readonly IValidator<AlterarProdutoDto> _atualizarProdutoValidator = atualizarProdutoValidator;
+    private readonly IValidator<AdicionarImagemProdutoDto> _adicionarImagemProdutoValidator = adicionarImagemProdutoValidator;
     private readonly IProdutoRepository _produtoRepository = produtoRepository;
     private readonly IMapper _mapper = mapper;
 
@@ -64,12 +66,14 @@ public class ProdutoService(
     /// <param name="produtoId">Id do produto associado</param>
     /// <param name="ordem">Ordem de exibicao da imagem</param>
     /// <returns></returns>
-    public async Task<Result> AdicionarThumbnail(string produtoId, int ordem)
+    public async Task<Result> AdicionarThumbnail(AdicionarImagemProdutoDto dto)
     {
-        var produto = await _produtoRepository.ObterPorId(produtoId);
-        if (produto == null)
-            return Result.Fail(BusinessErrors.ProdutoNaoEncontrado);
-        produto.AdicionarImagemThumbnail(ordem);
+        var validation = await _adicionarImagemProdutoValidator.ValidateAsync(dto);
+        if (!validation.IsValid)
+            return Result.Fail(validation.GetErrors());
+
+        var produto = await _produtoRepository.ObterPorId(dto.ProdutoId);
+        produto.AdicionarImagemThumbnail(dto.Ordem);
         await _produtoRepository.Commit();
         return Result.Ok();
     }

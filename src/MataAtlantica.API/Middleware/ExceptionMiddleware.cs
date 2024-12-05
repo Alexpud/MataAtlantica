@@ -1,5 +1,5 @@
-using System.Text.Json;
 using FluentValidation;
+using System.Text.Json;
 
 namespace MataAtlantica.API.Middleware;
 
@@ -22,7 +22,7 @@ public class ExceptionMiddleware : IMiddleware
     private static async Task HandleExceptionAsync(HttpContext httpContext, Exception exception)
     {
         var statusCode = GetStatusCode(exception);
-        var response = new
+        var response = new 
         {
             title = GetTitle(exception),
             status = statusCode,
@@ -45,12 +45,14 @@ public class ExceptionMiddleware : IMiddleware
             // ApplicationException applicationException => applicationException.Title,
             _ => "Server Error"
         };
-    private static IReadOnlyDictionary<string, string[]> GetErrors(Exception exception)
+    private static IReadOnlyDictionary<string, string> GetErrors(Exception exception)
     {
-        IReadOnlyDictionary<string, string[]> errors = null;
+        Dictionary<string, string> errors = null;
         if (exception is ValidationException validationException)
         {
-            errors = validationException.ErrorsDictionary;
+            errors = validationException
+                .Errors
+                .ToDictionary(p => p.ErrorCode, p => p.ErrorMessage);
         }
         return errors;
     }

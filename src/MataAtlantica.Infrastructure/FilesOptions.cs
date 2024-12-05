@@ -1,4 +1,4 @@
-﻿namespace MataAtlantica.API.Presentation.Options;
+﻿namespace MataAtlantica.Infrastructure;
 
 public class FilesOptions
 {

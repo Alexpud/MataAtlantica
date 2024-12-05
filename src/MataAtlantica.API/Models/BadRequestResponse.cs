@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using System.Net;
 
-namespace MataAtlantica.API.Presentation.Models;
+namespace MataAtlantica.API.Models;
 
 public class BadRequestResponse
 {

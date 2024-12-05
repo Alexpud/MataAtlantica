@@ -3,7 +3,7 @@ using MataAtlantica.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace MataAtlantica.API.Presentation.Controllers;
+namespace MataAtlantica.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

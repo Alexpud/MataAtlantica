@@ -1,10 +1,10 @@
-using MataAtlantica.API.Presentation.Models;
+using MataAtlantica.API.Models;
 using MataAtlantica.Domain.Models;
 using MataAtlantica.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace MataAtlantica.API.Presentation.Controllers;
+namespace MataAtlantica.API.Controllers;
 
 [Route("api/[controller]")]
 [Produces("application/json")]
@@ -55,7 +55,7 @@ public class FornecedoresController(FornecedorService service) : BaseController
     public async Task<IActionResult> Criar(AdicionarFornecedorRequest model)
     {
         var criarFornecedor = new AdicionarFornecedorDto(
-            Nome:   model.Nome,
+            Nome: model.Nome,
             Descricao: model.Descricao,
             CpfCnpj: model.CpfCnpj,
             Telefone: model.Telefone,

@@ -1,6 +1,4 @@
 ﻿using FluentResults;
-using FluentValidation;
-using MataAtlantica.API.Helpers;
 using MataAtlantica.Domain.Abstract.Services;
 using MataAtlantica.Domain.Models;
 using MataAtlantica.Domain.Services;
@@ -9,33 +7,15 @@ using AdicionarImagemProdutoDto = MataAtlantica.API.Application.Models.Adicionar
 namespace MataAtlantica.API.Application.Services;
 
 public partial class ImagensProdutoService(
-    IValidator<AdicionarImagemProdutoDto> validator,
+    //IValidator<AdicionarImagemProdutoDto> validator,
     IFileStorageService fileStorageService,
     ProdutoService produtoService)
 {
-    private readonly IValidator<AdicionarImagemProdutoDto> _adicionarThumbnailsValidator = validator;
+    //private readonly IValidator<AdicionarImagemProdutoDto> _adicionarThumbnailsValidator = validator;
     private readonly ProdutoService _produtoService = produtoService;
-
-    public async Task<Result> AdicionarThumbnail(AdicionarImagemProdutoDto model)
-    {
-        var result = await _adicionarThumbnailsValidator.ValidateAsync(model);
-        if (!result.IsValid)
-            return Result.Fail(result.GetErrors());
-
-        var dto = new Domain.Models.AdicionarImagemProdutoDto(model.ProdutoId, model.Ordem);
-        await _produtoService.AdicionarThumbnail(dto.ProdutoId, dto.Ordem);
-
-        var fileUploadDto = CreateFileUploadDto(model, TipoImagem.Thumbnail);
-        await fileStorageService.UploadFile(fileUploadDto);
-        return Result.Ok();
-    }
 
     public async Task<Result> AdicionarImagemIlustrativa(AdicionarImagemProdutoDto model)
     {
-        var result = await _adicionarThumbnailsValidator.ValidateAsync(model);
-        if (!result.IsValid)
-            return Result.Fail(result.GetErrors());
-
         var dto = new Domain.Models.AdicionarImagemProdutoDto(model.ProdutoId, model.Ordem);
         await _produtoService.AdicionarImagemIlustrativa(dto);
 

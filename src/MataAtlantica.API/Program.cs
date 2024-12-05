@@ -1,25 +1,22 @@
-using FluentResults;
 using FluentValidation;
-using MataAtlantica.API.Application.Models;
 using MataAtlantica.API.Application.Services;
-using MataAtlantica.API.Presentation.Options;
-using MataAtlantica.Application.Produtos.CadastrarThumbnail;
+using MataAtlantica.API.Middleware;
+using MataAtlantica.Application.Common;
+using MataAtlantica.Application.Produtos.AdicionarThumbnail;
 using MataAtlantica.Domain.Abstract.Repositories;
 using MataAtlantica.Domain.Abstract.Services;
 using MataAtlantica.Domain.Models;
 using MataAtlantica.Domain.Models.Validators;
 using MataAtlantica.Domain.Profiles;
 using MataAtlantica.Domain.Services;
+using MataAtlantica.Infrastructure;
 using MataAtlantica.Infrastructure.Data;
 using MataAtlantica.Infrastructure.Repositories;
 using MataAtlantica.Infrastructure.Services;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using System.Net.NetworkInformation;
 using System.Reflection;
-using MataAtlantica.API.Middleware;
-using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,11 +59,17 @@ builder.Services.AddScoped<IValidator<AdicionarProdutoDto>, CriarProdutoValidato
 builder.Services.AddScoped<IValidator<AlterarProdutoDto>, AlterarProdutoValidator>();
 builder.Services.AddScoped<IValidator<AlterarFornecedorDto>, AlterarFornecedorValidator>();
 builder.Services.AddScoped<IValidator<AdicionarProdutoThumbnailCommand>, AdicionarProdutoThumbnailCommandValidator>();
+builder.Services.AddScoped<IValidator<AdicionarImagemProdutoDto>, AdicionarImagemProdutoValidator>();
+
+builder.Services.AddTransient<ExceptionMiddleware>();
 // builder.Services.AddScoped<IValidator<MataAtlantica.API.Application.Models.AdicionarImagemProdutoDto>, AdicionarImagemProdutoValidator>();
 
 builder.Services.AddMediatR(cfg =>
 {
-    cfg.RegisterServicesFromAssemblies(typeof(CadastrarThumbnailHandler).Assembly);
+    cfg.RegisterServicesFromAssemblies(typeof(AdicionarProdutoThumbnailCommandHandler).Assembly);
+    cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+    cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+
 });
 
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
@@ -82,6 +85,7 @@ builder.Services.AddDbContext<MataAtlanticaDbContext>(p =>
 
 var app = builder.Build();
 
+app.UseMiddleware(typeof(ExceptionMiddleware));
 
 using (var Scope = app.Services.CreateScope())
 {
@@ -102,6 +106,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseMiddleware<ExceptionMiddleware>();
 
 app.Run();

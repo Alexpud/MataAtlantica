@@ -1,10 +1,10 @@
-using MataAtlantica.API.Presentation.Models;
+using MataAtlantica.API.Models;
 using MataAtlantica.Domain.Models;
 using MataAtlantica.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace MataAtlantica.API.Presentation.Controllers;
+namespace MataAtlantica.API.Controllers;
 
 [Route("api/[controller]")]
 public class ProdutosController(ProdutoService service) : BaseController
@@ -85,7 +85,7 @@ public class ProdutosController(ProdutoService service) : BaseController
     [ProducesResponseType(typeof(ProdutoDto), (int)HttpStatusCode.OK)]
     public IActionResult BuscarProdutos([FromQuery] BuscarProdutosRequest model)
     {
-        var dto= new BuscarProdutosArgs()
+        var dto = new BuscarProdutosArgs()
         {
             Categoria = model.Categoria,
             Fornecedor = model.Fornecedor,
