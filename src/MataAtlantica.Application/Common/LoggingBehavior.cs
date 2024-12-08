@@ -14,7 +14,10 @@ public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        _logger.LogInformation($"Handling {typeof(TRequest).Name}");
+        _logger.LogInformation("Message={Message}; HandledType={HandledType}; Request={Request}", 
+            "Handling mediatr request", 
+            "{typeof(TRequest).Name}",
+            request);
         var response = await next();
         _logger.LogInformation($"Handled {typeof(TResponse).Name}");
 

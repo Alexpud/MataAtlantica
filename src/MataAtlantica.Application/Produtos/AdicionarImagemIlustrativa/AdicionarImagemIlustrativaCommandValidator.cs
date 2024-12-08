@@ -1,14 +1,13 @@
 ﻿using FluentValidation;
 using MataAtlantica.Domain.Erros;
 
-namespace MataAtlantica.Application.Produtos.AdicionarThumbnail;
+namespace MataAtlantica.Application.Produtos.AdicionarImagemIlustrativa;
 
-public class AdicionarProdutoImagemCommandValidator : AbstractValidator<AdicionarProdutoImagemCommand>
+public class AdicionarImagemIlustrativaCommandValidator : AbstractValidator<AdicionarImagemIlustrativaCommand>
 {
     public static string[] FormatosPermitidos = { ".jpeg", ".png" };
     public const int TamanhoMaximoImagem = 1_000_000;
-
-    public AdicionarProdutoImagemCommandValidator()
+    public AdicionarImagemIlustrativaCommandValidator()
     {
         RuleFor(p => p.ArquivoImagem)
             .NotNull()
@@ -20,13 +19,5 @@ public class AdicionarProdutoImagemCommandValidator : AbstractValidator<Adiciona
             .Must(imagem => imagem?.Length < TamanhoMaximoImagem)
             .WithErrorCode(nameof(BusinessErrors.ImagemMuitoGrande))
             .WithMessage(BusinessErrors.ImagemMuitoGrande.Message);
-    }
-}
-
-public class AdicionarProdutoThumbnailCommandValidator : AbstractValidator<AdicionarProdutoThumbnailCommand>
-{
-    public AdicionarProdutoThumbnailCommandValidator()
-    {
-        Include(new AdicionarProdutoImagemCommandValidator());
     }
 }

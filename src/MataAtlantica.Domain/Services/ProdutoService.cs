@@ -78,10 +78,15 @@ public class ProdutoService(
         return Result.Ok();
     }
 
-    public async Task AdicionarImagemIlustrativa(AdicionarImagemProdutoDto dto)
+    public async Task<Result> AdicionarImagemIlustrativa(AdicionarImagemProdutoDto dto)
     {
+        var validation = await _adicionarImagemProdutoValidator.ValidateAsync(dto);
+        if (!validation.IsValid)
+            return Result.Fail(validation.GetErrors());
+
         var produto = await _produtoRepository.ObterPorId(dto.ProdutoId);
         produto.AdicionarImagemIlustrativa(dto.Ordem);
         await _produtoRepository.Commit();
+        return Result.Ok();
     }
 }

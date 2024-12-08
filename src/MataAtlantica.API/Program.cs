@@ -1,5 +1,4 @@
 using FluentValidation;
-using MataAtlantica.API.Application.Services;
 using MataAtlantica.API.Middleware;
 using MataAtlantica.Application.Common;
 using MataAtlantica.Application.Produtos.AdicionarThumbnail;
@@ -51,14 +50,13 @@ builder.Services.AddScoped<CategoriaService>();
 builder.Services.AddScoped<FornecedorService>();
 builder.Services.AddScoped<ProdutoService>();
 builder.Services.AddScoped<IFileStorageService, FileStorageService>();
-builder.Services.AddScoped<ImagensProdutoService>();
 builder.Services.AddScoped<FileStorageClientFactory>();
 
 builder.Services.AddScoped<IValidator<AdicionarFornecedorDto>, CriarFornecedorValidator>();
 builder.Services.AddScoped<IValidator<AdicionarProdutoDto>, CriarProdutoValidator>();
 builder.Services.AddScoped<IValidator<AlterarProdutoDto>, AlterarProdutoValidator>();
 builder.Services.AddScoped<IValidator<AlterarFornecedorDto>, AlterarFornecedorValidator>();
-builder.Services.AddScoped<IValidator<AdicionarProdutoThumbnailCommand>, AdicionarProdutoThumbnailCommandValidator>();
+builder.Services.AddScoped<IValidator<AdicionarThumbnailCommand>, AdicionarThumbnailCommandValidator>();
 builder.Services.AddScoped<IValidator<AdicionarImagemProdutoDto>, AdicionarImagemProdutoValidator>();
 
 builder.Services.AddTransient<ValidationExceptionHandler>();
@@ -66,7 +64,7 @@ builder.Services.AddTransient<ValidationExceptionHandler>();
 
 builder.Services.AddMediatR(cfg =>
 {
-    cfg.RegisterServicesFromAssemblies(typeof(AdicionarProdutoThumbnailCommandHandler).Assembly);
+    cfg.RegisterServicesFromAssemblies(typeof(CommandHandler).Assembly);
     cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
     cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
 

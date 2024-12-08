@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Http;
 using System.Text;
 
 namespace MataAtlantica.Application.Tests.Produtos.AdicionarThumbnail;
-public class AdicionarProdutoImagemCommandValidatorTests
+public class AdicionarThumbnailCommandValidatorTests
 {
-    private readonly AdicionarProdutoImagemCommandValidator _sut;
+    private readonly AdicionarThumbnailCommandValidator _sut;
     private readonly IProdutoRepository _produtoRepository;
-    public AdicionarProdutoImagemCommandValidatorTests()
+    public AdicionarThumbnailCommandValidatorTests()
     {
         _sut = new();
     }
@@ -20,16 +20,16 @@ public class AdicionarProdutoImagemCommandValidatorTests
     public async Task TestValidate_DeveTerErroDeValidacaoParaThumbnails_QuandoNenhumArquivoForPassado()
     {
         // Arrange
-        var model = new AdicionarProdutoImagemCommand();
+        var model = new AdicionarThumbnailCommand();
 
         // Act
         var result = await _sut.TestValidateAsync(model);
 
         // Assert
         result.ShouldHaveValidationErrorFor(p => p.ArquivoImagem);
-        var errors = result.Errors.Where(p => p.PropertyName == nameof(AdicionarProdutoImagemCommand.ArquivoImagem));
+        var errors = result.Errors.Where(p => p.PropertyName == nameof(AdicionarThumbnailCommand.ArquivoImagem));
         Assert.NotEmpty(result.Errors
-            .Where(p => p.PropertyName == nameof(AdicionarProdutoImagemCommand.ArquivoImagem)
+            .Where(p => p.PropertyName == nameof(AdicionarThumbnailCommand.ArquivoImagem)
                 && p.ErrorCode == nameof(BusinessErrors.NenhumImagemPassada)));
     }
 
@@ -40,7 +40,7 @@ public class AdicionarProdutoImagemCommandValidatorTests
         // Arrange
         var bytes = Encoding.UTF8.GetBytes("This is a dummy file");
         IFormFile file = new FormFile(new MemoryStream(bytes), 0, bytes.Length, "Data", "dummy.pdf");
-        var model = new AdicionarProdutoImagemCommand
+        var model = new AdicionarThumbnailCommand
         {
             ArquivoImagem = file
         };
@@ -50,9 +50,9 @@ public class AdicionarProdutoImagemCommandValidatorTests
 
         // Assert
         result.ShouldHaveValidationErrorFor(p => p.ArquivoImagem);
-        var errors = result.Errors.Where(p => p.PropertyName == nameof(AdicionarProdutoImagemCommand.ArquivoImagem));
+        var errors = result.Errors.Where(p => p.PropertyName == nameof(AdicionarThumbnailCommand.ArquivoImagem));
         Assert.NotEmpty(result.Errors
-            .Where(p => p.PropertyName == nameof(AdicionarProdutoImagemCommand.ArquivoImagem)
+            .Where(p => p.PropertyName == nameof(AdicionarThumbnailCommand.ArquivoImagem)
                 && p.ErrorCode == nameof(BusinessErrors.ArquivoComFormatoInvalido)));
     }
 }

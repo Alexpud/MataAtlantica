@@ -1,5 +1,5 @@
-﻿using MataAtlantica.API.Application.Services;
-using MataAtlantica.API.Controllers;
+﻿using MataAtlantica.API.Controllers;
+using MataAtlantica.Application.Produtos.AdicionarImagemIlustrativa;
 using MataAtlantica.Application.Produtos.AdicionarThumbnail;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -7,10 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace MataAtlantica.API.Presentation.Controllers;
 
 [Route("api/produtos")]
-public partial class ProdutoImagensController(ImagensProdutoService imagemProdutoService,
-    IMediator mediator) : BaseController
+public partial class ProdutoImagensController(IMediator mediator) : BaseController
 {
-    private readonly ImagensProdutoService _imagemProdutoService = imagemProdutoService;
     private readonly IMediator _mediator = mediator;
 
     /// <summary>
@@ -23,7 +21,7 @@ public partial class ProdutoImagensController(ImagensProdutoService imagemProdut
     [HttpPost("{produtoId}/thumbnail")]
     public async Task<IActionResult> AdicionarThumbnail([FromForm] AdicionarImagemRequest request, string produtoId)
     {
-        var model = new AdicionarProdutoThumbnailCommand
+        var model = new AdicionarThumbnailCommand
         {
             Ordem = request.Ordem,
             ProdutoId = produtoId,
@@ -39,13 +37,13 @@ public partial class ProdutoImagensController(ImagensProdutoService imagemProdut
     [HttpPost("{produtoId}/imagem-ilustrativa")]
     public async Task<IActionResult> AdicionarImagemIlustrativa([FromForm] AdicionarImagemRequest request, string produtoId)
     {
-        var model = new Application.Models.AdicionarImagemProdutoDto
+        var model = new AdicionarImagemIlustrativaCommand
         {
             Ordem = request.Ordem,
             ProdutoId = produtoId,
             ArquivoImagem = request.File
         };
-        var result = await _imagemProdutoService.AdicionarImagemIlustrativa(model);
+        var result = await _mediator.Send(model);
         if (result.IsFailed)
             return HandleFailedResult(result);
         return Ok();
