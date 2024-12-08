@@ -54,10 +54,9 @@ public class ProdutoService(
         return Result.Ok(_mapper.Map<ProdutoDto>(produto));
     }
 
-    public List<ProdutoDto> BuscarProdutos(BuscarProdutosArgs args)
+    public IQueryable<ProdutoDto> BuscarProdutos(BuscarProdutosArgs args)
     {
-        var produtos = _produtoRepository.Buscar(args);
-        return produtos.ToList();
+        return _produtoRepository.Buscar(args);
     }
 
     /// <summary>

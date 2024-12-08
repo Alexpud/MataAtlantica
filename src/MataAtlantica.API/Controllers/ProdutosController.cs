@@ -1,15 +1,21 @@
 using MataAtlantica.API.Models;
+using MataAtlantica.Application.Produtos.AdicionarProduto;
+using MataAtlantica.Application.Produtos.AlterarProduto;
+using MataAtlantica.Application.Produtos.BuscarProdutos;
+using MataAtlantica.Application.Produtos.ObterProduto;
 using MataAtlantica.Domain.Models;
 using MataAtlantica.Domain.Services;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
 namespace MataAtlantica.API.Controllers;
 
 [Route("api/[controller]")]
-public class ProdutosController(ProdutoService service) : BaseController
+public class ProdutosController(IMediator mediator, ProdutoService service) : BaseController
 {
     private readonly ProdutoService _service = service;
+    private readonly IMediator _mediator = mediator;
 
     /// <summary>
     /// Obtem produto pelo Id
@@ -20,7 +26,7 @@ public class ProdutosController(ProdutoService service) : BaseController
     [ProducesResponseType(typeof(ProdutoDto), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> ObterPorId(string id)
     {
-        var produto = await _service.ObterPorId(id);
+        var produto = await _mediator.Send(new ObterProdutoQuery(id));
         return produto == null ? NoContent() : Ok(produto);
     }
 
@@ -47,14 +53,14 @@ public class ProdutosController(ProdutoService service) : BaseController
     [ProducesResponseType(typeof(BadRequestResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> AdicionarProduto(AdicionarProdutoRequest model)
     {
-        var dto = new AdicionarProdutoDto(
+        var command = new AdicionarProdutoCommand(
             model.Nome,
             model.CategoriaId,
             model.Preco,
             model.Descricao,
             model.FornecedorId,
             model.Marca);
-        var result = await _service.Adicionar(dto);
+        var result = await _mediator.Send(command);
         return result.IsFailed ? HandleFailedResult(result) : Ok(result.Value);
     }
 
@@ -69,10 +75,10 @@ public class ProdutosController(ProdutoService service) : BaseController
     [ProducesResponseType(typeof(BadRequestResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> AlterarProduto(string id, AlterarProdutoRequest model)
     {
-        var dto = new AlterarProdutoDto(
+        var command = new AlterarProdutoCommand(
             id,
             model.Nome);
-        var result = await _service.Alterar(dto);
+        var result = await _mediator.Send(command);
         return result.IsFailed ? HandleFailedResult(result) : Ok(result.Value);
     }
 
@@ -85,12 +91,7 @@ public class ProdutosController(ProdutoService service) : BaseController
     [ProducesResponseType(typeof(ProdutoDto), (int)HttpStatusCode.OK)]
     public IActionResult BuscarProdutos([FromQuery] BuscarProdutosRequest model)
     {
-        var dto = new BuscarProdutosArgs()
-        {
-            Categoria = model.Categoria,
-            Fornecedor = model.Fornecedor,
-            Nome = model.Nome,
-        };
-        return Ok(_service.BuscarProdutos(dto));
+        var query = new BuscarProdutosQuery(model.Nome, model.Categoria, model.Fornecedor);
+        return Ok(_mediator.Send(query));
     }
 }

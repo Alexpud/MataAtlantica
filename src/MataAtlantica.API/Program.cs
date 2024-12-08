@@ -1,7 +1,9 @@
 using FluentValidation;
 using MataAtlantica.API.Middleware;
 using MataAtlantica.Application.Common;
+using MataAtlantica.Application.Produtos.AdicionarProduto;
 using MataAtlantica.Application.Produtos.AdicionarThumbnail;
+using MataAtlantica.Application.Produtos.AlterarProduto;
 using MataAtlantica.Domain.Abstract.Repositories;
 using MataAtlantica.Domain.Abstract.Services;
 using MataAtlantica.Domain.Models;
@@ -56,27 +58,27 @@ builder.Services.AddScoped<IValidator<AdicionarFornecedorDto>, CriarFornecedorVa
 builder.Services.AddScoped<IValidator<AdicionarProdutoDto>, CriarProdutoValidator>();
 builder.Services.AddScoped<IValidator<AlterarProdutoDto>, AlterarProdutoValidator>();
 builder.Services.AddScoped<IValidator<AlterarFornecedorDto>, AlterarFornecedorValidator>();
-builder.Services.AddScoped<IValidator<AdicionarThumbnailCommand>, AdicionarThumbnailCommandValidator>();
 builder.Services.AddScoped<IValidator<AdicionarImagemProdutoDto>, AdicionarImagemProdutoValidator>();
-
-builder.Services.AddTransient<ValidationExceptionHandler>();
-// builder.Services.AddScoped<IValidator<MataAtlantica.API.Application.Models.AdicionarImagemProdutoDto>, AdicionarImagemProdutoValidator>();
+builder.Services.AddScoped<IValidator<AdicionarThumbnailCommand>, AdicionarThumbnailCommandValidator>();
+builder.Services.AddScoped<IValidator<AdicionarProdutoCommand>, AdicionarProdutoCommandValidtor>();
+builder.Services.AddScoped<IValidator<AlterarProdutoCommand>, AlterarProdutoCommandValidator>();
 
 builder.Services.AddMediatR(cfg =>
 {
-    cfg.RegisterServicesFromAssemblies(typeof(CommandHandler).Assembly);
     cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
     cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+    cfg.RegisterServicesFromAssemblies(typeof(ValidationBehavior<,>).Assembly);
 
 });
 
-builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+//builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
 builder.Services.Configure<FilesOptions>(
     builder.Configuration.GetSection(FilesOptions.Posicao));
 
-builder.Services.AddDbContext<MataAtlanticaDbContext>(p =>
-    p.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+builder.Services
+    .AddDbContext<MataAtlanticaDbContext>(p =>
+        p.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
 
 builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
