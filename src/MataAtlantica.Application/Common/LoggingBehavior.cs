@@ -1,3 +1,4 @@
+using MataAtlantica.Utils;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -5,9 +6,9 @@ namespace MataAtlantica.Application.Common;
 
 public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
-    private readonly ILogger<LoggingBehavior<TRequest, TResponse>> _logger;
+    private readonly ILogService _logger;
 
-    public LoggingBehavior(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
+    public LoggingBehavior(ILogService logger)
     {
         _logger = logger;
     }
@@ -16,10 +17,10 @@ public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
     {
         _logger.LogInformation("Message={Message}; HandledType={HandledType}; Request={Request}", 
             "Handling mediatr request", 
-            "{typeof(TRequest).Name}",
+            typeof(TRequest).Name,
             request);
         var response = await next();
-        _logger.LogInformation($"Handled {typeof(TResponse).Name}");
+        //_logger.LogInformation($"Handled {typeof(TResponse).Name}");
 
         return response;
     }

@@ -42,6 +42,7 @@
 	  <ProjectReference Include="..\MataAtlantica.Application\MataAtlantica.Application.csproj" />
 	  <ProjectReference Include="..\MataAtlantica.Domain\MataAtlantica.Domain.csproj" />
 	  <ProjectReference Include="..\MataAtlantica.Infrastructure\MataAtlantica.Infrastructure.csproj" />
+	  <ProjectReference Include="..\MataAtlantica.Utils\MataAtlantica.Utils.csproj" />
 	</ItemGroup>
 
 </Project>

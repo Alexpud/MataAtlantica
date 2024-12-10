@@ -14,6 +14,7 @@ using MataAtlantica.Infrastructure;
 using MataAtlantica.Infrastructure.Data;
 using MataAtlantica.Infrastructure.Repositories;
 using MataAtlantica.Infrastructure.Services;
+using MataAtlantica.Utils;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -63,6 +64,9 @@ builder.Services.AddScoped<IValidator<AdicionarThumbnailCommand>, AdicionarThumb
 builder.Services.AddScoped<IValidator<AdicionarProdutoCommand>, AdicionarProdutoCommandValidtor>();
 builder.Services.AddScoped<IValidator<AlterarProdutoCommand>, AlterarProdutoCommandValidator>();
 
+builder.Services.AddScoped<RequestContextId>();
+builder.Services.AddScoped<ILogService, LogService>();
+
 builder.Services.AddMediatR(cfg =>
 {
     cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
@@ -84,6 +88,8 @@ builder.Services
 builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
 // Desativar query tracking para contextos de leitura em um CQRS seria interessante
 
+
+
 builder.Services.AddProblemDetails();
 
 var app = builder.Build();
@@ -104,6 +110,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<RequestContextMiddleware>();
 
 app.UseHttpsRedirection();
 
