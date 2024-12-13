@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using FluentResults;
 using MataAtlantica.Domain.Abstract.Repositories;
 using MataAtlantica.Domain.Entidades;
+using MataAtlantica.Domain.Erros;
 using MataAtlantica.Domain.Models;
 
 namespace MataAtlantica.Domain.Services;
@@ -42,16 +44,14 @@ public class CategoriaService(ICategoriaRepository categoriaRepository, IMapper 
         return _mapper.Map<CategoriaDto>(categoria);
     }
 
-    public async Task<CategoriaDto> AdicionarSubCategoria(string id, string nome)
+    public async Task<Result<Categoria>> AdicionarSubCategoria(string categoriaPaiId, string nome)
     {
-        var categoria = await _categoriaRepository.ObterPorId(id);
+        var categoria = await _categoriaRepository.ObterPorId(categoriaPaiId);
+        if (categoria == null)
+            return Result.Fail(BusinessErrors.CategoriaNaoEncontrada);
+
         var subCategoria = new Categoria(nome);
         subCategoria.SetCategoriaPai(categoria);
-        _categoriaRepository.Adicionar(subCategoria);
-
-        await _categoriaRepository.Commit();
-
-        categoria = await _categoriaRepository.ObterPorId(id, categoria => categoria.SubCategorias);
-        return _mapper.Map<CategoriaDto>(categoria);
+        return Result.Ok(subCategoria);
     }
 }

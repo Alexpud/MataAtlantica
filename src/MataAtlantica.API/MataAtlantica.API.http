@@ -26,3 +26,12 @@ Content-Type: application/json
 GET {{MataAtlantica.API_HostAddress}}/api/mediatr
 
 ###
+
+@id=1
+POST {{MataAtlantica.API_HostAddress}}/api/categorias/{{id}}
+Content-Type: application/json
+{
+  "Nome": "Teste"
+}
+###
+

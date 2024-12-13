@@ -1,5 +1,6 @@
 using FluentValidation;
 using MataAtlantica.API.Middleware;
+using MataAtlantica.Application.Categorias.AdicionarCategoria;
 using MataAtlantica.Application.Common;
 using MataAtlantica.Application.Produtos.AdicionarProduto;
 using MataAtlantica.Application.Produtos.AdicionarThumbnail;
@@ -63,6 +64,7 @@ builder.Services.AddScoped<IValidator<AdicionarImagemProdutoDto>, AdicionarImage
 builder.Services.AddScoped<IValidator<AdicionarThumbnailCommand>, AdicionarThumbnailCommandValidator>();
 builder.Services.AddScoped<IValidator<AdicionarProdutoCommand>, AdicionarProdutoCommandValidtor>();
 builder.Services.AddScoped<IValidator<AlterarProdutoCommand>, AlterarProdutoCommandValidator>();
+builder.Services.AddScoped<IValidator<AdicionarCategoriaCommand>,  AdicionarCategoriaCommandValidator>();
 
 builder.Services.AddScoped<RequestContextId>();
 builder.Services.AddScoped<ILogService, LogService>();

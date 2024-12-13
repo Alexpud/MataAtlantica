@@ -1,6 +1,10 @@
-﻿using MataAtlantica.Domain.Models;
+﻿using MataAtlantica.Application.Categorias.AdicionarCategoria;
+using MataAtlantica.Application.Categorias.AdicionarSubCategoria;
+using MataAtlantica.Domain.Models;
 using MataAtlantica.Domain.Services;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Http;
 using System.Net;
 
 namespace MataAtlantica.API.Controllers;
@@ -8,9 +12,10 @@ namespace MataAtlantica.API.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [Produces("application/json")]
-public class CategoriasController(CategoriaService categoriaService) : ControllerBase
+public class CategoriasController(IMediator mediator, CategoriaService categoriaService) : BaseController
 {
     private readonly CategoriaService _categoriaService = categoriaService;
+    private readonly IMediator _mediator = mediator;
 
     /// <summary>
     /// Adiciona uma nova categoria
@@ -19,10 +24,10 @@ public class CategoriasController(CategoriaService categoriaService) : Controlle
     /// <returns></returns>
     [HttpPost]
     [ProducesResponseType(typeof(CategoriaDto), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Criar(AdicionarCategoriaRequest model)
+    public async Task<IActionResult> Adicionar(AdicionarCategoriaRequest model)
     {
-        var dto = new AdicionarCategoriaDto(model.Nome);
-        return Ok(await _categoriaService.Adicionar(dto));
+        var command = new AdicionarCategoriaCommand(model.Nome);
+        return Ok(await _mediator.Send(command));
     }
 
     /// <summary>
@@ -35,8 +40,9 @@ public class CategoriasController(CategoriaService categoriaService) : Controlle
     [ProducesResponseType(typeof(CategoriaDto), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> AdicionarSubCategoria(string id, AdicionarCategoriaRequest model)
     {
-        var dto = new AdicionarCategoriaDto(model.Nome);
-        return Ok(await _categoriaService.AdicionarSubCategoria(id, model.Nome));
+        var command = new AdicionarSubCategoriaCommand(id, model.Nome);
+        var result = await _mediator.Send(command);
+        return result.IsFailed ? HandleFailedResult(result) : Ok(result);
     }
 
     /// <summary>

@@ -21,22 +21,31 @@ public static class EntityValidationErrors
     public static IError NotaProdutoObrigatoriaParaAvaliacao = new Error("Nota do produto e obrigatoria");
     public static IError ProdutoObrigatorioParaAvaliacao = new Error("Produto e obrigatorio");
 
-    public static IError NomeObrigatorioParaProduto = new Error("Nome e obrigatorio");
-    public static IError DescricaoObrigatorioParaProduto = new Error("Descricao e obrigatoria");
-    public static IError MarcaObrigatoriaParaProduto = new Error("Marca e obrigatoria");
-    public static IError PrecoObrigatorioParaProduto = new Error("Preco e obrigatorio");
-    public static IError CategoriaObrigatorioParaProduto = new Error("Categoria e obrigatorio");
-    public static IError FornecedorObrigatorioParaProduto = new Error("Fornecedor e obrigatorio");
+    public static IError NomeObrigatorioParaProduto = new ValidationError("NomeObrigatorioParaProduto", "Nome e obrigatorio");
+    public static IError DescricaoObrigatorioParaProduto = new ValidationError("DescricaoObrigatorioParaProduto", "Descricao e obrigatoria");
+    public static IError MarcaObrigatoriaParaProduto = new ValidationError("MarcarobrigatoriaParaProduto", "Marca e obrigatoria");
+    public static IError PrecoObrigatorioParaProduto = new ValidationError("PrecoObrigatorioParaProduto", "Preco e obrigatorio");
+    public static IError CategoriaObrigatorioParaProduto = new ValidationError("CategoriaObrigatorioParaProduto", "Categoria e obrigatorio");
+    public static IError FornecedorObrigatorioParaProduto = new ValidationError("FornecedorObrigatorioParaProduto", "Fornecedor e obrigatorio");
+    public static IError NomeObrigatorioParaCategoria = new ValidationError("NomeObrigatorioParaCategoria", "Nome e obrigatorio");
 }
 
 public static class BusinessErrors
 {
-    public static IError FornecedorNaoEncontrado = new Error("Fornecedor nao encontrado");
-    public static IError FornecedorComCpfCnpjJaExiste = new Error("Fornecedor com o cpf/cnpj informado ja existe");
-    public static IError CategoriaNaoEncontrada = new Error("Categoria nao encontrada");
-    public static IError NenhumImagemPassada = new Error("Nenhuma imagem foi passada");
-    public static IError QuantidadeDeArquivosSuperiorAoLimite = new Error("Quantidade de arquivos superior ao limite");
-    public static IError ArquivoComFormatoInvalido = new Error("Arquivo com formato invalido");
-    public static IError ImagemMuitoGrande = new Error("Imagem ultrapassa o tamanho máximo de 1Mb");
-    public static IError ProdutoNaoEncontrado = new Error("Produto nao encontrado");
+    public static IError FornecedorNaoEncontrado = new ValidationError("FornecedorNaoEncontrado", "Fornecedor nao encontrado");
+    public static IError FornecedorComCpfCnpjJaExiste = new ValidationError("FornecedorComCpfCnpjJaExiste", "Fornecedor com o cpf/cnpj informado ja existe");
+    public static IError CategoriaNaoEncontrada = new ValidationError("CategoriaNaoEncontrada", "Categoria nao encontrada");
+    public static IError NenhumImagemPassada = new ValidationError("NenhumaImagemPassada", "Nenhuma imagem foi passada");
+    public static IError QuantidadeDeArquivosSuperiorAoLimite = new ValidationError("QuantidadeDeArquivosSuperiorAoLimite", "Quantidade de arquivos superior ao limite");
+    public static IError ArquivoComFormatoInvalido = new ValidationError("ArquivoComFormatoInvalido", "Arquivo com formato invalido");
+    public static IError ImagemMuitoGrande = new ValidationError("ImagemMuitoGrande", "Imagem ultrapassa o tamanho máximo de 1Mb");
+    public static IError ProdutoNaoEncontrado = new ValidationError("ProdutoNaoEncontrado", "Produto nao encontrado");
+}
+
+public class ValidationError : Error
+{
+    public ValidationError(string errorCode, string errorMessage) : base(errorMessage)
+    {
+        WithMetadata("ErrorCode", errorCode);
+    }
 }
