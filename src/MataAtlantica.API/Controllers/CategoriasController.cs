@@ -1,5 +1,6 @@
 ﻿using MataAtlantica.Application.Categorias.AdicionarCategoria;
 using MataAtlantica.Application.Categorias.AdicionarSubCategoria;
+using MataAtlantica.Application.Categorias.ListarCategorias;
 using MataAtlantica.Domain.Models;
 using MataAtlantica.Domain.Services;
 using MediatR;
@@ -51,9 +52,9 @@ public class CategoriasController(IMediator mediator, CategoriaService categoria
     /// <returns></returns>
     [HttpGet]
     [ProducesResponseType(typeof(List<CategoriaDto>), (int)HttpStatusCode.OK)]
-    public IActionResult Listar()
+    public async Task<IActionResult> Listar()
     {
-        return Ok(_categoriaService.ListarCategoriasComoArvore());
+        return Ok(await _mediator.Send(new ListarCategoriasQuery()));
     }
 }
 

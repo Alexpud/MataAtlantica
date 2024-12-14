@@ -36,14 +36,6 @@ public class CategoriaService(ICategoriaRepository categoriaRepository, IMapper 
     private static bool EhSubCategoria(CategoriaDto categoria)
         => categoria.CategoriaPaiId != null;
 
-    public async Task<CategoriaDto> Adicionar(AdicionarCategoriaDto dto)
-    {
-        var categoria = new Categoria(dto.Nome);
-        _categoriaRepository.Adicionar(categoria);
-        await _categoriaRepository.Commit();
-        return _mapper.Map<CategoriaDto>(categoria);
-    }
-
     public async Task<Result<Categoria>> AdicionarSubCategoria(string categoriaPaiId, string nome)
     {
         var categoria = await _categoriaRepository.ObterPorId(categoriaPaiId);
