@@ -1,5 +1,6 @@
 using MataAtlantica.API.Models;
 using MataAtlantica.Application.Fornecedores.AdicionarFornecedor;
+using MataAtlantica.Application.Fornecedores.AlterarFornecedor;
 using MataAtlantica.Application.Fornecedores.Listar;
 using MataAtlantica.Application.Fornecedores.ObterPorId;
 using MataAtlantica.Domain.Models;
@@ -110,7 +111,7 @@ public class FornecedoresController(IMediator mediator, FornecedorService servic
     [ProducesResponseType(typeof(BadRequestResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> Alterar(string id, AlterarFornecedorRequest model)
     {
-        var alterarFornecedor = new AlterarFornecedorDto(
+        var command = new AlterarFornecedorCommand(
             Id: id,
             Nome: model.Nome,
             Descricao: model.Descricao,
@@ -124,7 +125,7 @@ public class FornecedoresController(IMediator mediator, FornecedorService servic
                 UF: model.Localizacao.UF,
                 CEP: model.Localizacao.CEP
             ));
-        var result = await _service.Alterar(alterarFornecedor);
+        var result = await _mediator.Send(command);
         if (result.IsFailed)
             return HandleFailedResult(result);
         return Ok(result.Value);

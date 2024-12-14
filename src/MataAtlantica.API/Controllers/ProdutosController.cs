@@ -2,7 +2,7 @@ using MataAtlantica.API.Models;
 using MataAtlantica.Application.Produtos.AdicionarProduto;
 using MataAtlantica.Application.Produtos.AlterarProduto;
 using MataAtlantica.Application.Produtos.BuscarProdutos;
-using MataAtlantica.Application.Produtos.ObterProduto;
+using MataAtlantica.Application.Produtos.ObterProdutoPorId;
 using MataAtlantica.Domain.Models;
 using MataAtlantica.Domain.Services;
 using MediatR;
