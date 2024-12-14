@@ -45,16 +45,4 @@ public class FornecedorService(
 
         return Result.Ok(_mapper.Map<FornecedorDto>(fornecedor));
     }
-
-    public async Task<FornecedorDto> ObterPorId(string id)
-    {
-        var fornecedor = await _fornecedorRepository.ObterPorId(id);
-        return fornecedor == null ? null : _mapper.Map<FornecedorDto>(fornecedor);
-    }
-
-    public List<FornecedorDto> Listar()
-    {
-        var fornecedores = _fornecedorRepository.AsQueryable();
-        return _mapper.Map<List<FornecedorDto>>(fornecedores);
-    }
 }

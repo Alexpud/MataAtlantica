@@ -1,6 +1,10 @@
 using MataAtlantica.API.Models;
+using MataAtlantica.Application.Fornecedores.AdicionarFornecedor;
+using MataAtlantica.Application.Fornecedores.Listar;
+using MataAtlantica.Application.Fornecedores.ObterPorId;
 using MataAtlantica.Domain.Models;
 using MataAtlantica.Domain.Services;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -8,9 +12,10 @@ namespace MataAtlantica.API.Controllers;
 
 [Route("api/[controller]")]
 [Produces("application/json")]
-public class FornecedoresController(FornecedorService service) : BaseController
+public class FornecedoresController(IMediator mediator, FornecedorService service) : BaseController
 {
     private readonly FornecedorService _service = service;
+    private readonly IMediator _mediator = mediator;
 
     /// <summary>
     /// Obtem fornecedor pelo Id
@@ -20,7 +25,7 @@ public class FornecedoresController(FornecedorService service) : BaseController
     [HttpGet("{id}")]
     public async Task<IActionResult> ObterPorId(string id)
     {
-        var fornecedor = await _service.ObterPorId(id);
+        var fornecedor = await _mediator.Send(new ObterFornecedorPorIdQuery(id));
         return fornecedor == null ? NoContent() : Ok(fornecedor);
     }
 
@@ -54,7 +59,7 @@ public class FornecedoresController(FornecedorService service) : BaseController
     [ProducesResponseType(typeof(BadRequestResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> Criar(AdicionarFornecedorRequest model)
     {
-        var criarFornecedor = new AdicionarFornecedorDto(
+        var command = new AdicionarFornecedorCommand(
             Nome: model.Nome,
             Descricao: model.Descricao,
             CpfCnpj: model.CpfCnpj,
@@ -68,7 +73,7 @@ public class FornecedoresController(FornecedorService service) : BaseController
                 CEP: model.Localizacao.CEP
             ));
 
-        var result = await _service.Adicionar(criarFornecedor);
+        var result = await _mediator.Send(command);
         if (result.IsFailed)
             return HandleFailedResult(result);
         return Ok(result.Value);
@@ -133,7 +138,7 @@ public class FornecedoresController(FornecedorService service) : BaseController
     [ProducesResponseType(typeof(List<FornecedorDto>), (int)HttpStatusCode.OK)]
     public IActionResult Listar()
     {
-        return Ok(_service.Listar());
+        return Ok(_mediator.Send(new ListarFornecedoresQuery()));
     }
 }
 
