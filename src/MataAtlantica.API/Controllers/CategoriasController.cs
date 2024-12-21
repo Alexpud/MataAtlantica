@@ -5,7 +5,6 @@ using MataAtlantica.Domain.Models;
 using MataAtlantica.Domain.Services;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Http;
 using System.Net;
 
 namespace MataAtlantica.API.Controllers;

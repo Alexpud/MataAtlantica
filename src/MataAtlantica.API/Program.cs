@@ -16,7 +16,6 @@ using MataAtlantica.Infrastructure.Data;
 using MataAtlantica.Infrastructure.Repositories;
 using MataAtlantica.Infrastructure.Services;
 using MataAtlantica.Utils;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -64,7 +63,7 @@ builder.Services.AddScoped<IValidator<AdicionarImagemProdutoDto>, AdicionarImage
 builder.Services.AddScoped<IValidator<AdicionarThumbnailCommand>, AdicionarThumbnailCommandValidator>();
 builder.Services.AddScoped<IValidator<AdicionarProdutoCommand>, AdicionarProdutoCommandValidtor>();
 builder.Services.AddScoped<IValidator<AlterarProdutoCommand>, AlterarProdutoCommandValidator>();
-builder.Services.AddScoped<IValidator<AdicionarCategoriaCommand>,  AdicionarCategoriaCommandValidator>();
+builder.Services.AddScoped<IValidator<AdicionarCategoriaCommand>, AdicionarCategoriaCommandValidator>();
 
 builder.Services.AddScoped<RequestContextId>();
 builder.Services.AddScoped<ILogService, LogService>();

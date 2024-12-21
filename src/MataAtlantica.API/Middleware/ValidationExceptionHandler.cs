@@ -19,7 +19,7 @@ public class ValidationExceptionHandler(ILogger<ValidationExceptionHandler> logg
 
     private static async Task HandleExceptionAsync(HttpContext httpContext, Exception exception)
     {
-        var response = new 
+        var response = new
         {
             title = "Alguns erros foram encontrados",
             status = HttpStatusCode.BadRequest,
