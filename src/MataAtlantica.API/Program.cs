@@ -1,19 +1,23 @@
 using FluentValidation;
-using MataAtlantica.API.Application.Models;
-using MataAtlantica.API.Application.Services;
-using MataAtlantica.API.Domain.Abstract.Repositories;
-using MataAtlantica.API.Domain.Abstract.Services;
-using MataAtlantica.API.Domain.Models;
-using MataAtlantica.API.Domain.Models.Validators;
-using MataAtlantica.API.Domain.Profiles;
-using MataAtlantica.API.Domain.Services;
-using MataAtlantica.API.Infrastructure.Data;
-using MataAtlantica.API.Infrastructure.Repositories;
-using MataAtlantica.API.Infrastructure.Services;
-using MataAtlantica.API.Presentation.Options;
+using MataAtlantica.API.Middleware;
+using MataAtlantica.Application.Categorias.AdicionarCategoria;
+using MataAtlantica.Application.Common;
+using MataAtlantica.Application.Produtos.AdicionarProduto;
+using MataAtlantica.Application.Produtos.AdicionarThumbnail;
+using MataAtlantica.Application.Produtos.AlterarProduto;
+using MataAtlantica.Domain.Abstract.Repositories;
+using MataAtlantica.Domain.Abstract.Services;
+using MataAtlantica.Domain.Models;
+using MataAtlantica.Domain.Models.Validators;
+using MataAtlantica.Domain.Profiles;
+using MataAtlantica.Domain.Services;
+using MataAtlantica.Infrastructure;
+using MataAtlantica.Infrastructure.Data;
+using MataAtlantica.Infrastructure.Repositories;
+using MataAtlantica.Infrastructure.Services;
+using MataAtlantica.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using System;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,24 +53,50 @@ builder.Services.AddScoped<CategoriaService>();
 builder.Services.AddScoped<FornecedorService>();
 builder.Services.AddScoped<ProdutoService>();
 builder.Services.AddScoped<IFileStorageService, FileStorageService>();
-builder.Services.AddScoped<ImagensProdutoService>();
 builder.Services.AddScoped<FileStorageClientFactory>();
 
 builder.Services.AddScoped<IValidator<AdicionarFornecedorDto>, CriarFornecedorValidator>();
 builder.Services.AddScoped<IValidator<AdicionarProdutoDto>, CriarProdutoValidator>();
 builder.Services.AddScoped<IValidator<AlterarProdutoDto>, AlterarProdutoValidator>();
 builder.Services.AddScoped<IValidator<AlterarFornecedorDto>, AlterarFornecedorValidator>();
-builder.Services.AddScoped<IValidator<MataAtlantica.API.Application.Models.AdicionarImagemProdutoDto>, AdicionarImagemProdutoValidator>();
+builder.Services.AddScoped<IValidator<AdicionarImagemProdutoDto>, AdicionarImagemProdutoValidator>();
+builder.Services.AddScoped<IValidator<AdicionarThumbnailCommand>, AdicionarThumbnailCommandValidator>();
+builder.Services.AddScoped<IValidator<AdicionarProdutoCommand>, AdicionarProdutoCommandValidtor>();
+builder.Services.AddScoped<IValidator<AlterarProdutoCommand>, AlterarProdutoCommandValidator>();
+builder.Services.AddScoped<IValidator<AdicionarCategoriaCommand>, AdicionarCategoriaCommandValidator>();
+
+builder.Services.AddScoped<RequestContextId>();
+builder.Services.AddScoped<ILogService, LogService>();
+
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+    cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+    cfg.RegisterServicesFromAssemblies(typeof(ValidationBehavior<,>).Assembly);
+
+});
+
+//builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
 builder.Services.Configure<FilesOptions>(
     builder.Configuration.GetSection(FilesOptions.Posicao));
 
-builder.Services.AddDbContext<MataAtlanticaDbContext>(p =>
-    p.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+builder.Services
+    .AddDbContext<MataAtlanticaDbContext>(p =>
+        p.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
+
+builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
 // Desativar query tracking para contextos de leitura em um CQRS seria interessante
 
+
+
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
+
+app.UseExceptionHandler();
+
 
 using (var Scope = app.Services.CreateScope())
 {
@@ -81,10 +111,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<RequestContextMiddleware>();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();

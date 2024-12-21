@@ -5,6 +5,29 @@
 GET {{MataAtlantica.API_HostAddress}}/api/fornecedores/string
 
 ###
+GET {{MataAtlantica.API_HostAddress}}/api/fornecedores
+
+###
+
+@fornecedorId=3c2de4f3-7691-44f7-9fc6-0865271a1c5a
+PUT {{MataAtlantica.API_HostAddress}}/api/fornecedores/{{fornecedorId}}
+Content-Type: application/json
+  {
+      "nome": "Nivea(alterado)(alterado)",
+      "descricao": "Grande vendedora de cosméticos(alterado)",
+      "localizacao": {
+        "rua": "asdasd(alterado)",
+        "bairro": "Bairro das pedras(alterado)",
+        "numero": "1231",
+        "cidade": "Florianopolis",
+        "uf": "SP",
+        "cep": "400000000"
+      },
+      "cpfCnpj": "XXX.XXX.XXX/0001-sXdX",
+      "telefone": "(17) 99999-9999"
+    }
+
+###
 
 GET {{MataAtlantica.API_HostAddress}}/api/produtos
 
@@ -21,4 +44,16 @@ Content-Type: application/json
   "Nome": "asdasd"
 }
 
+###
+
+GET {{MataAtlantica.API_HostAddress}}/api/mediatr
+
+###
+
+@id=1
+POST {{MataAtlantica.API_HostAddress}}/api/categorias/{{id}}
+Content-Type: application/json
+{
+  "Nome": "Teste"
+}
 ###
