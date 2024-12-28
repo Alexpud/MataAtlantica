@@ -19,5 +19,5 @@ public class AlterarFornecedorRequest
     [Required]
     public string Telefone { get; set; }
 
-    public EnderecoFornecedor Localizacao { get; set; }
+    public Endereco Localizacao { get; set; }
 }

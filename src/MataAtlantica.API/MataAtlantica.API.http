@@ -57,3 +57,28 @@ Content-Type: application/json
   "Nome": "Teste"
 }
 ###
+
+GET {{MataAtlantica.API_HostAddress}}/api/categorias
+Authorization: Bearer CfDJ8JmAdGC8KYRLgwDEJfIKcw9esm4PC2sg5bXUWNUhZt3kZ8A17yma6cnP80PdfdMhUgNqt5UYkdjD0C0MGitzme2D3pPHNN1rDl9r5-P1Q_L3kHyow2zH4bL1AFW9Cu5kmnTBX6DHE-hccN2jiw5ZpPVTYCDf5x_slHocfox2-y6Nq7HXz2u06MIdAVKDtvp-0nvRypeuFpvnmVz1yex72JkX02KuzC0YCS00cnV-1-9_gRdWWGxWKh5Ih7AJWK579INc4nReoKJnG8rGWYkHATzp2aI3_CYz8WxgaRWOy6bxvlgxeViDFOn86gOG9Lzucgvm_iI9vIDJGjzDjQeoxXbGyO2zsj_mNyCWaLEtHHs4dEKmKqI73I4-nY3H4T57eenFVisWhyPp26muCa86jdSBkMBfVER7fZBDQGWlIPEHeFaAEpn7g2Ik8xZlMygIEWokhsmYA5BFD18Jv7szZ9y1tPie-ZlKnrIk5S70ZNaxva9SiPoNEJ_4dLVQja7cjFvmMTd_jtCHHYbfvGF_84Ct-8RJxSNG2Oob0OReG7c4mvPpKDjh3fnoRMpcr1hCJSFG5kD9BhCNNUdMVlufa29jKY4ReAjbjtCZ6W9QPDnZv-sAxv_OiWIzqsJNxaV3tuN56-4XXF29LYs7tYqie2YdG0CpQJjWHoo6JH92vYP9G2-KVfrYDU9pRZhy7IAtPw
+
+###
+
+POST {{MataAtlantica.API_HostAddress}}/api/usuarios
+Content-Type: application/json
+
+{
+  "Nome": "Alexandre",
+  "Sobrenome": "Maciel",
+  "Login": "alexandre.maciele4@gmail.com",
+  "Senha": "Ph1l0s0phers@1",
+  "Endereco": {
+    "Rua": "Rua nova",
+    "Bairro": "Bairro bem legal",
+    "CEP": "123123",
+    "Numero": "1231",
+    "Cidade": "cIDADE NOVA",
+    "UF": "SE"
+  }
+}
+
+###

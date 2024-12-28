@@ -16,7 +16,6 @@ public class FornecedorEntityTypeConfiguration : IEntityTypeConfiguration<Fornec
         builder.Property(p => p.Telefone).HasMaxLength(20).IsRequired();
         builder.OwnsOne(p => p.Localizacao, enderecoBuilder =>
         {
-            enderecoBuilder.WithOwner(nameof(Endereco.Fornecedor));
             enderecoBuilder.Property(nameof(Endereco.Cidade)).HasMaxLength(50);
             enderecoBuilder.Property(nameof(Endereco.Bairro)).HasMaxLength(50);
             enderecoBuilder.Property(nameof(Endereco.Numero)).HasMaxLength(10);

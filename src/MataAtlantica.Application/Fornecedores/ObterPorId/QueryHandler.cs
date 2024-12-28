@@ -2,7 +2,7 @@
 using FluentResults;
 using MataAtlantica.Domain.Abstract.Repositories;
 using MataAtlantica.Domain.Erros;
-using MataAtlantica.Domain.Models;
+using MataAtlantica.Domain.Models.Fornecedores;
 using MediatR;
 
 namespace MataAtlantica.Application.Fornecedores.ObterPorId;

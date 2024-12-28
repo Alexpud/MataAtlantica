@@ -2,7 +2,7 @@
 using MataAtlantica.Domain.Abstract.Repositories;
 using MataAtlantica.Domain.Erros;
 
-namespace MataAtlantica.Domain.Models;
+namespace MataAtlantica.Domain.Models.Produtos;
 
 public class AlterarProdutoDto
 {

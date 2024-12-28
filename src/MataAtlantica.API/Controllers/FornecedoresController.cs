@@ -3,7 +3,7 @@ using MataAtlantica.Application.Fornecedores.AdicionarFornecedor;
 using MataAtlantica.Application.Fornecedores.AlterarFornecedor;
 using MataAtlantica.Application.Fornecedores.Listar;
 using MataAtlantica.Application.Fornecedores.ObterPorId;
-using MataAtlantica.Domain.Models;
+using MataAtlantica.Domain.Models.Fornecedores;
 using MataAtlantica.Domain.Services;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -65,7 +65,7 @@ public class FornecedoresController(IMediator mediator, FornecedorService servic
             Descricao: model.Descricao,
             CpfCnpj: model.CpfCnpj,
             Telefone: model.Telefone,
-            Localizacao: new Domain.Models.EnderecoFornecedor(
+            Localizacao: new Domain.Models.Endereco(
                 Rua: model.Localizacao.Rua,
                 Bairro: model.Localizacao.Bairro,
                 Numero: model.Localizacao.Numero,
@@ -117,7 +117,7 @@ public class FornecedoresController(IMediator mediator, FornecedorService servic
             Descricao: model.Descricao,
             CpfCnpj: model.CpfCnpj,
             Telefone: model.Telefone,
-            Localizacao: new Domain.Models.EnderecoFornecedor(
+            Localizacao: new Domain.Models.Endereco(
                 Rua: model.Localizacao.Rua,
                 Bairro: model.Localizacao.Bairro,
                 Numero: model.Localizacao.Numero,

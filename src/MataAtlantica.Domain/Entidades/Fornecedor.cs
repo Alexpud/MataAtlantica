@@ -1,4 +1,4 @@
-using MataAtlantica.Domain.Models;
+using MataAtlantica.Domain.Models.Fornecedores;
 
 namespace MataAtlantica.Domain.Entidades;
 
@@ -45,15 +45,4 @@ public class Fornecedor : EntidadeBase
         Localizacao.Bairro = alterarFornecedor.Localizacao.Bairro;
         Localizacao.Rua = alterarFornecedor.Localizacao.Rua;
     }
-}
-
-public class Endereco
-{
-    public string Rua { get; set; }
-    public string Bairro { get; set; }
-    public string Numero { get; set; }
-    public string Cidade { get; set; }
-    public string UF { get; set; }
-    public string CEP { get; set; }
-    public Fornecedor Fornecedor { get; set; }
 }

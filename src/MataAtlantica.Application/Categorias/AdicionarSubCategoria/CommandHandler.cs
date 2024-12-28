@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FluentResults;
 using MataAtlantica.Domain.Abstract.Repositories;
-using MataAtlantica.Domain.Models;
+using MataAtlantica.Domain.Models.Categorias;
 using MataAtlantica.Domain.Services;
 using MediatR;
 

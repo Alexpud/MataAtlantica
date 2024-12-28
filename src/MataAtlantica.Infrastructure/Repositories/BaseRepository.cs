@@ -51,4 +51,9 @@ public abstract class BaseRepository<TEntity>(MataAtlanticaDbContext dbContext) 
             return await ObterPorId(id);
         return await _dbSet.Include(include).FirstOrDefaultAsync(entity => entity.Id == id);
     }
+
+    public async Task<TEntity> ObterPorSpec(BaseSpecification<TEntity> specification)
+    {
+        return await _dbSet.FirstOrDefaultAsync(specification.ToExpression());
+    }
 }

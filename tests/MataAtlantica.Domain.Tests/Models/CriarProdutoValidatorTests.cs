@@ -3,6 +3,7 @@ using MataAtlantica.Domain.Abstract.Repositories;
 using MataAtlantica.Domain.Entidades;
 using MataAtlantica.Domain.Erros;
 using MataAtlantica.Domain.Models;
+using MataAtlantica.Domain.Models.Produtos;
 using MataAtlantica.Domain.Models.Validators;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;

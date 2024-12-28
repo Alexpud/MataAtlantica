@@ -1,6 +1,6 @@
 ﻿using MataAtlantica.Domain.Entidades;
 
-namespace MataAtlantica.Domain.Models;
+namespace MataAtlantica.Domain.Models.Produtos;
 
 public class ProdutoDto
 {

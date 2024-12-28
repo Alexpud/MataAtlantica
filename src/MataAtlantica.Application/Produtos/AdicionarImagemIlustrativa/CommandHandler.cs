@@ -3,6 +3,7 @@ using MataAtlantica.Application.Produtos.AdicionarThumbnail;
 using MataAtlantica.Application.Produtos.Common;
 using MataAtlantica.Domain.Abstract.Services;
 using MataAtlantica.Domain.Models;
+using MataAtlantica.Domain.Models.Produtos;
 using MataAtlantica.Domain.Services;
 using MediatR;
 using Microsoft.AspNetCore.Http;

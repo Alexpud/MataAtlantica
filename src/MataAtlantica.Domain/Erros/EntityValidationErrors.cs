@@ -40,6 +40,11 @@ public static class BusinessErrors
     public static IError ArquivoComFormatoInvalido = new ValidationError("ArquivoComFormatoInvalido", "Arquivo com formato invalido");
     public static IError ImagemMuitoGrande = new ValidationError("ImagemMuitoGrande", "Imagem ultrapassa o tamanho máximo de 1Mb");
     public static IError ProdutoNaoEncontrado = new ValidationError("ProdutoNaoEncontrado", "Produto nao encontrado");
+    public static IError UsuarioComLoginJaExiste = new ValidationError("UsuarioComLoginJaExiste", "Usuario com com o login informado ja existe");
+    public static IError UsuarioComLoginDesformatado = new ValidationError("UsuarioComLoginDesformatado", "Usuario não possui login no formato de email");
+    public static IError SenhaObrigatoriaParaUsuario = new ValidationError("SenhaObrigatoriaParaUsuario", "Senha e obrigatoria");
+    public static IError NomeObrigatorioParaUsuario = new ValidationError("NomeObrigatorioParaUsuario", "Nome e obrigatorio");
+    public static IError SobrenomeObrigatorioParaUsuario = new ValidationError("SobrenomeObrigatorioParaUsuario", "Sobrenome e obrigatorio");
 }
 
 public class ValidationError : Error

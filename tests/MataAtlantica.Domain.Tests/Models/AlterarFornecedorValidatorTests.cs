@@ -2,7 +2,7 @@
 using MataAtlantica.Domain.Abstract.Repositories;
 using MataAtlantica.Domain.Entidades;
 using MataAtlantica.Domain.Erros;
-using MataAtlantica.Domain.Models;
+using MataAtlantica.Domain.Models.Fornecedores;
 using MataAtlantica.Domain.Models.Validators;
 using MataAtlantica.Domain.Tests.Builder;
 using NSubstitute;

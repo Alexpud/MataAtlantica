@@ -1,8 +1,6 @@
 ﻿using MataAtlantica.Domain.Entidades;
-using MataAtlantica.Domain.Models;
+using MataAtlantica.Domain.Models.Produtos;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
-using System.Linq.Expressions;
 
 namespace MataAtlantica.Domain.Specifications;
 
@@ -18,13 +16,4 @@ public class BuscarProdutosSpecification : BaseSpecification<Produto>
 
         IncludeExpression = (produto) => produto.Include(p => p.Fornecedor).Include(p => p.Categoria);
     }
-}
-
-public abstract class BaseSpecification<T> where T : EntidadeBase
-{
-    protected Expression<Func<T, bool>> Predicate { get; set; }
-
-    public Func<IQueryable<T>, IIncludableQueryable<T, object>> IncludeExpression { get; set; }
-
-    public Expression<Func<T, bool>> ToExpression() => Predicate;
 }

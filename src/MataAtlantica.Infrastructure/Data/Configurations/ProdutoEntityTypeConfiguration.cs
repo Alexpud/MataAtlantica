@@ -27,3 +27,25 @@ public class ProdutoEntityTypeConfiguration : IEntityTypeConfiguration<Produto>
         });
     }
 }
+
+public class UsuarioEntityTypeConfiguration : IEntityTypeConfiguration<Usuario>
+{
+    public void Configure(EntityTypeBuilder<Usuario> builder)
+    {
+        builder.HasKey(p => p.Id);
+        builder.Property(p => p.Nome).HasMaxLength(50).IsRequired();
+        builder.Property(p => p.Sobrenome).HasMaxLength(50).IsRequired();
+        builder.Property(p => p.Login).HasMaxLength(100).IsRequired();
+        
+        builder.HasIndex(p => p.Login).IsUnique();
+
+        builder.OwnsOne(p => p.Endereco, enderecoBuilder =>
+        {
+            enderecoBuilder.Property(nameof(Endereco.Rua)).HasMaxLength(100);
+            enderecoBuilder.Property(nameof(Endereco.Cidade)).HasMaxLength(50);
+            enderecoBuilder.Property(nameof(Endereco.Bairro)).HasMaxLength(50);
+            enderecoBuilder.Property(nameof(Endereco.Numero)).HasMaxLength(10);
+            enderecoBuilder.Property(nameof(Endereco.UF)).HasMaxLength(5);
+        });
+    }
+}

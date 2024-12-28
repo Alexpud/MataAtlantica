@@ -1,5 +1,6 @@
 ﻿using AutoFixture;
 using MataAtlantica.Domain.Models;
+using MataAtlantica.Domain.Models.Fornecedores;
 
 namespace MataAtlantica.API.Tests.Builder;
 
@@ -14,7 +15,7 @@ public class CriarFornecedorBuilder : BaseBuilder<AdicionarFornecedorDto, CriarF
             Descricao: string.Empty,
             CpfCnpj: _cpfCnpj,
             Telefone: string.Empty,
-            Localizacao: new EnderecoFornecedor(
+            Localizacao: new Endereco(
                 Rua: string.Empty,
                 Bairro: string.Empty,
                 Numero: string.Empty,
@@ -45,7 +46,7 @@ public class AlterarFornecedorBuilder : BaseBuilder<AlterarFornecedorDto, Altera
             Descricao: _fixture.Create<string>(),
             CpfCnpj: _cpfCnpj,
             Telefone: _fixture.Create<string>(),
-            Localizacao: new EnderecoFornecedor(
+            Localizacao: new Endereco(
                 Rua: _fixture.Create<string>(),
                 Bairro: _fixture.Create<string>(),
                 Numero: _fixture.Create<string>(),

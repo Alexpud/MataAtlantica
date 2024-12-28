@@ -1,6 +1,5 @@
 using MataAtlantica.Utils;
 using MediatR;
-using Microsoft.Extensions.Logging;
 
 namespace MataAtlantica.Application.Common;
 
