@@ -7,13 +7,15 @@ using MataAtlantica.Infrastructure.Identity;
 using MataAtlantica.Utils;
 using Microsoft.AspNetCore.Identity;
 
+
 namespace MataAtlantica.Infrastructure.Services;
 
 public  class UserIdentityService(
     IUsuarioRepository usuarioRepository,
     IUserManagerWrapper userManagerWrapper,
     IUserStore<User> userStore,
-    ILogService logService)
+    ILogService logService,
+     SignInManager<User> signInManager)
 {
     private readonly IUsuarioRepository usuarioRepository = usuarioRepository;
     private readonly IUserManagerWrapper userManagerWrapper = userManagerWrapper;
@@ -42,6 +44,12 @@ public  class UserIdentityService(
             throw new Exception("Adição do usuário no sistema falhou");
         }
         return new IdentityUser(user.Id);
+    }
+
+    public async Task<SignInResult> Login(string login, string senha)
+    {
+        signInManager.AuthenticationScheme = IdentityConstants.BearerScheme;
+        return await signInManager.PasswordSignInAsync(login, senha, false, lockoutOnFailure: true);
     }
 }
 
