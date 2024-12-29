@@ -24,6 +24,8 @@ public class FornecedoresController(IMediator mediator, FornecedorService servic
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
+    [ProducesResponseType(typeof(FornecedorDto), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(NoContentResult), (int)HttpStatusCode.NoContent)]
     public async Task<IActionResult> ObterPorId(string id)
     {
         var fornecedor = await _mediator.Send(new ObterFornecedorPorIdQuery(id));
@@ -74,10 +76,7 @@ public class FornecedoresController(IMediator mediator, FornecedorService servic
                 CEP: model.Localizacao.CEP
             ));
 
-        var result = await _mediator.Send(command);
-        if (result.IsFailed)
-            return HandleFailedResult(result);
-        return Ok(result.Value);
+        return HandleResult(await _mediator.Send(command));
 
     }
 
@@ -125,10 +124,7 @@ public class FornecedoresController(IMediator mediator, FornecedorService servic
                 UF: model.Localizacao.UF,
                 CEP: model.Localizacao.CEP
             ));
-        var result = await _mediator.Send(command);
-        if (result.IsFailed)
-            return HandleFailedResult(result);
-        return Ok(result.Value);
+        return HandleResult(await _mediator.Send(command));
     }
 
     /// <summary>

@@ -8,6 +8,13 @@ namespace MataAtlantica.API.Controllers;
 [Produces("application/json")]
 public abstract class BaseController : ControllerBase
 {
+
+    protected IActionResult HandleResult(Result result)
+    {
+        if (result.IsSuccess)
+            return Ok();
+        return HandleFailedResult(result);
+    }
     protected IActionResult HandleResult<T>(Result<T> result)
     {
         if (result.IsSuccess)

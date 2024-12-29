@@ -60,8 +60,7 @@ public class ProdutosController(IMediator mediator, ProdutoService service) : Ba
             model.Descricao,
             model.FornecedorId,
             model.Marca);
-        var result = await _mediator.Send(command);
-        return result.IsFailed ? HandleFailedResult(result) : Ok(result.Value);
+        return HandleResult(await _mediator.Send(command));
     }
 
     /// <summary>
@@ -78,8 +77,7 @@ public class ProdutosController(IMediator mediator, ProdutoService service) : Ba
         var command = new AlterarProdutoCommand(
             id,
             model.Nome);
-        var result = await _mediator.Send(command);
-        return result.IsFailed ? HandleFailedResult(result) : Ok(result.Value);
+        return HandleResult(await _mediator.Send(command));
     }
 
     /// <summary>

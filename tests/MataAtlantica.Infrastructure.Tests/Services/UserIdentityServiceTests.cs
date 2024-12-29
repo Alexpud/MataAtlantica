@@ -26,7 +26,7 @@ public class UserIdentityServiceTests
         _userManagerWrapper = Substitute.For<IUserManagerWrapper>();
         _userStore = Substitute.For<IUserStore<User>>();
         _logService = Substitute.For<ILogService>();
-        _sut = new(_usuarioRepository, _userManagerWrapper, _userStore, _logService);
+        _sut = new(_usuarioRepository, _userManagerWrapper, _userStore, _logService, signInManager: null);
     }
 
     [Trait("Feature", "Adicionar usuario")]
