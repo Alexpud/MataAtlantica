@@ -37,6 +37,6 @@ jobs:
       with:
           load: true
           push: ${{ github.event_name != 'pull_request' }}
-          tags: spudin/mata-atlantica:$(date +%s)
+          tags: spudin/mata-atlantica:${{ github.sha }}
 
   
