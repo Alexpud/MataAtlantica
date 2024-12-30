@@ -38,7 +38,7 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         load: true
-        context: ./src/MataAtlantica.API
+        context: .
         file: ./src/MataAtlantica.API/Dockerfile
         push: ${{ github.event_name != 'pull_request' }}
         tags: spudin/mata-atlantica:${{ github.sha }}
