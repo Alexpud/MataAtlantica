@@ -26,6 +26,9 @@ jobs:
       id: render
       with:
         json: "./src/MataAtlantica.API/appsettings.json"
+    - name: Get the output
+      run: echo "${{ steps.render.outputs.result }}"
+      
     - name: print appsettings.json
       run: echo -e "$(<./src/MataAtlantica.API/appsettings.json)"
     # - name: create-json
