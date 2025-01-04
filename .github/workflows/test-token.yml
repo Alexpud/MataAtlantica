@@ -26,6 +26,8 @@ jobs:
       id: render
       with:
         json: "./src/MataAtlantica.API/appsettings.json"
+    - name: print appsettings.json
+      run: echo -e "$(<./src/MataAtlantica.API/appsettings.json)"
     # - name: create-json
     #   id: create-json
     #   uses: jsdaniell/create-json@v1.2.3
