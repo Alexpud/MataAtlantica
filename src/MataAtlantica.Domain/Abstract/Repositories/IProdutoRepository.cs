@@ -1,5 +1,5 @@
 ﻿using MataAtlantica.Domain.Entidades;
-using MataAtlantica.Domain.Models;
+using MataAtlantica.Domain.Models.Produtos;
 
 namespace MataAtlantica.Domain.Abstract.Repositories;
 

@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using FluentValidation;
 using MataAtlantica.Domain.Erros;
-using MataAtlantica.Domain.Models;
+using MataAtlantica.Domain.Models.Produtos;
 using MataAtlantica.Domain.Services;
 using MediatR;
 

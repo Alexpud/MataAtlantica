@@ -3,7 +3,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using MataAtlantica.Domain.Abstract.Repositories;
 using MataAtlantica.Domain.Entidades;
-using MataAtlantica.Domain.Models;
+using MataAtlantica.Domain.Models.Fornecedores;
 using MataAtlantica.Domain.Services;
 using MataAtlantica.Domain.Tests.Builder;
 using NSubstitute;

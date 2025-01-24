@@ -27,10 +27,7 @@ public partial class ProdutoImagensController(IMediator mediator) : BaseControll
             ProdutoId = produtoId,
             ArquivoImagem = request.File
         };
-        var result = await _mediator.Send(model);
-        if (result.IsFailed)
-            return HandleFailedResult(result);
-        return Ok();
+        return HandleResult(await _mediator.Send(model));
     }
 
     [Consumes("multipart/form-data")]
@@ -43,9 +40,6 @@ public partial class ProdutoImagensController(IMediator mediator) : BaseControll
             ProdutoId = produtoId,
             ArquivoImagem = request.File
         };
-        var result = await _mediator.Send(model);
-        if (result.IsFailed)
-            return HandleFailedResult(result);
-        return Ok();
+        return HandleResult(await _mediator.Send(model));
     }
 }

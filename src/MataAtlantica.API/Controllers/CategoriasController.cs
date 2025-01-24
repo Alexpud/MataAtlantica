@@ -1,14 +1,18 @@
-﻿using MataAtlantica.Application.Categorias.AdicionarCategoria;
+﻿using MataAtlantica.API.Models.Categorias;
+using MataAtlantica.Application.Categorias.AdicionarCategoria;
 using MataAtlantica.Application.Categorias.AdicionarSubCategoria;
 using MataAtlantica.Application.Categorias.ListarCategorias;
-using MataAtlantica.Domain.Models;
+using MataAtlantica.Domain.Models.Categorias;
 using MataAtlantica.Domain.Services;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Security.Claims;
 
 namespace MataAtlantica.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 [Produces("application/json")]
@@ -41,8 +45,7 @@ public class CategoriasController(IMediator mediator, CategoriaService categoria
     public async Task<IActionResult> AdicionarSubCategoria(string id, AdicionarCategoriaRequest model)
     {
         var command = new AdicionarSubCategoriaCommand(id, model.Nome);
-        var result = await _mediator.Send(command);
-        return result.IsFailed ? HandleFailedResult(result) : Ok(result);
+        return HandleResult(await _mediator.Send(command));
     }
 
     /// <summary>
@@ -51,10 +54,8 @@ public class CategoriasController(IMediator mediator, CategoriaService categoria
     /// <returns></returns>
     [HttpGet]
     [ProducesResponseType(typeof(List<CategoriaDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Listar()
+    public async Task<IActionResult> Listar(ClaimsPrincipal claims)
     {
         return Ok(await _mediator.Send(new ListarCategoriasQuery()));
     }
 }
-
-public record struct AdicionarCategoriaRequest(string Nome);

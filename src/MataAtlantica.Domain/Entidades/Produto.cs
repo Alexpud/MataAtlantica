@@ -1,4 +1,4 @@
-using MataAtlantica.Domain.Models;
+using MataAtlantica.Domain.Models.Produtos;
 
 namespace MataAtlantica.Domain.Entidades;
 

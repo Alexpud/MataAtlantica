@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MataAtlantica.Domain.Abstract.Repositories;
-using MataAtlantica.Domain.Models;
+using MataAtlantica.Domain.Models.Fornecedores;
 using MediatR;
 
 namespace MataAtlantica.Application.Fornecedores.Listar;
