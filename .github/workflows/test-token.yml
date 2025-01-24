@@ -20,14 +20,13 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
-    - name: print secrets
-      run: echo $SECRETS
-    - uses: loveloper44/render-json-action@v2.0.2
-      id: render
+    - uses: cschleiden/replace-tokens@v1
       with:
-        json: "./src/MataAtlantica.API/appsettings.json"
-    - name: Get the output
-      run: echo "${{ steps.render.outputs.result }}"
+        tokenPrefix: '{'
+        tokenSuffix: '}'
+        files: '["**/appsettings.json"]'
+      env:
+        CONNECTIONSRINGS.DEFAULT: ${{ vars.CONNECTION_STRINGS_DEFAULT }}
       
     - name: print appsettings.json
       run: echo -e "$(<./src/MataAtlantica.API/appsettings.json)"
