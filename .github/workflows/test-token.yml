@@ -26,7 +26,7 @@ jobs:
         tokenSuffix: '}'
         files: '["**/appsettings.json"]'
       env:
-        CONNECTIONSRINGS.DEFAULT: ${{ vars.CONNECTION_STRINGS_DEFAULT }}
+        CONNECTION_STRINGS_DEFAULT: ${{ vars.CONNECTION_STRINGS_DEFAULT }}
       
     - name: print appsettings.json
       run: echo -e "$(<./src/MataAtlantica.API/appsettings.json)"
