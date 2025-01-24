@@ -1,4 +1,4 @@
-﻿using MataAtlantica.API.Models;
+﻿using MataAtlantica.API.Models.Categorias;
 using MataAtlantica.Application.Categorias.AdicionarCategoria;
 using MataAtlantica.Application.Categorias.AdicionarSubCategoria;
 using MataAtlantica.Application.Categorias.ListarCategorias;

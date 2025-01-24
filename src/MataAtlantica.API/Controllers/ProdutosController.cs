@@ -1,4 +1,5 @@
 using MataAtlantica.API.Models;
+using MataAtlantica.API.Models.Produtos;
 using MataAtlantica.Application.Produtos.AdicionarProduto;
 using MataAtlantica.Application.Produtos.AlterarProduto;
 using MataAtlantica.Application.Produtos.BuscarProdutos;

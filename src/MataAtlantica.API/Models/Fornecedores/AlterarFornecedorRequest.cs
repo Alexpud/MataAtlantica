@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MataAtlantica.API.Models;
+namespace MataAtlantica.API.Models.Fornecedor;
 
-public class AdicionarFornecedorRequest
+public class AlterarFornecedorRequest
 {
     [Required]
     public string Nome { get; set; }

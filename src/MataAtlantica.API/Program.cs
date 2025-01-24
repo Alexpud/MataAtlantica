@@ -5,11 +5,13 @@ using MataAtlantica.Application.Common;
 using MataAtlantica.Application.Produtos.AdicionarProduto;
 using MataAtlantica.Application.Produtos.AdicionarThumbnail;
 using MataAtlantica.Application.Produtos.AlterarProduto;
+using MataAtlantica.Application.Usuarios.AdicionarMetodoPagamento;
 using MataAtlantica.Application.Usuarios.AdicionarUsuario;
 using MataAtlantica.Domain.Abstract.Repositories;
 using MataAtlantica.Domain.Abstract.Services;
 using MataAtlantica.Domain.Models.Fornecedores;
 using MataAtlantica.Domain.Models.Produtos;
+using MataAtlantica.Domain.Models.Usuarios;
 using MataAtlantica.Domain.Models.Validators;
 using MataAtlantica.Domain.Profiles;
 using MataAtlantica.Domain.Services;
@@ -74,6 +76,11 @@ builder.Services.AddScoped<IValidator<AdicionarProdutoCommand>, AdicionarProduto
 builder.Services.AddScoped<IValidator<AlterarProdutoCommand>, AlterarProdutoCommandValidator>();
 builder.Services.AddScoped<IValidator<AdicionarCategoriaCommand>, AdicionarCategoriaCommandValidator>();
 builder.Services.AddScoped<IValidator<AdicionarUsuarioCommand>, AdicionarUsuarioCommandValidator>();
+builder.Services.AddScoped<IValidator<AdicionarMetodoPagamentoCommand>, AdicionarMetodoPagamentoCommandValidator>();
+builder.Services.AddScoped<IValidator<AdicionarMetodoPagamentoDto>, AdicionarMetodoPagamentoDtoValidator>();
+builder.Services.AddScoped<IValidator<AlterarMetodoPagamentoDto>, AlterarMetodoPagamentoDtoValidator>();
+
+builder.Services.AddScoped<IValidadorCartao, ValidadorCartao>(); 
 
 builder.Services.AddAuthorization();
 

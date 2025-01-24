@@ -1,5 +1,8 @@
 ﻿using MataAtlantica.API.Models;
+using MataAtlantica.API.Models.Usuarios;
+using MataAtlantica.Application.Usuarios.AdicionarMetodoPagamento;
 using MataAtlantica.Application.Usuarios.AdicionarUsuario;
+using MataAtlantica.Application.Usuarios.AlterarMetodoPagamento;
 using MataAtlantica.Application.Usuarios.Login;
 using MataAtlantica.Domain.Models.Usuarios;
 using MediatR;
@@ -52,5 +55,41 @@ public class UsuariosController(IMediator mediator) : BaseController
     {
         var result = await _mediator.Send(new LoginCommand(request.Login, request.Senha));
         return result.IsFailed ? Unauthorized() : Empty;
+    }
+
+    /// <summary>
+    /// Adiciona um método de pagamento a um usuário
+    /// </summary>
+    /// <param name="usuarioId">ID do usuário</param>
+    /// <param name="request">Dados do método de pagamento</param>
+    /// <returns></returns>
+    [HttpPost("{usuarioId}/metodo-pagamento")]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(BadRequestResponse), (int)HttpStatusCode.BadRequest)]
+    public async Task<IActionResult> AdicionarMetodoPagamento(string usuarioId, AdicionarMetodoPagamentoRequest request)
+    {
+        var command = new AdicionarMetodoPagamentoCommand(usuarioId, request.Bandeira, request.NumeroIdentificacao, request.Validade, request.Tipo);
+        var result = await _mediator.Send(command);
+        return HandleResult(result);
+    }
+
+    /// <summary>
+    /// Altera o metodo de pagamento do usuário
+    /// </summary>
+    /// <param name="usuarioId"></param>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    [HttpPut("{usuarioId}/metodo-pagamento")]
+    public async Task<IActionResult> AlterarMetodoPagamento(string usuarioId, AlterarMetodoPagamentoRequest request)
+    {
+        var command = new AlterarMetodoPagamentoCommand(
+            usuarioId, 
+            request.MetodoPagamentoId, 
+            request.Bandeira, 
+            request.NumeroIdentificacao, 
+            request.Validade, 
+            request.Tipo);
+        var result = await _mediator.Send(command);
+        return HandleResult(result);
     }
 }

@@ -1,4 +1,5 @@
 using MataAtlantica.API.Models;
+using MataAtlantica.API.Models.Fornecedor;
 using MataAtlantica.Application.Fornecedores.AdicionarFornecedor;
 using MataAtlantica.Application.Fornecedores.AlterarFornecedor;
 using MataAtlantica.Application.Fornecedores.Listar;

@@ -1,4 +1,4 @@
-namespace MataAtlantica.API.Models;
+namespace MataAtlantica.API.Models.Produtos;
 
 public class BuscarProdutosRequest
 {
