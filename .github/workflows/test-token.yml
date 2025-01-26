@@ -1,0 +1,40 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: Testing
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    environment: producao
+    runs-on: ubuntu-latest
+    env:
+      SECRETS: ${{ vars.SECRETS }}
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - uses: cschleiden/replace-tokens@v1
+      with:
+        tokenPrefix: '{'
+        tokenSuffix: '}'
+        files: '["**/appsettings.json"]'
+      env:
+        CONNECTIONSTRINGS_DEFAULT: ${{ vars.CONNECTIONSTRINGS_DEFAULT }}
+        FILES_USELOCALSTORAGE: ${{ vars.FILES_USELOCALSTORAGE }}
+        FILES_USEBLOBSTORAGE: ${{ vars.FILES_USEBLOBSTORAGE }}
+      
+    - name: print appsettings.json
+      run: echo -e "$(<./src/MataAtlantica.API/appsettings.json)"
+    # - name: create-json
+    #   id: create-json
+    #   uses: jsdaniell/create-json@v1.2.3
+    #   with:
+    #       name: "./src/credentials.json"
+    #       json: $SECRETS
