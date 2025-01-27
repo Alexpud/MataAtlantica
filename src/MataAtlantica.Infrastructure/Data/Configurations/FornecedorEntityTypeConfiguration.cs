@@ -14,6 +14,8 @@ public class FornecedorEntityTypeConfiguration : IEntityTypeConfiguration<Fornec
         builder.Property(p => p.Descricao).HasMaxLength(1000).IsRequired();
         builder.Property(p => p.CpfCnpj).HasMaxLength(100).IsRequired();
         builder.Property(p => p.Telefone).HasMaxLength(20).IsRequired();
+        builder.Property(p => p.CriadoEm).HasColumnType("timestamp without time zone").IsRequired();
+        builder.Property(p => p.UltimaAtualizacao).HasColumnType("timestamp without time zone").IsRequired();
         builder.OwnsOne(p => p.Localizacao, enderecoBuilder =>
         {
             enderecoBuilder.Property(nameof(Endereco.Cidade)).HasMaxLength(50);

@@ -23,6 +23,7 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.11" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
 	</ItemGroup>
 	<PropertyGroup>
@@ -45,6 +46,14 @@
 	  <ProjectReference Include="..\MataAtlantica.Domain\MataAtlantica.Domain.csproj" />
 	  <ProjectReference Include="..\MataAtlantica.Infrastructure\MataAtlantica.Infrastructure.csproj" />
 	  <ProjectReference Include="..\MataAtlantica.Utils\MataAtlantica.Utils.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Update="appsettings.Development.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="appsettings.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 </Project>

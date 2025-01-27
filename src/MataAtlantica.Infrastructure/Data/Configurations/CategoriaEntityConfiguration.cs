@@ -12,6 +12,8 @@ public class CategoriaEntityConfiguration : IEntityTypeConfiguration<Categoria>
         builder.Property(p => p.Id).HasMaxLength(36).IsRequired();
         builder.Property(p => p.CriadoEm).IsRequired();
         builder.Property(p => p.Nome).HasMaxLength(50).IsRequired();
+        builder.Property(p => p.CriadoEm).HasColumnType("timestamp without time zone").IsRequired();
+
 
         builder
             .HasMany(p => p.SubCategorias)

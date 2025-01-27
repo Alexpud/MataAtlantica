@@ -110,7 +110,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 builder.Services.AddDbContext<AuthenticationDbContext>(p =>
-        p.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+        p.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
 builder.Services.AddScoped<RequestContextId>();
 builder.Services.AddScoped<ILogService, LogService>();
@@ -130,7 +130,7 @@ builder.Services.Configure<FilesOptions>(
 
 builder.Services
     .AddDbContext<MataAtlanticaDbContext>(p =>
-        p.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+        p.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
 
 builder.Services.AddExceptionHandler<ValidationExceptionHandler>();

@@ -87,7 +87,7 @@ POST {{MataAtlantica.API_HostAddress}}/api/usuarios/login
 Content-Type: application/json
 
 {
-  "Email": "alexandre.maciele@gmail.com",
-  "Password": "Ph1l0s0phers@1"
+  "Login": "alexandre.maciele4@gmail.com",
+  "Senha": "Ph1l0s0phers@1"
 }
 
