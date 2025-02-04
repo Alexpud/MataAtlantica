@@ -10,8 +10,8 @@ namespace MataAtlantica.Application.Categorias.AdicionarSubCategoria;
 public record AdicionarSubCategoriaCommand(string CategoriaId, string subCategoria) : IRequest<Result<CategoriaDto>> { }
 
 internal class CommandHandler(
-    ICategoriaRepository categoriaRepository, 
-    IMapper mapper, 
+    ICategoriaRepository categoriaRepository,
+    IMapper mapper,
     CategoriaService categoriaService) : IRequestHandler<AdicionarSubCategoriaCommand, Result<CategoriaDto>>
 {
     private readonly CategoriaService _categoriaService = categoriaService;

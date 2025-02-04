@@ -1,5 +1,4 @@
 using FluentValidation;
-using FluentValidation.Results;
 using MataAtlantica.Domain.Erros;
 
 namespace MataAtlantica.Domain.Entidades;

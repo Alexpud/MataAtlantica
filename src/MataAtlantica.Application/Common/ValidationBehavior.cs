@@ -20,7 +20,7 @@ public class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TReq
         var validationResult = validationFailures.FirstOrDefault(validationResult => !validationResult.IsValid);
         if (validationResult != null)
             throw new ValidationException(validationResult.Errors);
-        
+
         return await next();
     }
 }

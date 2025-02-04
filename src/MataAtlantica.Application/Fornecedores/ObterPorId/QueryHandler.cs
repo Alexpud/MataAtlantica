@@ -17,8 +17,8 @@ public class QueryHandler(IFornecedorRepository fornecedorRepository, IMapper ma
     public async Task<Result<FornecedorDto>> Handle(ObterFornecedorPorIdQuery request, CancellationToken cancellationToken)
     {
         var fornecedor = await _fornecedorRepository.ObterPorId(request.Id);
-        return fornecedor == null 
-            ? Result.Fail(BusinessErrors.FornecedorNaoEncontrado) 
+        return fornecedor == null
+            ? Result.Fail(BusinessErrors.FornecedorNaoEncontrado)
             : _mapper.Map<FornecedorDto>(fornecedor);
     }
 }

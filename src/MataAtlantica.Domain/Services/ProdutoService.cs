@@ -3,7 +3,6 @@ using FluentResults;
 using FluentValidation;
 using MataAtlantica.Domain.Abstract.Repositories;
 using MataAtlantica.Domain.Entidades;
-using MataAtlantica.Domain.Erros;
 using MataAtlantica.Domain.Helpers;
 using MataAtlantica.Domain.Models.Produtos;
 

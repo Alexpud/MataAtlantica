@@ -14,9 +14,9 @@ public class Usuario : EntidadeBase
 
     public Usuario(
         string id,
-        string nome, 
-        string sobrenome, 
-        string login, 
+        string nome,
+        string sobrenome,
+        string login,
         Endereco endereco)
     {
         Id = id;
@@ -26,7 +26,7 @@ public class Usuario : EntidadeBase
         Endereco = endereco;
     }
 
-    public void AdicionarMetodoPagamento(MetodoPagamento metodoPagamento) 
+    public void AdicionarMetodoPagamento(MetodoPagamento metodoPagamento)
         => OpcoesPagamento.Append(metodoPagamento);
 }
 
@@ -39,9 +39,9 @@ public class MetodoPagamento : EntidadeBase
     public string UsuarioId { get; private set; }
     public DateTime UltimaAtualizacao { get; private set; }
     public MetodoPagamento(
-        BandeiraCartao bandeira, 
-        string numeroIdentificacao, 
-        DateTime validade, 
+        BandeiraCartao bandeira,
+        string numeroIdentificacao,
+        DateTime validade,
         TipoPagamento tipo)
     {
         Bandeira = bandeira;

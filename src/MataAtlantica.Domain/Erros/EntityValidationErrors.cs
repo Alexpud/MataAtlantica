@@ -1,5 +1,4 @@
 using FluentResults;
-using System.ComponentModel.DataAnnotations;
 
 namespace MataAtlantica.Domain.Erros;
 

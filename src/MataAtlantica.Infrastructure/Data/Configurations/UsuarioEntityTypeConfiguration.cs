@@ -12,7 +12,7 @@ public class UsuarioEntityTypeConfiguration : IEntityTypeConfiguration<Usuario>
         builder.Property(p => p.Nome).HasMaxLength(50).IsRequired();
         builder.Property(p => p.Sobrenome).HasMaxLength(50).IsRequired();
         builder.Property(p => p.Login).HasMaxLength(100).IsRequired();
-        
+
         builder.HasIndex(p => p.Login).IsUnique();
 
         builder.OwnsOne(p => p.Endereco, enderecoBuilder =>

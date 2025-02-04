@@ -1,5 +1,4 @@
 ﻿using FluentResults;
-using MataAtlantica.Application.Produtos.AdicionarThumbnail;
 using MataAtlantica.Application.Produtos.Common;
 using MataAtlantica.Domain.Abstract.Services;
 using MataAtlantica.Domain.Models;

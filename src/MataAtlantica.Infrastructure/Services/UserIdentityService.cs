@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace MataAtlantica.Infrastructure.Services;
 
-public  class UserIdentityService(
+public class UserIdentityService(
     IUsuarioRepository usuarioRepository,
     IUserManagerWrapper userManagerWrapper,
     IUserStore<User> userStore,
@@ -27,7 +27,7 @@ public  class UserIdentityService(
         var usuario = await usuarioRepository.ObterPorSpec(new BuscarUsuarioPorLoginSpecification(login));
         if (usuario != null)
             return Result.Fail(BusinessErrors.UsuarioComLoginJaExiste);
-        
+
         var user = new User();
         var emailStore = (IUserEmailStore<User>)userStore;
         await userStore.SetUserNameAsync(user, login, CancellationToken.None);

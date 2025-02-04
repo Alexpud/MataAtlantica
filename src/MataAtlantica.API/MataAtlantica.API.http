@@ -87,7 +87,13 @@ POST {{MataAtlantica.API_HostAddress}}/api/usuarios/login
 Content-Type: application/json
 
 {
-  "Email": "alexandre.maciele@gmail.com",
-  "Password": "Ph1l0s0phers@1"
+  "Login": "alexandre.maciele@gmail.com",
+  "Senha": "Ph1l0s0phers@1"
 }
 
+
+###
+
+GET {{MataAtlantica.API_HostAddress}}/api/teste
+Authorization: Bearer CfDJ8JmAdGC8KYRLgwDEJfIKcw-KxeO1MSO27wlSzadb6VKaoj3f4lx41pIopTWc9C56bYDegv9Z-f20EEI9-V8L8WO2CweyiM4OORo-UB9aiXIvdO2D8oVEUosu5ay8KzqutLi5lWly_SkN7Ldvh-ZdKHDjkJVQWkX42Uloc-RMA9VUGq49oe7-xDIfAEtubPiaZdVr4M5qvd-d8NjvYTG0BsV_n29kCrTjV83zcwX3NzSmX4Ju-FG2MWYKHU2jEbLl89oHREsiMk35Io2SZ88_2I99KdvEhjH3H0AlDHRYcKh8ksQInnz1Hzabl_1OLu5VwOxWsdHsYhnyYMyuC37o3h1yKZWngDeGYQe411B9e8vhXSWM7in0SbfsbC1gJ7bFLuUglibKitqj3jem4OhsIjt9C7EgL4VvLW3IqngSiI2NEvFlHnDk1DGm_VVGxBDWDwu_VHqSu9OkMxgJX_7gylXx2zmZ8cVX0eleU_Rl8Qj8r0mVXZBOMjt4T4X9IV1spT5TzcIRD2kSR6YqUkHL72pkSCLwz4OQaEqn2p01235yOB2pX-Mj2AgnpyCrLeq94Cn2p9ByqGHLWlWmUf6VTJwfEb5OtGwpdetaVMOk55elOQbqxu6qcBMOl4RS_C-j021p_28fa8oL6OMFJORl5Vksg8rmWkBM3HjXj4j2xynHo-cD_wYOn0VdL9fljs6eBO5pVS2xGD65RGysapCN4FHNFehhhxZwaNB6dtQnSObG
+Cache-Control: no-cache

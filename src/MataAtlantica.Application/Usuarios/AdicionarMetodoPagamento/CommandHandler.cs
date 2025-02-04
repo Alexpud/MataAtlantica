@@ -1,6 +1,5 @@
 ﻿using FluentResults;
 using FluentValidation;
-using MataAtlantica.Domain.Abstract.Repositories;
 using MataAtlantica.Domain.Entidades;
 using MataAtlantica.Domain.Erros;
 using MataAtlantica.Domain.Models.Usuarios;
@@ -53,7 +52,7 @@ public class CommandHandler(
             request.NumeroIdentificacao,
             request.Validade,
             request.Tipo);
-            
+
         await _validadorCartaoCredito.EnviarNotificaco(eventoValidacaoCartao);
         return result;
     }

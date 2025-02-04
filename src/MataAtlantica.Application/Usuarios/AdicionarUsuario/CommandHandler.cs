@@ -12,7 +12,8 @@ public record AdicionarUsuarioCommand(
     string Senha,
     string Nome,
     string Sobrenome,
-    Endereco Endereco) : IRequest<Result<UsuarioDto>> { }
+    Endereco Endereco) : IRequest<Result<UsuarioDto>>
+{ }
 
 public class CommandHandler(
     UserIdentityService userIdentityService,

@@ -9,7 +9,7 @@ namespace MataAtlantica.Application.Produtos.AlterarProduto;
 
 public record AlterarProdutoCommand(string ProdutoId, string Nome) : IRequest<Result<ProdutoDto>> { }
 
-public class AlterarProdutoCommandValidator  : AbstractValidator<AlterarProdutoCommand>
+public class AlterarProdutoCommandValidator : AbstractValidator<AlterarProdutoCommand>
 {
     public AlterarProdutoCommandValidator()
     {

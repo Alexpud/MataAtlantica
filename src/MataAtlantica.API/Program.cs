@@ -1,4 +1,5 @@
 using FluentValidation;
+using MataAtlantica.API.Cache;
 using MataAtlantica.API.Middleware;
 using MataAtlantica.Application.Categorias.AdicionarCategoria;
 using MataAtlantica.Application.Common;
@@ -55,7 +56,7 @@ builder.Services.AddAutoMapper(typeof(DomainProfile).Assembly);
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<IFornecedorRepository, FornecedorRepository>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
-builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();   
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
 builder.Services.AddScoped<CategoriaService>();
 builder.Services.AddScoped<FornecedorService>();
@@ -80,7 +81,19 @@ builder.Services.AddScoped<IValidator<AdicionarMetodoPagamentoCommand>, Adiciona
 builder.Services.AddScoped<IValidator<AdicionarMetodoPagamentoDto>, AdicionarMetodoPagamentoDtoValidator>();
 builder.Services.AddScoped<IValidator<AlterarMetodoPagamentoDto>, AlterarMetodoPagamentoDtoValidator>();
 
-builder.Services.AddScoped<IValidadorCartao, ValidadorCartao>(); 
+builder.Services.AddScoped<IValidadorCartao, ValidadorCartao>();
+
+builder.Services.AddStackExchangeRedisOutputCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+    options.InstanceName = "MataAtlantica";
+});
+
+builder.Services.AddOutputCache(configure =>
+{
+    //configure.AddBasePolicy(p => p.AddPolicy<CustomPolicy>().SetCacheKeyPrefix("custom-"), true);
+    configure.AddPolicy("CustomPolicy", new CustomPolicy());
+});
 
 builder.Services.AddAuthorization();
 
@@ -166,6 +179,8 @@ app.UseMiddleware<RequestContextMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseOutputCache();
 
 app.MapControllers();
 

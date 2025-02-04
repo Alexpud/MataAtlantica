@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MataAtlantica.Domain.Entidades;
-using MataAtlantica.Domain.Models;
 using MataAtlantica.Domain.Models.Categorias;
 using MataAtlantica.Domain.Models.Fornecedores;
 using MataAtlantica.Domain.Models.Produtos;

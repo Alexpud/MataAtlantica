@@ -24,7 +24,7 @@ public class UsuariosController(IMediator mediator) : BaseController
     /// <param name="request"></param>
     /// <returns></returns>
     [HttpPost]
-    [ProducesResponseType(typeof(UsuarioDto), (int) HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(UsuarioDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(BadRequestResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> AdicionarUsuario(AdicionarUsuarioRequest request)
     {
@@ -34,11 +34,11 @@ public class UsuariosController(IMediator mediator) : BaseController
             request.Nome,
             request.Sobrenome,
             new Domain.Models.Endereco(
-                request.Endereco.Rua, 
+                request.Endereco.Rua,
                 request.Endereco.Bairro,
-                request.Endereco.Numero, 
+                request.Endereco.Numero,
                 request.Endereco.Cidade,
-                request.Endereco.UF, 
+                request.Endereco.UF,
                 request.Endereco.CEP));
         var result = await _mediator.Send(command);
         return HandleResult(result);
@@ -83,11 +83,11 @@ public class UsuariosController(IMediator mediator) : BaseController
     public async Task<IActionResult> AlterarMetodoPagamento(string usuarioId, AlterarMetodoPagamentoRequest request)
     {
         var command = new AlterarMetodoPagamentoCommand(
-            usuarioId, 
-            request.MetodoPagamentoId, 
-            request.Bandeira, 
-            request.NumeroIdentificacao, 
-            request.Validade, 
+            usuarioId,
+            request.MetodoPagamentoId,
+            request.Bandeira,
+            request.NumeroIdentificacao,
+            request.Validade,
             request.Tipo);
         var result = await _mediator.Send(command);
         return HandleResult(result);

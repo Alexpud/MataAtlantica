@@ -32,7 +32,7 @@ public class AlterarMetododPagamentoCommandValidator : AbstractValidator<Alterar
         RuleFor(p => p.UsuarioId)
             .NotEmpty()
             .WithErrorCode(nameof(BusinessErrors.IdUsuarioObrigatorio))
-            .WithMessage(BusinessErrors.IdUsuarioObrigatorio.Message);  
+            .WithMessage(BusinessErrors.IdUsuarioObrigatorio.Message);
 
         RuleFor(p => p.MetodoPagamentoId)
             .NotEmpty()
