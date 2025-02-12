@@ -7,6 +7,7 @@ using MataAtlantica.Domain.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 using System.Net;
 using System.Security.Claims;
 
@@ -53,8 +54,9 @@ public class CategoriasController(IMediator mediator, CategoriaService categoria
     /// </summary>
     /// <returns></returns>
     [HttpGet]
+    [OutputCache(Duration = 60, PolicyName = "CustomPolicy")]
     [ProducesResponseType(typeof(List<CategoriaDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Listar(ClaimsPrincipal claims)
+    public async Task<IActionResult> Listar()
     {
         return Ok(await _mediator.Send(new ListarCategoriasQuery()));
     }
