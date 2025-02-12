@@ -108,13 +108,16 @@ public static class DependenciesExtensions
         return services;
     }
 
-    public static IServiceCollection AddCacheDependencies(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddCacheDependencies(this IServiceCollection services, IConfiguration configuration, bool isDevelopment)
     {
-        services.AddStackExchangeRedisOutputCache(options =>
+        if (!isDevelopment)
         {
-            options.Configuration = configuration.GetConnectionString("Redis");
-            options.InstanceName = "MataAtlantica";
-        });
+            services.AddStackExchangeRedisOutputCache(options =>
+            {
+                options.Configuration = configuration.GetConnectionString("Redis");
+                options.InstanceName = "MataAtlantica";
+            });
+        }
 
         services.AddOutputCache(configure =>
         {

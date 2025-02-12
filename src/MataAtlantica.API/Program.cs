@@ -38,7 +38,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddDependencies();
 
-builder.Services.AddCacheDependencies(builder.Configuration);
+builder.Services.AddCacheDependencies(builder.Configuration, builder.Environment.IsDevelopment());
 
 builder.Services.AddOtherDepdencies();
 
