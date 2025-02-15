@@ -134,9 +134,9 @@ public class FornecedoresController(IMediator mediator, FornecedorService servic
     /// <returns></returns>
     [HttpGet]
     [ProducesResponseType(typeof(List<FornecedorDto>), (int)HttpStatusCode.OK)]
-    public IActionResult Listar()
+    public async Task<IActionResult> Listar()
     {
-        return Ok(_mediator.Send(new ListarFornecedoresQuery()));
+        return Ok(await _mediator.Send(new ListarFornecedoresQuery()));
     }
 }
 
