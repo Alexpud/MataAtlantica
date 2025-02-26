@@ -13,7 +13,11 @@ public class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TReq
         CancellationToken cancellationToken)
     {
         var context = new ValidationContext<TRequest>(request);
-
+        if (request is BaseRequest requisicao)
+        {
+            var hasErrors = requisicao.Validate().Errors.Any();
+        }
+        
         var validationFailures = await Task.WhenAll(
             _validators.Select(validator => validator.ValidateAsync(context)));
 

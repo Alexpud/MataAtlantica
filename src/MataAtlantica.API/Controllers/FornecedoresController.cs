@@ -1,5 +1,6 @@
 using MataAtlantica.API.Models;
 using MataAtlantica.API.Models.Fornecedor;
+using MataAtlantica.Application.Common;
 using MataAtlantica.Application.Fornecedores.AdicionarFornecedor;
 using MataAtlantica.Application.Fornecedores.AlterarFornecedor;
 using MataAtlantica.Application.Fornecedores.Listar;
@@ -19,6 +20,12 @@ public class FornecedoresController(IMediator mediator, FornecedorService servic
     private readonly FornecedorService _service = service;
     private readonly IMediator _mediator = mediator;
 
+    [HttpGet("teste")]
+    public async Task<IActionResult> Teste()
+    {
+        await _mediator.Send(new Requisicao());
+        return Ok();
+    }
     /// <summary>
     /// Obtem fornecedor pelo Id
     /// </summary>
@@ -44,7 +51,7 @@ public class FornecedoresController(IMediator mediator, FornecedorService servic
     ///     POST /Fornecedores
     ///     {
     ///         "Nome": "Nivea",
-    ///         "Descricao": "Grande vendedora de cosméticos",
+    ///         "Descricao": "Grande vendedora de cosmï¿½ticos",
     ///         "CpfCnpj": "XXX.XXX.XXX/0001-XX",
     ///         "Telefone": "(17) 99999-9999",
     ///         "Localizacao": {
@@ -92,7 +99,7 @@ public class FornecedoresController(IMediator mediator, FornecedorService servic
     ///     PUT /Fornecedores/{id}
     ///     {
     ///         "Nome": "Nivea",
-    ///         "Descricao": "Grande vendedora de cosméticos",
+    ///         "Descricao": "Grande vendedora de cosmï¿½ticos",
     ///         "CpfCnpj": "XXX.XXX.XXX/0001-XX",
     ///         "Telefone": "(17) 99999-9999",
     ///         "Localizacao": {
