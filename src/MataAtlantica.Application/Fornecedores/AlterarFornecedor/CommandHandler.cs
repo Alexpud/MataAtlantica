@@ -1,25 +1,14 @@
-﻿using FluentResults;
-using MataAtlantica.Application.Common;
-using MataAtlantica.Domain.Models;
+﻿using MataAtlantica.Application.Common;
 using MataAtlantica.Domain.Models.Fornecedores;
 using MataAtlantica.Domain.Services;
 using MediatR;
 
 namespace MataAtlantica.Application.Fornecedores.AlterarFornecedor;
 
-public record AlterarFornecedorCommand(
-    string Id,
-    string Nome,
-    string Descricao,
-    string CpfCnpj,
-    string Telefone,
-    Endereco Localizacao) : BaseCommand, IRequest<Result<FornecedorDto>>
-{ }
-
-public class CommandHandler(FornecedorService fornecedorService) : IRequestHandler<AlterarFornecedorCommand, Result<FornecedorDto>>
+public class CommandHandler(FornecedorService fornecedorService) : IRequestHandler<AlterarFornecedorCommand, CommandResponse<FornecedorDto>>
 {
     private readonly FornecedorService _fornecedorService = fornecedorService;
-    public async Task<Result<FornecedorDto>> Handle(AlterarFornecedorCommand request, CancellationToken cancellationToken)
+    public async Task<CommandResponse<FornecedorDto>> Handle(AlterarFornecedorCommand request, CancellationToken cancellationToken)
     {
         var dto = new AlterarFornecedorDto(
             request.Id,
@@ -29,6 +18,12 @@ public class CommandHandler(FornecedorService fornecedorService) : IRequestHandl
             request.Telefone,
             request.Localizacao);
 
-        return await _fornecedorService.Alterar(dto);
+        var response = new CommandResponse<FornecedorDto>();
+        var result = await _fornecedorService.Alterar(dto);
+        if (result.IsFailed)
+            response.WithErrors(result.Errors);
+        else
+            response.SetValue(result.Value);
+        return response;
     }
 }
