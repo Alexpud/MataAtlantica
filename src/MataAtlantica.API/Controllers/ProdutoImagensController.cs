@@ -21,12 +21,7 @@ public partial class ProdutoImagensController(IMediator mediator) : BaseControll
     [HttpPost("{produtoId}/thumbnail")]
     public async Task<IActionResult> AdicionarThumbnail([FromForm] AdicionarImagemRequest request, string produtoId)
     {
-        var model = new AdicionarThumbnailCommand
-        {
-            Ordem = request.Ordem,
-            ProdutoId = produtoId,
-            ArquivoImagem = request.File
-        };
+        var model = new AdicionarThumbnailCommand(produtoId, request.File, request.Ordem);
         return HandleResult(await _mediator.Send(model));
     }
 
@@ -34,12 +29,7 @@ public partial class ProdutoImagensController(IMediator mediator) : BaseControll
     [HttpPost("{produtoId}/imagem-ilustrativa")]
     public async Task<IActionResult> AdicionarImagemIlustrativa([FromForm] AdicionarImagemRequest request, string produtoId)
     {
-        var model = new AdicionarImagemIlustrativaCommand
-        {
-            Ordem = request.Ordem,
-            ProdutoId = produtoId,
-            ArquivoImagem = request.File
-        };
+        var model = new AdicionarImagemIlustrativaCommand(produtoId, request.File, request.Ordem);  
         return HandleResult(await _mediator.Send(model));
     }
 }

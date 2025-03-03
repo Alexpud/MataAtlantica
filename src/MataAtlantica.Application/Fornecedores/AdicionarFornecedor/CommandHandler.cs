@@ -1,4 +1,7 @@
 ﻿using FluentResults;
+using FluentValidation;
+using FluentValidation.Results;
+using MataAtlantica.Application.Common;
 using MataAtlantica.Domain.Models;
 using MataAtlantica.Domain.Models.Fornecedores;
 using MataAtlantica.Domain.Services;
@@ -11,7 +14,19 @@ public record AdicionarFornecedorCommand(
     string Descricao,
     string CpfCnpj,
     string Telefone,
-    Endereco Localizacao) : IRequest<Result<FornecedorDto>>;
+    Endereco Localizacao) : BaseCommand, IRequest<Result<FornecedorDto>>
+{
+    public override ValidationResult Validate()
+    {
+        var validator = new AdicionarFornecedorCommandValidator();
+        return validator.Validate(this);
+    }
+}
+
+public class AdicionarFornecedorCommandValidator : AbstractValidator<AdicionarFornecedorCommand>
+{
+
+}
 
 internal class CommandHandler(FornecedorService fornecedorService) : IRequestHandler<AdicionarFornecedorCommand, Result<FornecedorDto>>
 {

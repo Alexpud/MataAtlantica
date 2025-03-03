@@ -96,12 +96,6 @@ public static class DependenciesExtensions
         services.AddScoped<IValidator<AlterarProdutoDto>, AlterarProdutoValidator>();
         services.AddScoped<IValidator<AlterarFornecedorDto>, AlterarFornecedorValidator>();
         services.AddScoped<IValidator<AdicionarImagemProdutoDto>, AdicionarImagemProdutoValidator>();
-        services.AddScoped<IValidator<AdicionarThumbnailCommand>, AdicionarThumbnailCommandValidator>();
-        services.AddScoped<IValidator<AdicionarProdutoCommand>, AdicionarProdutoCommandValidtor>();
-        services.AddScoped<IValidator<AlterarProdutoCommand>, AlterarProdutoCommandValidator>();
-        services.AddScoped<IValidator<AdicionarCategoriaCommand>, AdicionarCategoriaCommandValidator>();
-        services.AddScoped<IValidator<AdicionarUsuarioCommand>, AdicionarUsuarioCommandValidator>();
-        services.AddScoped<IValidator<AdicionarMetodoPagamentoCommand>, AdicionarMetodoPagamentoCommandValidator>();
         services.AddScoped<IValidator<AdicionarMetodoPagamentoDto>, AdicionarMetodoPagamentoDtoValidator>();
         services.AddScoped<IValidator<AlterarMetodoPagamentoDto>, AlterarMetodoPagamentoDtoValidator>();
         services.AddScoped<IValidadorCartao, ValidadorCartao>();

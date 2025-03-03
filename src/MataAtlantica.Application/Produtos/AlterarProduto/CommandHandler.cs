@@ -7,24 +7,6 @@ using MediatR;
 
 namespace MataAtlantica.Application.Produtos.AlterarProduto;
 
-public record AlterarProdutoCommand(string ProdutoId, string Nome) : IRequest<Result<ProdutoDto>> { }
-
-public class AlterarProdutoCommandValidator : AbstractValidator<AlterarProdutoCommand>
-{
-    public AlterarProdutoCommandValidator()
-    {
-
-        RuleFor(model => model.ProdutoId)
-            .NotEmpty()
-            .WithErrorCode(nameof(BusinessErrors.ProdutoNaoEncontrado))
-            .WithMessage(BusinessErrors.ProdutoNaoEncontrado.Message);
-
-        RuleFor(model => model.Nome)
-            .NotEmpty()
-            .WithErrorCode(nameof(EntityValidationErrors.NomeObrigatorioParaProduto))
-            .WithMessage(EntityValidationErrors.NomeObrigatorioParaProduto.Message);
-    }
-}
 
 public class CommandHandler(ProdutoService produtoService) : IRequestHandler<AlterarProdutoCommand, Result<ProdutoDto>>
 {

@@ -2,7 +2,7 @@ using FluentValidation.Results;
 
 namespace MataAtlantica.Application.Common;
 
-public abstract class BaseRequest
+public abstract record BaseCommand
 {
     public ValidationResult ValidationResult { get; set; }
 

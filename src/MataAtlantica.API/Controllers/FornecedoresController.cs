@@ -20,12 +20,6 @@ public class FornecedoresController(IMediator mediator, FornecedorService servic
     private readonly FornecedorService _service = service;
     private readonly IMediator _mediator = mediator;
 
-    [HttpGet("teste")]
-    public async Task<IActionResult> Teste()
-    {
-        await _mediator.Send(new Requisicao());
-        return Ok();
-    }
     /// <summary>
     /// Obtem fornecedor pelo Id
     /// </summary>

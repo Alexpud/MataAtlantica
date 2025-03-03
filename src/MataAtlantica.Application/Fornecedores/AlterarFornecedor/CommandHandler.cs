@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using MataAtlantica.Application.Common;
 using MataAtlantica.Domain.Models;
 using MataAtlantica.Domain.Models.Fornecedores;
 using MataAtlantica.Domain.Services;
@@ -12,7 +13,7 @@ public record AlterarFornecedorCommand(
     string Descricao,
     string CpfCnpj,
     string Telefone,
-    Endereco Localizacao) : IRequest<Result<FornecedorDto>>
+    Endereco Localizacao) : BaseCommand, IRequest<Result<FornecedorDto>>
 { }
 
 public class CommandHandler(FornecedorService fornecedorService) : IRequestHandler<AlterarFornecedorCommand, Result<FornecedorDto>>
