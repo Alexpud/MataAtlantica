@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mata-atlantica-db-deployment
+  labels:
+    app: mata-atlantica-db
+spec:
+  selector:
+    matchLabels:
+      app: mata-atlantica-db
+  template:
+    metadata:
+      labels:
+        app: mata-atlantica-db
+    spec:
+      containers:
+      - name: mata-atlantica-db
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        env:
+          - name: ACCEPT_EULA
+            value: "Y"
+          - name: MSSQL_SA_PASSWORD
+            value: "Password@123456"
+        ports:
+        - containerPort: 1433
+
+        
