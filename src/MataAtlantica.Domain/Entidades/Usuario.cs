@@ -10,7 +10,7 @@ public class Usuario : EntidadeBase
     public DateTime UltimaAtualizacao { get; private set; }
     public Endereco Endereco { get; private set; }
     public IEnumerable<MetodoPagamento> OpcoesPagamento = Enumerable.Empty<MetodoPagamento>();
-    private Usuario() { }
+    public  Usuario() { }
 
     public Usuario(
         string id,

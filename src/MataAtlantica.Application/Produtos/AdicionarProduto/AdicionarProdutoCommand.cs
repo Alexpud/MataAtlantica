@@ -13,7 +13,7 @@ public record AdicionarProdutoCommand(
     string Descricao,
     string FornecedorId,
     string Marca
-    ) : BaseCommand, IRequest<Result<ProdutoDto>>
+    ) : BaseCommand, IRequest<CommandResponse<ProdutoDto>>
 {
     public override ValidationResult Validate()
     {

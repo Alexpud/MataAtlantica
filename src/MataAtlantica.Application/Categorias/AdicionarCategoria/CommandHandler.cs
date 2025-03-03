@@ -10,8 +10,6 @@ using MediatR;
 
 namespace MataAtlantica.Application.Categorias.AdicionarCategoria;
 
-
-
 public class CommandHandler(ICategoriaRepository categoriaRepository,
     IMapper mapper) : IRequestHandler<AdicionarCategoriaCommand, CommandResponse<CategoriaDto>>
 {

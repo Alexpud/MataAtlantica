@@ -17,12 +17,13 @@ public class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TReq
         var context = new ValidationContext<TRequest>(request);
         if (request is BaseCommand requisicao)
         {
-            var hasErrors = requisicao.Validate().Errors.Any();
-            if (hasErrors)
-                return (TResponse)new BaseResponse()
-                {
-                    Errors = requisicao.Validate().GetErrors()  
-                };
+            var errors = requisicao.Validate().GetErrors();
+            if (errors.Any())
+            {
+                var response = new TResponse();
+                response.WithErrors(errors);
+                return response;
+            }
         }
         
         return await next();

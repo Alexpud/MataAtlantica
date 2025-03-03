@@ -78,7 +78,7 @@ public class FornecedoresController(IMediator mediator, FornecedorService servic
                 CEP: model.Localizacao.CEP
             ));
 
-        return HandleResult(await _mediator.Send(command));
+        return Ok(await _mediator.Send(command));
 
     }
 
@@ -126,7 +126,7 @@ public class FornecedoresController(IMediator mediator, FornecedorService servic
                 UF: model.Localizacao.UF,
                 CEP: model.Localizacao.CEP
             ));
-        return HandleResult(await _mediator.Send(command));
+        return Ok(await _mediator.Send(command));
     }
 
     /// <summary>

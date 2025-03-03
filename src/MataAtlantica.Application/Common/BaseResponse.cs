@@ -1,12 +1,16 @@
 ﻿using FluentResults;
+using System.Text.Json.Serialization;
 
 namespace MataAtlantica.Application.Common;
 
 public record class BaseResponse
 {
-    public IEnumerable<IError> Errors { get; set; } = Enumerable.Empty<IError>();
+    [JsonIgnore]
+    public List<Erro> Errors { get; set; } = new List<Erro>();
     public BaseResponse() { }
 
     public void WithErrors(IEnumerable<IError> errors) 
-        => Errors = Errors.Concat(errors);
+        => Errors.AddRange(errors.Select(p => new Erro((string)p.Metadata["ErrorCode"],p.Message)));
 }
+
+public record Erro(string Codigo, string Mensagem);

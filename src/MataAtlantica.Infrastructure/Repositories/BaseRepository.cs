@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace MataAtlantica.Infrastructure.Repositories;
 
-public abstract class BaseRepository<TEntity>(MataAtlanticaDbContext dbContext) : IBaseRepository<TEntity> where TEntity : EntidadeBase
+public abstract class BaseRepository<TEntity>(MataAtlanticaDbContext dbContext) : IBaseRepository<TEntity> where TEntity : EntidadeBase, new()
 {
     protected readonly DbSet<TEntity> _dbSet = dbContext.Set<TEntity>();
     private readonly DbContext _dbContext = dbContext;
@@ -20,6 +20,11 @@ public abstract class BaseRepository<TEntity>(MataAtlanticaDbContext dbContext) 
     public void Atualizar(TEntity entidade)
     {
         _dbSet.Update(entidade);
+    }
+
+    public void Excluir(string id)
+    {
+        _dbSet.Remove(new TEntity() { Id = id });
     }
 
     public IQueryable<TEntity> AsQueryable()

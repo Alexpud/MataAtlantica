@@ -17,9 +17,8 @@ namespace MataAtlantica.API.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [Produces("application/json")]
-public class CategoriasController(IMediator mediator, CategoriaService categoriaService) : BaseController
+public class CategoriasController(IMediator mediator) : BaseController
 {
-    private readonly CategoriaService _categoriaService = categoriaService;
     private readonly IMediator _mediator = mediator;
 
     /// <summary>
@@ -46,7 +45,7 @@ public class CategoriasController(IMediator mediator, CategoriaService categoria
     public async Task<IActionResult> AdicionarSubCategoria(string id, AdicionarCategoriaRequest model)
     {
         var command = new AdicionarSubCategoriaCommand(id, model.Nome);
-        return HandleResult(await _mediator.Send(command));
+        return Ok(await _mediator.Send(command));
     }
 
     /// <summary>
