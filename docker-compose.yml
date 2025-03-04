@@ -10,14 +10,18 @@ services:
     image: redis
     ports:
     - "6379:6379"
-#  api:
-#    build:
-#      context: ./src/MataAtlantica.API
-#    environment:
-#      - ConnectionStrings__Default=Server=SqlServer,1433; Database=MataAtlanticaDB; User Id=sa; Password=Password@123456; TrustServerCertificate=true;
-#      - ConnectionStrings__Redis=redis:6379,abortConnect=false
-#    ports:
-#      - "8080:8080"
-#    depends_on:
-#      - SqlServer
-#      - Redis
+  api:
+    image: spudin/mata-atlantica
+    build:
+      context: ./src/MataAtlantica.API
+      no_cache: true
+      tags:
+        - "latest"
+    environment:
+      - ConnectionStrings__Default=Server=SqlServer,1433; Database=MataAtlanticaDB; User Id=sa; Password=Password@123456; TrustServerCertificate=true;
+      - ConnectionStrings__Redis=redis:6379,abortConnect=false
+    ports:
+      - "8080:8080"
+    depends_on:
+      - SqlServer
+      - Redis
