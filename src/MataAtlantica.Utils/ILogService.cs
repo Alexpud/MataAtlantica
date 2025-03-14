@@ -22,7 +22,7 @@ public class LogService(ILogger<LogService> logger, RequestContextId requestCont
 
     public void LogError(string messageTemplate, params object[] args)
     {
-        var parametros = new List<object>() { _contextId.ToString() };
+        var parametros = new List<object>() { _contextId?.ToString() };
         parametros.AddRange(args);
         _logger.LogError("ContextId={ContextId}; " + messageTemplate, parametros.ToArray());
     }

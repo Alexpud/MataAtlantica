@@ -72,9 +72,11 @@ using (var Scope = app.Services.CreateScope())
 {
     var context = Scope.ServiceProvider.GetRequiredService<MataAtlanticaDbContext>();
     var identityContext = Scope.ServiceProvider.GetRequiredService<AuthenticationDbContext>();
-
+    
     context.Database.Migrate();
     identityContext.Database.Migrate();
+
+    await IdentitySeed.Seed((Scope));
 }
 
 // Configure the HTTP request pipeline.

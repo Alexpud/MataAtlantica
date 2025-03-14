@@ -9,7 +9,7 @@ public class ResultFilter : IAsyncResultFilter
     public async Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)
     {
         var objectResult = context.Result as ObjectResult;
-        if (objectResult.Value is BaseResponse)
+        if (objectResult?.Value is BaseResponse)
         {
             context.Result = objectResult.Value switch
             {

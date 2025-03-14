@@ -1,12 +1,6 @@
 ﻿using FluentValidation;
 using MataAtlantica.API.Cache;
-using MataAtlantica.Application.Categorias.AdicionarCategoria;
 using MataAtlantica.Application.Common;
-using MataAtlantica.Application.Produtos.AdicionarProduto;
-using MataAtlantica.Application.Produtos.AdicionarThumbnail;
-using MataAtlantica.Application.Produtos.AlterarProduto;
-using MataAtlantica.Application.Usuarios.AdicionarMetodoPagamento;
-using MataAtlantica.Application.Usuarios.AdicionarUsuario;
 using MataAtlantica.Domain.Abstract.Repositories;
 using MataAtlantica.Domain.Abstract.Services;
 using MataAtlantica.Domain.Models.Fornecedores;
@@ -55,7 +49,7 @@ public static class DependenciesExtensions
 
         services.AddDbContext<AuthenticationDbContext>(p =>
                 p.UseSqlServer(configuration.GetConnectionString("Default")));
-
+        
         return services;
     }
 

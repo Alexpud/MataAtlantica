@@ -101,8 +101,8 @@ POST {{HostAddress}}/api/usuarios/login
 Content-Type: application/json
 
 {
-  "Login": "alexandre.maciele@gmail.com",
-  "Senha": "Ph1l0s0phers@1"
+  "Login": "admin@mataatlantica.com",
+  "Senha": "123456"
 }
 
 
