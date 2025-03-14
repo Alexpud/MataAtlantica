@@ -20,10 +20,10 @@ public class Pedido : EntidadeBase
         EnderecoEntrega = endereco;
     }
 
-    public void AlterarStatus(StatusPedido status) 
+    public void AlterarStatus(StatusPedido status)
         => Status = status;
 
-    public void AdicionarItem(PedidoItem item) 
+    public void AdicionarItem(PedidoItem item)
         => Items = Items.Append(item);
 }
 

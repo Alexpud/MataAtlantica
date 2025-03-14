@@ -1,5 +1,6 @@
 using MataAtlantica.API.Models;
 using MataAtlantica.API.Models.Fornecedor;
+using MataAtlantica.Application.Common;
 using MataAtlantica.Application.Fornecedores.AdicionarFornecedor;
 using MataAtlantica.Application.Fornecedores.AlterarFornecedor;
 using MataAtlantica.Application.Fornecedores.Listar;
@@ -44,7 +45,7 @@ public class FornecedoresController(IMediator mediator, FornecedorService servic
     ///     POST /Fornecedores
     ///     {
     ///         "Nome": "Nivea",
-    ///         "Descricao": "Grande vendedora de cosméticos",
+    ///         "Descricao": "Grande vendedora de cosmï¿½ticos",
     ///         "CpfCnpj": "XXX.XXX.XXX/0001-XX",
     ///         "Telefone": "(17) 99999-9999",
     ///         "Localizacao": {
@@ -77,7 +78,7 @@ public class FornecedoresController(IMediator mediator, FornecedorService servic
                 CEP: model.Localizacao.CEP
             ));
 
-        return HandleResult(await _mediator.Send(command));
+        return Ok(await _mediator.Send(command));
 
     }
 
@@ -92,7 +93,7 @@ public class FornecedoresController(IMediator mediator, FornecedorService servic
     ///     PUT /Fornecedores/{id}
     ///     {
     ///         "Nome": "Nivea",
-    ///         "Descricao": "Grande vendedora de cosméticos",
+    ///         "Descricao": "Grande vendedora de cosmï¿½ticos",
     ///         "CpfCnpj": "XXX.XXX.XXX/0001-XX",
     ///         "Telefone": "(17) 99999-9999",
     ///         "Localizacao": {
@@ -125,7 +126,7 @@ public class FornecedoresController(IMediator mediator, FornecedorService servic
                 UF: model.Localizacao.UF,
                 CEP: model.Localizacao.CEP
             ));
-        return HandleResult(await _mediator.Send(command));
+        return Ok(await _mediator.Send(command));
     }
 
     /// <summary>
@@ -134,9 +135,9 @@ public class FornecedoresController(IMediator mediator, FornecedorService servic
     /// <returns></returns>
     [HttpGet]
     [ProducesResponseType(typeof(List<FornecedorDto>), (int)HttpStatusCode.OK)]
-    public IActionResult Listar()
+    public async Task<IActionResult> Listar()
     {
-        return Ok(_mediator.Send(new ListarFornecedoresQuery()));
+        return Ok(await _mediator.Send(new ListarFornecedoresQuery()));
     }
 }
 

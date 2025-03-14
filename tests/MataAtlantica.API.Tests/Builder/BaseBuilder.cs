@@ -1,6 +1,6 @@
 ﻿namespace MataAtlantica.API.Tests.Builder;
 
-public abstract class BaseBuilder<TClass, TBuilder> 
+public abstract class BaseBuilder<TClass, TBuilder>
     where TClass : class
     where TBuilder : BaseBuilder<TClass, TBuilder>
 {

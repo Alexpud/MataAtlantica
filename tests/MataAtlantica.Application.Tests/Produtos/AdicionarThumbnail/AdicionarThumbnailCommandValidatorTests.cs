@@ -20,7 +20,7 @@ public class AdicionarThumbnailCommandValidatorTests
     public async Task TestValidate_DeveTerErroDeValidacaoParaThumbnails_QuandoNenhumArquivoForPassado()
     {
         // Arrange
-        var model = new AdicionarThumbnailCommand();
+        var model = new AdicionarThumbnailCommand("", null, 0);
 
         // Act
         var result = await _sut.TestValidateAsync(model);
@@ -40,10 +40,7 @@ public class AdicionarThumbnailCommandValidatorTests
         // Arrange
         var bytes = Encoding.UTF8.GetBytes("This is a dummy file");
         IFormFile file = new FormFile(new MemoryStream(bytes), 0, bytes.Length, "Data", "dummy.pdf");
-        var model = new AdicionarThumbnailCommand
-        {
-            ArquivoImagem = file
-        };
+        var model = new AdicionarThumbnailCommand(null, file, 0);   
 
         // Act
         var result = await _sut.TestValidateAsync(model);

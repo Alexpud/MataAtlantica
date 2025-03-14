@@ -1,9 +1,11 @@
 using MataAtlantica.API.Models;
 using MataAtlantica.API.Models.Produtos;
+using MataAtlantica.Application.Common;
 using MataAtlantica.Application.Produtos.AdicionarProduto;
 using MataAtlantica.Application.Produtos.AlterarProduto;
 using MataAtlantica.Application.Produtos.BuscarProdutos;
 using MataAtlantica.Application.Produtos.ObterProdutoPorId;
+using MataAtlantica.Domain.Abstract.Repositories;
 using MataAtlantica.Domain.Models.Produtos;
 using MataAtlantica.Domain.Services;
 using MediatR;
@@ -61,7 +63,7 @@ public class ProdutosController(IMediator mediator, ProdutoService service) : Ba
             model.Descricao,
             model.FornecedorId,
             model.Marca);
-        return HandleResult(await _mediator.Send(command));
+        return Ok(await _mediator.Send(command));
     }
 
     /// <summary>
@@ -92,5 +94,13 @@ public class ProdutosController(IMediator mediator, ProdutoService service) : Ba
     {
         var query = new BuscarProdutosQuery(model.Nome, model.Categoria, model.Fornecedor);
         return Ok(_mediator.Send(query));
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> ExcluirProduto([FromServices] IProdutoRepository repository, string id)
+    {
+        repository.Excluir(id);
+        await repository.Commit();
+        return BadRequest(new CommandResponse());
     }
 }

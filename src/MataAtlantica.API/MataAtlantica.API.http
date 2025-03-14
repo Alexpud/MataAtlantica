@@ -1,44 +1,61 @@
-@MataAtlantica.API_HostAddress = https://localhost:7188
-
 ###
 
-GET {{MataAtlantica.API_HostAddress}}/api/fornecedores/string
+GET {{HostAddress}}/api/fornecedores/string
 
 ###
-GET {{MataAtlantica.API_HostAddress}}/api/fornecedores
+GET {{HostAddress}}/api/fornecedores
+
 
 ###
-
-@fornecedorId=3c2de4f3-7691-44f7-9fc6-0865271a1c5a
-PUT {{MataAtlantica.API_HostAddress}}/api/fornecedores/{{fornecedorId}}
+POST {{HostAddress}}/api/Produtos
+#Authorization: Bearer CfDJ8DnhIXNhZudBmnzaD-NVmSKA69lKfK4l0j4jKOtKtP3TvNLTbpp-PLjXQn9u8mRMKYKotq7PUaUEKcnZS3ZIhXAs32Ym7bIvhezHRAeGGKgreNrLIj_bALdCMR1hZ3VDmWNhikyDL0-xET4ZnnqPDRfUeAy-gTd5UKDHv2syxqZdUShoWoh2pU8EmOmZ3Afl0sX0zNDB8kaRMbOxAZQcsz9D327KSX66H2BXbwiy_F-aPg8nXh7Kg5p58waYwYfFfgVS6y2YRNIEw_nhfCHHAaRb-GxLtE5zSFs6f0SgNmxPvfkR0pDZ9GhF74ppeQUQsZQLnB0w5sXoyAsO4e3uFOOTPuhIqJrxv31nUFX_ds0cqcXcrRaYJxETp99ooNwVH8uKt_wowkNA96OYqcdO-XjJqCiFnLwwhpTp3JdPH__eW3TNT8lEvU9jy5Bfty8z1ypLuAnIWdA_gX68zzaLo2wflAPbiZGXYrLw2VPQphzHkWJiUG07vidhKEbxBWRgSJsdcjLltIN2vho6jWkmBCwFzxkmOBo-GPf1Ycpnmc8zFUadbWkKawPNgGk0L3jgwKKUtDPPKESa8LHZm-lRB3UaUl37Di3NHA8yuutbKuDUhptNkbF0VDeLoVudQPrnVS4Wh635LR8L3P7foFqE7OOd359vtgHzCovfGcqUrl_nOVZoGqWwkXQAw3_wXZsf3Z0-M1YTBQq0noqTXlUAK3IxSluxk9KRAGvhi22o3wIV
 Content-Type: application/json
-  {
-      "nome": "Nivea(alterado)(alterado)",
-      "descricao": "Grande vendedora de cosméticos(alterado)",
-      "localizacao": {
-        "rua": "asdasd(alterado)",
-        "bairro": "Bairro das pedras(alterado)",
-        "numero": "1231",
-        "cidade": "Florianopolis",
-        "uf": "SP",
-        "cep": "400000000"
-      },
-      "cpfCnpj": "XXX.XXX.XXX/0001-sXdX",
-      "telefone": "(17) 99999-9999"
-    }
+
+{
+  "Nome": "Produto legals 3",
+  "Descricao": "PRODUTO MUITO BOM",
+  "Categoria": "CategoriaA",
+  "Preco": 1,
+  "FornecedorId": "749b6be7-672a-4bff-8c77-1ffa0ba184a6",
+  "CategoriaId": "c3509f46-e220-4f3f-8529-fba7c0be31ed",
+  "Marca": "asdasd"
+}
+
+###
+DELETE {{HostAddress}}/api/Produtos/3e65c539-5c2e-4d50-97e7-c8e11443a3d6
 
 ###
 
-GET {{MataAtlantica.API_HostAddress}}/api/produtos
+POST {{HostAddress}}/api/fornecedores
+Content-Type: application/json
+
+{
+  "nome": "Nivea(alterado)(alterado)",
+  "descricao": "Grande vendedora de cosmï¿½ticos(alterado)",
+  "localizacao": {
+    "rua": "asdasd(alterado)",
+    "bairro": "Bairro das pedras(alterado)",
+    "numero": "1231",
+    "cidade": "Florianopolis",
+    "uf": "SP",
+    "cep": "400000000"
+  },
+  "cpfCnpj": "XXX.XXX.XXX/0001-sXdX",
+  "telefone": "(17) 99999-9999"
+}
 
 ###
 
-GET {{MataAtlantica.API_HostAddress}}/api/produtos
+GET {{HostAddress}}/api/produtos
+
+###
+
+GET {{HostAddress}}/api/produtos
 
 ###
 
 @id=0fe3eb77-32b8-4c20-945a-02db4f0c498e
-PUT {{MataAtlantica.API_HostAddress}}/api/produtos/{{id}}
+PUT {{HostAddress}}/api/produtos/{{id}}
 Content-Type: application/json
 {
   "Nome": "asdasd"
@@ -46,24 +63,21 @@ Content-Type: application/json
 
 ###
 
-GET {{MataAtlantica.API_HostAddress}}/api/mediatr
+GET {{HostAddress}}/api/mediatr
 
 ###
 
-@id=1
-POST {{MataAtlantica.API_HostAddress}}/api/categorias/{{id}}
+id=1
+POST {{HostAddress}}/api/categorias/{{id}}
 Content-Type: application/json
 {
   "Nome": "Teste"
 }
-###
 
-GET {{MataAtlantica.API_HostAddress}}/api/categorias
-Authorization: Bearer CfDJ8JmAdGC8KYRLgwDEJfIKcw9esm4PC2sg5bXUWNUhZt3kZ8A17yma6cnP80PdfdMhUgNqt5UYkdjD0C0MGitzme2D3pPHNN1rDl9r5-P1Q_L3kHyow2zH4bL1AFW9Cu5kmnTBX6DHE-hccN2jiw5ZpPVTYCDf5x_slHocfox2-y6Nq7HXz2u06MIdAVKDtvp-0nvRypeuFpvnmVz1yex72JkX02KuzC0YCS00cnV-1-9_gRdWWGxWKh5Ih7AJWK579INc4nReoKJnG8rGWYkHATzp2aI3_CYz8WxgaRWOy6bxvlgxeViDFOn86gOG9Lzucgvm_iI9vIDJGjzDjQeoxXbGyO2zsj_mNyCWaLEtHHs4dEKmKqI73I4-nY3H4T57eenFVisWhyPp26muCa86jdSBkMBfVER7fZBDQGWlIPEHeFaAEpn7g2Ik8xZlMygIEWokhsmYA5BFD18Jv7szZ9y1tPie-ZlKnrIk5S70ZNaxva9SiPoNEJ_4dLVQja7cjFvmMTd_jtCHHYbfvGF_84Ct-8RJxSNG2Oob0OReG7c4mvPpKDjh3fnoRMpcr1hCJSFG5kD9BhCNNUdMVlufa29jKY4ReAjbjtCZ6W9QPDnZv-sAxv_OiWIzqsJNxaV3tuN56-4XXF29LYs7tYqie2YdG0CpQJjWHoo6JH92vYP9G2-KVfrYDU9pRZhy7IAtPw
 
 ###
 
-POST {{MataAtlantica.API_HostAddress}}/api/usuarios
+POST {{HostAddress}}/api/usuarios
 Content-Type: application/json
 
 {
@@ -83,11 +97,36 @@ Content-Type: application/json
 
 ###
 
-POST {{MataAtlantica.API_HostAddress}}/api/usuarios/login
+POST {{HostAddress}}/api/usuarios/login
 Content-Type: application/json
 
 {
-  "Email": "alexandre.maciele@gmail.com",
-  "Password": "Ph1l0s0phers@1"
+  "Login": "alexandre.maciele@gmail.com",
+  "Senha": "Ph1l0s0phers@1"
 }
 
+
+###
+
+GET {{HostAddress}}/api/teste
+Authorization: Bearer CfDJ8JmAdGC8KYRLgwDEJfIKcw-KxeO1MSO27wlSzadb6VKaoj3f4lx41pIopTWc9C56bYDegv9Z-f20EEI9-V8L8WO2CweyiM4OORo-UB9aiXIvdO2D8oVEUosu5ay8KzqutLi5lWly_SkN7Ldvh-ZdKHDjkJVQWkX42Uloc-RMA9VUGq49oe7-xDIfAEtubPiaZdVr4M5qvd-d8NjvYTG0BsV_n29kCrTjV83zcwX3NzSmX4Ju-FG2MWYKHU2jEbLl89oHREsiMk35Io2SZ88_2I99KdvEhjH3H0AlDHRYcKh8ksQInnz1Hzabl_1OLu5VwOxWsdHsYhnyYMyuC37o3h1yKZWngDeGYQe411B9e8vhXSWM7in0SbfsbC1gJ7bFLuUglibKitqj3jem4OhsIjt9C7EgL4VvLW3IqngSiI2NEvFlHnDk1DGm_VVGxBDWDwu_VHqSu9OkMxgJX_7gylXx2zmZ8cVX0eleU_Rl8Qj8r0mVXZBOMjt4T4X9IV1spT5TzcIRD2kSR6YqUkHL72pkSCLwz4OQaEqn2p01235yOB2pX-Mj2AgnpyCrLeq94Cn2p9ByqGHLWlWmUf6VTJwfEb5OtGwpdetaVMOk55elOQbqxu6qcBMOl4RS_C-j021p_28fa8oL6OMFJORl5Vksg8rmWkBM3HjXj4j2xynHo-cD_wYOn0VdL9fljs6eBO5pVS2xGD65RGysapCN4FHNFehhhxZwaNB6dtQnSObG
+Cache-Control: no-cache
+
+###
+POST {{HostAddress}}/api/categorias
+Authorization: Bearer CfDJ8DnhIXNhZudBmnzaD-NVmSKszjuSh1NOifTxHMQqR7hMs56nM3BoNchHq-vzqEIsHH5xmvj8YJGsPdBuUDjS1yq3ufsbGOv7aZB51BrCxNuc4o-cLuv8Vw1DE3gfgHXjy7VvKyvKxhIwxgLfxzob1xZ8026GspQ-CoZ00xPtOl-IoI_pO6jtJR5_GFaIyABAOBecynQPd2cMqr3anWk9qP2FeIMUYURciVscC-4kmnq1xFxkWe5te04wxnz6SY51PczJkEHxhF6Y5bbbfWo8yBrHG_qNMz2m1mboYqFpgHbYAN4oDTad3lbpIHmbcbFnX08xpa6_joOqamn-fK5b1mSjGL7n37utBEKXk6EJfabOQXdHelz2MIqowWWHCOt08JKdOOdnygu84cDyOiH1Ovpk4i8QeJlxHm44dclVEM358FdydtnwfxywdWDCsaxlI-ukr-T7JLoUU8oNqGCcRe-CUXS_2dP4tmNpyuhiTulmwtCz8FOmYXA9YRetVKep8nD7Xnvz98BUUQH1Enbg04USSEtvhwwfURO509vay4ERjLc4_tfMIkeZ436knur2TuTdSc8zlsP8EdHzzhZcxczYT3OZZ0dKiNzd0naxyYE4MWPdr4vP4H5jwDshzZMuKKsGXcqMmgXSDE525nG8waPAlDK-GL31SKVVxkefL3OPViOXbBY-yoCtnaj7SbXAFFe2iAt9oVi2dKAqSELVryhDnXkbA99C8bRvrZiVnxMH
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "Nome": "CategoriaA"
+}
+
+
+###
+GET {{HostAddress}}/api/categorias
+Authorization: Bearer CfDJ8DnhIXNhZudBmnzaD-NVmSKszjuSh1NOifTxHMQqR7hMs56nM3BoNchHq-vzqEIsHH5xmvj8YJGsPdBuUDjS1yq3ufsbGOv7aZB51BrCxNuc4o-cLuv8Vw1DE3gfgHXjy7VvKyvKxhIwxgLfxzob1xZ8026GspQ-CoZ00xPtOl-IoI_pO6jtJR5_GFaIyABAOBecynQPd2cMqr3anWk9qP2FeIMUYURciVscC-4kmnq1xFxkWe5te04wxnz6SY51PczJkEHxhF6Y5bbbfWo8yBrHG_qNMz2m1mboYqFpgHbYAN4oDTad3lbpIHmbcbFnX08xpa6_joOqamn-fK5b1mSjGL7n37utBEKXk6EJfabOQXdHelz2MIqowWWHCOt08JKdOOdnygu84cDyOiH1Ovpk4i8QeJlxHm44dclVEM358FdydtnwfxywdWDCsaxlI-ukr-T7JLoUU8oNqGCcRe-CUXS_2dP4tmNpyuhiTulmwtCz8FOmYXA9YRetVKep8nD7Xnvz98BUUQH1Enbg04USSEtvhwwfURO509vay4ERjLc4_tfMIkeZ436knur2TuTdSc8zlsP8EdHzzhZcxczYT3OZZ0dKiNzd0naxyYE4MWPdr4vP4H5jwDshzZMuKKsGXcqMmgXSDE525nG8waPAlDK-GL31SKVVxkefL3OPViOXbBY-yoCtnaj7SbXAFFe2iAt9oVi2dKAqSELVryhDnXkbA99C8bRvrZiVnxMH
+###
+
+
+###

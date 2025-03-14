@@ -1,6 +1,4 @@
-﻿using FluentValidation.Results;
-
-namespace MataAtlantica.Domain.Entidades;
+﻿namespace MataAtlantica.Domain.Entidades;
 
 public abstract class EntidadeBase
 {

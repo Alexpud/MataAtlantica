@@ -7,6 +7,7 @@ using MataAtlantica.Domain.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 using System.Net;
 using System.Security.Claims;
 
@@ -16,9 +17,8 @@ namespace MataAtlantica.API.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [Produces("application/json")]
-public class CategoriasController(IMediator mediator, CategoriaService categoriaService) : BaseController
+public class CategoriasController(IMediator mediator) : BaseController
 {
-    private readonly CategoriaService _categoriaService = categoriaService;
     private readonly IMediator _mediator = mediator;
 
     /// <summary>
@@ -45,7 +45,7 @@ public class CategoriasController(IMediator mediator, CategoriaService categoria
     public async Task<IActionResult> AdicionarSubCategoria(string id, AdicionarCategoriaRequest model)
     {
         var command = new AdicionarSubCategoriaCommand(id, model.Nome);
-        return HandleResult(await _mediator.Send(command));
+        return Ok(await _mediator.Send(command));
     }
 
     /// <summary>
@@ -53,8 +53,9 @@ public class CategoriasController(IMediator mediator, CategoriaService categoria
     /// </summary>
     /// <returns></returns>
     [HttpGet]
+    [OutputCache(Duration = 60, PolicyName = "CustomPolicy")]
     [ProducesResponseType(typeof(List<CategoriaDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Listar(ClaimsPrincipal claims)
+    public async Task<IActionResult> Listar()
     {
         return Ok(await _mediator.Send(new ListarCategoriasQuery()));
     }

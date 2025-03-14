@@ -9,13 +9,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace MataAtlantica.Application.Produtos.AdicionarThumbnail;
 
-public record AdicionarThumbnailCommand : IRequest<Result>
-{
-    public string ProdutoId { get; set; }
-    public IFormFile ArquivoImagem { get; set; }
-    public int Ordem { get; set; }
-}
-
 
 public class CommandHandler(
     IFileStorageService fileStorageService,

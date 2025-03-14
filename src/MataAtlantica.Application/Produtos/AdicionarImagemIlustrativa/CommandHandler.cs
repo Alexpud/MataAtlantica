@@ -1,5 +1,6 @@
 ﻿using FluentResults;
-using MataAtlantica.Application.Produtos.AdicionarThumbnail;
+using FluentValidation.Results;
+using MataAtlantica.Application.Common;
 using MataAtlantica.Application.Produtos.Common;
 using MataAtlantica.Domain.Abstract.Services;
 using MataAtlantica.Domain.Models;
@@ -10,11 +11,13 @@ using Microsoft.AspNetCore.Http;
 
 namespace MataAtlantica.Application.Produtos.AdicionarImagemIlustrativa;
 
-public record AdicionarImagemIlustrativaCommand : IRequest<Result>
+public record AdicionarImagemIlustrativaCommand(string ProdutoId, IFormFile ArquivoImagem, int Ordem) : BaseCommand, IRequest<Result>
 {
-    public string ProdutoId { get; set; }
-    public IFormFile ArquivoImagem { get; set; }
-    public int Ordem { get; set; }
+    public override ValidationResult Validate()
+    {
+        var validator = new AdicionarImagemIlustrativaCommandValidator();
+        return validator.Validate(this);
+    }
 }
 
 public class CommandHandler(

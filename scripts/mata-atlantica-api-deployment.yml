@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mata-atlantica-api-deployment
+  labels:
+    app: mata-atlantica-api
+spec:
+  selector:
+    matchLabels:
+      app: mata-atlantica-api
+  template:
+    metadata:
+      labels:
+        app: mata-atlantica-api
+    spec:
+      containers:
+      - name: mata-atlantica-api
+        image: spudin/mata-atlantica
+        imagePullPolicy: Always
+        env:
+          - name: ConnectionStrings__Default
+            value: "Server=mata-atlantica-local-connection-db,1433; Database=MataAtlanticaDB; User Id=sa; Password=Password@123456; TrustServerCertificate=true;"
+          - name: ConnectionStrings__Redis
+            value: "Redis:6379,abortConnect=false"
+        ports:
+        - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mata-atlantica-port-db
+spec:
+  type: LoadBalancer
+  selector:
+    app: mata-atlantica-api
+  ports:
+  - port: 8080
+    targetPort: 8080
+
+

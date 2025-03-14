@@ -39,7 +39,7 @@ public class UserIdentityServiceTests
 
         string login = _fixture.Create<string>();
         string password = _fixture.Create<string>();
-        
+
         // Act
         var result = await _sut.AdicionarUsuario(login, password);
 

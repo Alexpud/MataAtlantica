@@ -6,7 +6,7 @@ using MataAtlantica.Domain.Erros;
 namespace MataAtlantica.Domain.Models.Usuarios;
 
 public record AdicionarMetodoPagamentoDto(
-    string UsuarioId, 
+    string UsuarioId,
     BandeiraCartao Bandeira,
     string NumeroIdentificacao,
     DateTime Validade,

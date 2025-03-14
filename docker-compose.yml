@@ -1,0 +1,27 @@
+services:
+  SqlServer:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Password@123456
+    ports:
+      - "1433:1433"
+  Redis:
+    image: redis
+    ports:
+    - "6379:6379"
+  api:
+    image: spudin/mata-atlantica
+    build:
+      context: ./src/MataAtlantica.API
+      no_cache: true
+      tags:
+        - "latest"
+    environment:
+      - ConnectionStrings__Default=Server=SqlServer,1433; Database=MataAtlanticaDB; User Id=sa; Password=Password@123456; TrustServerCertificate=true;
+      - ConnectionStrings__Redis=redis:6379,abortConnect=false
+    ports:
+      - "8080:8080"
+    depends_on:
+      - SqlServer
+      - Redis
