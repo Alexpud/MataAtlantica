@@ -47,5 +47,13 @@
 	  <ProjectReference Include="..\MataAtlantica.Infrastructure\MataAtlantica.Infrastructure.csproj" />
 	  <ProjectReference Include="..\MataAtlantica.Utils\MataAtlantica.Utils.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="publish\web.config" />
+	  <_ContentIncludedByDefault Remove="publish\appsettings.Development.json" />
+	  <_ContentIncludedByDefault Remove="publish\appsettings.json" />
+	  <_ContentIncludedByDefault Remove="publish\http-client.env.json" />
+	  <_ContentIncludedByDefault Remove="publish\MataAtlantica.API.deps.json" />
+	  <_ContentIncludedByDefault Remove="publish\MataAtlantica.API.runtimeconfig.json" />
+	</ItemGroup>
 
 </Project>
