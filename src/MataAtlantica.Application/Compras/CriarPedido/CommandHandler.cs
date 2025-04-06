@@ -1,24 +1,45 @@
+using Azure;
 using MataAtlantica.Application.Common;
+using MataAtlantica.Domain.Abstract.Services;
 using MataAtlantica.Domain.Models.Compras;
 using MediatR;
 
 namespace MataAtlantica.Application.Compras.CriarPedido;
 
-public record CriarPedidoCompraCommand : BaseCommand, IRequest
+public class CommandHandler(IPagamentoService pagamentoService,
+    IPedidoCompraService pedidoCompraService) : IRequestHandler<CriarPedidoCompraCommand, CommandResponse>
 {
-    public List<PedidoItemDto> Items { get; set; }
+    private readonly IPagamentoService _pagamentoService = pagamentoService;
+    private readonly IPedidoCompraService _pedidoCompraService = pedidoCompraService;
 
-    public InformacaoPagamentoDto InformacaoPagamento { get; set; }
-
-    public string UsuarioId { get; set; }
-
-    public InformacaoEntregaDto InformacaoEntrega { get; set; }
-}
-
-public class CommandHandler : IRequestHandler<CriarPedidoCompraCommand>
-{
-    public Task Handle(CriarPedidoCompraCommand request, CancellationToken cancellationToken)
+    public async Task<CommandResponse> Handle(CriarPedidoCompraCommand request, CancellationToken cancellationToken)
     {
+        // Validar as informações de pagamento
+        var response = new CommandResponse();
+        
+        var pedidoCompraDto = new PedidoCompraDto();
+        var adicionarPedidoCompraResult = await _pedidoCompraService.Adicionar(pedidoCompraDto);
+        if (adicionarPedidoCompraResult.IsFailed)
+        {
+           response.WithErrors((adicionarPedidoCompraResult.Errors));
+           return response;
+        }
+        
+        var pedidoCompra = adicionarPedidoCompraResult.Value;
+        var informacaoPagamentoResult = await _pagamentoService.ValidarInformacoesPagamento(request.InformacaoPagamento);
+        if (!informacaoPagamentoResult.IsFailed)
+        {
+            
+            response.WithErrors(informacaoPagamentoResult.Errors);
+            return response;
+        }
+        // Realizar pedido aos fornecedores
+        
+        // Fazer ccmunicação com o meio de compra, avisando da compra
+        
+        // INserir o pedido como status de compra pendente
+        
+        // Lançar evento avisando da compra pendente
         throw new NotImplementedException();
     }
 }
