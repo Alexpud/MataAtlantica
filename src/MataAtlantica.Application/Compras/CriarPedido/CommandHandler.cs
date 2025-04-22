@@ -21,15 +21,15 @@ public class CommandHandler(IPagamentoService pagamentoService,
         var adicionarPedidoCompraResult = await _pedidoCompraService.Adicionar(pedidoCompraDto);
         if (adicionarPedidoCompraResult.IsFailed)
         {
-           response.WithErrors((adicionarPedidoCompraResult.Errors));
+           response.WithErrors(adicionarPedidoCompraResult.Errors);
            return response;
         }
         
         var pedidoCompra = adicionarPedidoCompraResult.Value;
         var informacaoPagamentoResult = await _pagamentoService.ValidarInformacoesPagamento(request.InformacaoPagamento);
-        if (!informacaoPagamentoResult.IsFailed)
+        if (informacaoPagamentoResult.IsFailed)
         {
-            
+            // Atualizar a informação de pedido, informando o erro que deu de validação de pagamento
             response.WithErrors(informacaoPagamentoResult.Errors);
             return response;
         }

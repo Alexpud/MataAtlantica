@@ -1,8 +1,4 @@
-﻿using MataAtlantica.Domain.Models.Fornecedores;
-using MataAtlantica.Domain.Models.Produtos;
-using Microsoft.EntityFrameworkCore.Query.Internal;
-
-namespace MataAtlantica.Application.Common;
+﻿namespace MataAtlantica.Application.Common;
 
 public interface ICommandResponse
 {
@@ -27,5 +23,6 @@ public record class CommandResponse<TValue> : BaseResponse, ICommandResponse
 
 public record class CommandResponse : BaseResponse
 {
+    public bool EhInvalida => Errors.Any();
     public CommandResponse() { }
 }

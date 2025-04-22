@@ -44,6 +44,14 @@ public class PedidoCompra : EntidadeBase
 
     private PedidoCompra() { }
 
+    public PedidoCompra(string codigo, string usuarioId, decimal valor)
+    {
+        Status = StatusPedido.Pendente;
+        Codigo = codigo;
+        UsuarioId = usuarioId;
+        Valor = valor;
+    }
+
     public void AlterarStatus(StatusPedido status)
         => Status = status;
 
